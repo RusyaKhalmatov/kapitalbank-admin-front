@@ -1,0 +1,91 @@
+{
+  "name": "asgardia-admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "amqplib": "^0.5.5",
+    "ant-design-vue": "^1.5.0",
+    "apexcharts": "^3.10.0",
+    "chart.js": "^2.8.0",
+    "cookies": "^0.7.3",
+    "core-js": "^2.6.10",
+    "fingerprintjs2": "^2.1.0",
+    "js-base64": "^2.5.2",
+    "luxon": "^1.25.0",
+    "material-design-icons-iconfont": "^5.0.1",
+    "sockjs-client": "^1.4.0",
+    "store": "^2.0.12",
+    "vue": "^2.6.10",
+    "vue-carousel": "^0.18.0",
+    "vue-chartjs": "^3.4.2",
+    "vue-chat-scroll": "^1.4.0",
+    "vue-clipboard2": "^0.3.1",
+    "vue-codemirror": "^4.0.6",
+    "vue-content-loading": "^1.6.0",
+    "vue-datetime": "^1.0.0-beta.14",
+    "vue-gallery-slideshow": "^1.5.0",
+    "vue-json-excel": "^0.2.98",
+    "vue-material-design-icons": "^3.4.0",
+    "vue-mixins": "^0.3.6",
+    "vue-owl-carousel": "^2.0.3",
+    "vue-quick-chat": "^0.3.1",
+    "vue-quill": "^1.5.1",
+    "vue-quill-editor": "^3.0.6",
+    "vue-resource": "^1.5.1",
+    "vue-router": "^3.1.3",
+    "vue-runtime-helpers": "^1.1.2",
+    "vue-scrollto": "^2.18.2",
+    "vue-socket.io": "^3.0.7",
+    "vue-stomp": "0.0.5",
+    "vue-textarea-autosize": "^1.1.1",
+    "vue-the-mask": "^0.11.1",
+    "vuetify": "^1.5.19",
+    "vuex": "^3.1.1",
+    "webstomp-client": "^1.2.6",
+    "weekstart": "^1.0.1"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "@mdi/font": "^3.9.97",
+    "@vue/cli-plugin-babel": "^3.12.1",
+    "@vue/cli-plugin-eslint": "^3.12.1",
+    "@vue/cli-service": "^3.12.1",
+    "babel-eslint": "^10.0.3",
+    "css-loader": "^2.1.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.2.3",
+    "font-awesome": "^4.7.0",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
+    "vue-live-preview": "^0.4.1",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
