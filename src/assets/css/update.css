@@ -1,0 +1,13 @@
+.idev-page-card .ant-card-head-title{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.idev-page-card .ant-card-head-title h1{
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    font-size: 24px;
+    line-height: 32px;
+}

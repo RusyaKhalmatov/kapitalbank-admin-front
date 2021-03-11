@@ -60,11 +60,11 @@ const menuItems = {
                     icon: 'mdi-file-table-outline',
                     action: 'commission'
                 },
-                {
+                /*{
                     title: 'EPOS',
                     icon: 'mdi-file-table-outline',
                     action: 'epos'
-                },
+                },*/
                 {
                     title: 'Внешний Сервис',
                     icon: 'mdi-settings-outline',
@@ -123,11 +123,11 @@ const menuItems = {
                     icon: "mdi-settings-outline",
                     action: "terminalAdd",
                 },
-                {
+                /*{
                     title: "Сверка епосов",
                     icon: "mdi-settings-outline",
                     action: "eposRevise",
-                },
+                },*/
                 {
                     title: "Отмена транзакций",
                     icon: "loop",
@@ -143,11 +143,11 @@ const menuItems = {
                     icon: 'credit_card',
                     action: 'CardProductOrder',
                 },
-                {
+                /*{
                     title: 'Публикации',
                     icon: 'publish',
                     action: 'Publishings',
-                },
+                },*/
                 {
                     title: 'Программа лояльности',
                     icon: 'sentiment_satisfied_alt',
@@ -204,11 +204,11 @@ const menuItems = {
                         }
                     ]
                 },
-                {
+                /*{
                     title: 'Белый список по скорингу',
                     icon: 'list_alt',
                     action: 'WhiteList'
-                },
+                },*/
                 {
                     title: 'Управление кэшем',
                     icon: 'cached',
@@ -243,12 +243,12 @@ const menuItems = {
                         }
                     ]
                 },        
-                {
+                /*{
                     title: 'Stories',
                     icon: 'mdi-dns-outline',
                     action: 'Stories'
-                },
-                {
+                },*/
+                /*{
                     title: "Телеграм бот",
                     icon: "send",
                     child: [
@@ -268,7 +268,7 @@ const menuItems = {
                             action: 'telegramMessages',
                         }
                     ]
-                },
+                },*/
             ]
         },
         {
@@ -306,12 +306,12 @@ const menuItems = {
                         }
                     ]
                 },
-                {
+                /*{
                     title: 'Логи для Call Center',
                     icon: 'mdi-file-chart',
                     action: 'Logs'
-                },
-                {
+                },*/
+                /*{
                     title: "Chat",
                     icon: "mdi-android-messages",
                     child: [
@@ -331,7 +331,7 @@ const menuItems = {
                             action: 'chatbot',
                         },
                     ]
-                },
+                },*/
                 {
                     title: "Блокировки",
                     icon: "mdi-cellphone-lock",
@@ -353,11 +353,11 @@ const menuItems = {
                     icon: "mdi-mail",
                     action: "cardHistory"
                 },
-                {
+                /*{
                     title: "История по епосам",
                     icon: "mdi-mail",
                     action: "EposHistory"
-                },
+                },*/
                 
                 {
                     title: "Виртуальная карта",
@@ -423,11 +423,11 @@ const menuItems = {
                     icon: 'mdi-file-table-outline',
                     action: 'commission'
                 },
-                {
+                /*{
                     title: 'EPOS',
                     icon: 'mdi-file-table-outline',
                     action: 'epos'
-                },
+                },*/
                 {
                     title: 'Внешний Сервис',
                     icon: 'mdi-settings-outline',
@@ -460,7 +460,7 @@ const menuItems = {
                     icon: "mdi-basket-unfill",
                     action: 'appVersion'
                 },
-                {
+                /*{
                     title: "Активация епосов Uzcard",
                     icon: "mdi-settings-outline",
                     action: "terminalAdd",
@@ -469,17 +469,17 @@ const menuItems = {
                     title: "Сверка епосов",
                     icon: "mdi-settings-outline",
                     action: "eposRevise",
-                },
+                },*/
                 {
                     title: "Отмена транзакций",
                     icon: "loop",
                     action: "reverse",
                 },
-                {
+                /*{
                     title: "История по епосам",
                     icon: "mdi-mail",
                     action: "EposHistory"
-                },
+                },*/
                 
                 {
                     title: "Виртуальная карта",
@@ -497,31 +497,31 @@ const menuItems = {
                         }
                     ]
                 },
-                {
+                /*{
                     title: 'Белый список по скорингу',
                     icon: 'list_alt',
                     action: 'WhiteList'
-                },
+                },*/
                 {
                     title: 'Управление кэшем',
                     icon: 'cached',
                     action: 'Cache'
                 },
-                {
+                /*{
                     title: 'Управление погодой',
                     icon: 'brightness_7',
                     action: 'Weather'
-                },
+                },*/
                 {
                     title: 'Страны',
                     icon: 'flag',
                     action: 'Countries'
                 },
-                {
+                /*{
                     title: 'Запрещенные слова Visa Direct',
                     icon: 'clear',
                     action: 'BannedWords'
-                },
+                },*/
                 {
                     title: 'Автопушки',
                     icon: 'web',
@@ -590,27 +590,27 @@ const menuItems = {
                         }
                     ]
                 },
-                {
+                /*{
                     title: 'Поставщики маркетплейса',
                     icon: 'mdi-folder-star',
                     action: 'MarketProviders',
-                },
+                },*/
                 {
                     title: 'Карточные продукты',
                     icon: 'credit_card',
                     action: 'CardProduct',
                 },
-                {
+                /*{
                     title: 'Описание разделов',
                     icon: 'publish',
                     action: 'Publishings',
-                },
+                },*/
                 {
                     title: 'Социальные адреса',
                     icon: 'publish',
                     action: 'SocialMedia'
                 },
-                {
+                /*{
                     title: 'Программа лояльности',
                     icon: 'sentiment_satisfied_alt',
                     child:[
@@ -670,7 +670,7 @@ const menuItems = {
                             action: 'LoyaltyRecommended'
                         }
                     ]
-                },
+                },*/
             ]
         },
         {
@@ -689,6 +689,11 @@ const menuItems = {
                                     title: 'Клиенты',
                                     icon: 'mdi-account',
                                     action: 'clients'
+                                },
+                                {
+                                    title: 'Белый список',
+                                    icon: 'mdi-account',
+                                    action: 'userWhiteList'
                                 },
                                 {
                                     title: 'VIP-Клиенты',
@@ -712,12 +717,12 @@ const menuItems = {
                                 }
                             ]
                         },
-                        {
+                        /*{
                             title: 'Логи для Call Center',
                             icon: 'mdi-file-chart',
                             action: 'Logs'
-                        },
-                        {
+                        },*/
+                        /*{
                             title: "Chat",
                             icon: "mdi-android-messages",
                             child: [
@@ -737,7 +742,7 @@ const menuItems = {
                                     action: 'chatbot',
                                 },
                             ]
-                        },
+                        },*/
                         {
                             title: "Блокировки",
                             icon: "mdi-cellphone-lock",
@@ -814,17 +819,17 @@ const menuItems = {
                         }
                     ]
                 },        
-                {
+                /*{
                     title: 'Stories',
                     icon: 'mdi-dns-outline',
                     action: 'Stories'
-                },
-                {
+                },*/
+                /*{
                     title: 'Мини объявления',
                     icon: 'publish',
                     action: 'Publication'
-                },
-                {
+                },*/
+                /*{
                     title: "Телеграм бот",
                     icon: "send",
                     child: [
@@ -844,7 +849,7 @@ const menuItems = {
                             action: 'telegramMessages',
                         }
                     ]
-                },
+                },*/
             ]
         },
         {
@@ -874,11 +879,11 @@ const menuItems = {
             icon: 'credit_card',
             action: 'CardProductOrder',
         },
-        {
+        /*{
             title: 'Запрещенные слова Visa Direct',
             icon: 'clear',
             action: 'BannedWords'
-        },
+        },*/
         // {
         //     title: 'Антифрод',
         //     icon: 'mdi-account-badge-outline',
@@ -896,11 +901,11 @@ const menuItems = {
             icon: "mdi-file-chart",
             action: "report"
         },
-        {
+        /*{
             title: 'Логи для Call Center',
             icon: 'mdi-file-chart',
             action: 'Logs'
-        },
+        },*/
         {
             title: "Заблокированный Аккаунт",
             icon: "mdi-account",
@@ -983,11 +988,11 @@ const menuItems = {
             icon: 'mdi-account-badge-outline',
             action: 'blockedDevices'
         },
-        {
+        /*{
             title: 'Логи для Call Center',
             icon: 'mdi-file-chart',
             action: 'Logs'
-        },
+        },*/
         {
             title: "Chat",
             icon: 'send',
@@ -1018,11 +1023,11 @@ const menuItems = {
             icon: "mdi-alpha-p-circle-outline",
             action: "CheckService"                    
         },
-        {
+        /*{
             title: 'Запрещенные слова Visa Direct',
             icon: 'clear',
             action: 'BannedWords'
-        },
+        },*/
         {
             title: 'Заказ карт',
             icon: 'credit_card',

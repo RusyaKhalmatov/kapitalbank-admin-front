@@ -60,9 +60,9 @@
                     {text: "Отчет по заказу карт", value: "ReportBySummery"},
                     {text: "Отчет по виртуальной карте", value: "VirtualCards"},
                     {text: "Отчет по реквизитам", value: "ReportRequisite"} ,
-                    {text: "Beeline отчет", value: "ReportBeeline"},
+                    /*{text: "Beeline отчет", value: "ReportBeeline"},
                     {text: "Ucell отчет", value: "ReportUcellComponent"},
-                    {text: "Количество запросов по скорингу", value: "ExternalHistoryStatistic"},
+                    {text: "Количество запросов по скорингу", value: "ExternalHistoryStatistic"},*/
 
                     
                 ]

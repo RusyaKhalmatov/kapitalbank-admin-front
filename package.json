@@ -74,7 +74,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "strict": "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

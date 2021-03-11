@@ -17,6 +17,7 @@ export default new Vuex.Store({
         toolbar: true,
         // apiUrl: 'https://mobile.kapitalbank.uz/api',
         prodApiUrl: 'http://192.168.131.2:8091/api',
+        prodApiUrl2: 'http://192.168.131.2:8082/api',
         apiUrl: 'http://192.168.131.2:8091/api',
         // apiUrl: 'http://192.168.132.1:8091/api',
 
@@ -110,7 +111,8 @@ export default new Vuex.Store({
         apiUrl: state => state.apiUrl,
         beelineUrl: state => state.beelineUrl,
         ucellUrl: state => state.ucellUrl,
-        newApiUrl: state => state.newApiUrl,
+        newApiUrl: state => state.prodApiUrl,
+        newApiUrl2: state => state.prodApiUrl2,
         chatApiUrl: state => state.chatApiUrl,
         avtoApiUrl: state => state.avtoApiUrl,
         loyaltyUrl: state => state.loyaltyUrl,

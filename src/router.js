@@ -138,680 +138,683 @@ import BannedWords from './views/BannedWords.vue'
 import Autonotifications from './views/Autonotifications.vue'
 
 
-
-
-
-
-
-
 Vue.use(Router);
 
 export default new Router({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    routes: [
-        {
-            path:'/reportP2pUcell',
-            name: 'ReportP2pUcell',
-            component: ReportP2pUcell
-        },
-        {
-            path:'/marketProviders',
-            name: 'MarketProviders',
-            component: MarketProviders
-        },
-        {
-            path:'/autonotifications',
-            name: 'Autonotifications',
-            component: Autonotifications
-        },
-        {
-            path:'/bannedWords',
-            name: 'BannedWords',
-            component: BannedWords
-        },
-        {
-            path: '/reportUcellComponent',
-            name: 'ReportUcellComponent',
-            component: ReportUcellComponent
-        },
-        {
-            path:'/weather',
-            name: 'Weather',
-            component: Weather
-        },
-        {
-            path:'/localPaymentCategory',
-            name: 'LocalPaymentCategory',
-            component: LocalPaymentCategory
-        },
-        {
-            path:'/reportVisaDirect',
-            name: 'reportVisaDirect',
-            component: reportVisaDirect
-        },
-        {
-            path:'/socialMedia',
-            name: 'SocialMedia',
-            component: SocialMedia
-        },
-        {
-            path:'/reportOfDeposit',
-            name: 'reportOfDeposit',
-            component: reportOfDeposit
-        },
-        {
-            path:'/reportOfCredit',
-            name: 'reportOfCredit',
-            component: reportOfCredit
-        },
-        {
-            path: '/bonus',
-            name: 'Bonus',
-            component: Bonus
-        },
-        {
-            path: '/creditAsia',
-            name: 'creditAsia',
-            component: CreditAsia
-        },
-        {
-            path:'/countries',
-            name: 'Countries',
-            component: Countries
-        },
-        {
-            path: '/login',
-            name: 'login',
-            component: Login
-        },
-        {
-            path: '/faq',
-            name: 'Faq',
-            component: Faq
-        },
-        {
-            path: '/publication',
-            name: 'Publication',
-            component: Publication
-        },
-        {
-            path: '/reverse',
-            name: 'reverse',
-            component: Reverse,
-        },
-        {
-            path: '/eposHistory',
-            name: 'EposHistory',
-            component: EposHistory
-        },
-        {
-            path: '/cardProductOrder',
-            name: 'CardProductOrder',
-            component: CardProductOrder,
-        },  
-        {
-            
-            path: '/virtualCardAccountType',
-            name: 'VirtualCardAccountType',
-            component: virtualCardAccountType,
-        },
-        {
-            path: '/reportRequisite',
-            name: 'ReportRequisite',
-            component: ReportRequisite,
-        },
-        {
-            path: '/whiteList',
-            name: 'WhiteList',
-            component: WhiteList,
-        },   
-        {
-            path: '/accountWalletHistory',
-            name: 'AccountWalletHistory',
-            component: AccountWalletHistory
-        },
-        {
-            path: '/reportBeeline',
-            name: 'ReportBeeline',
-            component: ReportBeeline
-        },
-        {
-            path: '/reportUcell',
-            name: 'ReportUcell',
-            component: ReportUcell
-        },
-        {
-            path: '/categoryList',
-            name: 'CategoryList',
-            component: CategoryList
-        },
-        {
-            path:'/recommendedStatus',
-            name: 'RecommendedStatus',
-            component: RecommendedStatus
-        },
-        {
-            path:'/virtualCardHistory',
-            name: 'virtualCardHistory',
-            component: virtualCardHistory
-        },
-        {
-            path: '/externalHistoryStatistic',
-            name: 'ExternalHistoryStatistic',
-            component: ExternalHistoryStatistic,
-        },  
-        {
-            path: '/cache',
-            name: 'Cache',
-            component: Cache,
-        }, 
-        {
-            path: '/usersByAddedCards',
-            name: 'usersByAddedCards',
-            component: UsersByAddedCards,
-        },    
-        {
-            path: '/virtualCards',
-            name: 'VirtualCards',
-            component: VirtualCards,
-        },              
-        {
-            path: '/reportBySummery',
-            name: 'ReportBySummery',
-            component: ReportBySummery,
-        },
-        {
-            path: '/checkService',
-            name: 'CheckService',
-            component: CheckService,
-        },
-        {
-            path: '/loyaltyRecommended',
-            name: 'LoyaltyRecommended',
-            component: LoyaltyRecommended
-        },
-        {
-            path: '/сhatStaffMonitoring',
-            name: 'ChatStaffMonitoring',
-            component: ChatStaffMonitoring,
-        }, 
-        {
-            path: '/chatDataMonitoring',
-            name: 'ChatDataMonitoring',
-            component: ChatDataMonitoring,
-        },         
-        {
-            path: '/showBalance',
-            name: 'ShowBalance',
-            component: ShowBalance,
-        },        
-        {
-            path: '/publishings',
-            name: 'Publishings',
-            component: Publishings,
-        },
-        {
-            path: '/serviceproviders',
-            name: 'ServiceProviders',
-            component: ServiceProviders,
-        },        
-        {
-            path: '/specialClients',
-            name: 'specialClients',
-            component: specialClients
-        },
-        {
-            path: '/loyaltyFilterAccount',
-            name: 'LoyaltyFilterAccount',
-            component: LoyaltyFilterAccount,
-        },
-        {
-            path: '/loyaltyFilterTransactions',
-            name: 'LoyaltyFilterTransactions',
-            component: LoyaltyFilterTransactions,
-        },
-        {
-            path: '/loyaltyFilterTariffs',
-            name: 'LoyaltyFilterTariffs',
-            component: LoyaltyFilterTariffs,
-        },
-        {
-            path: '/terminalAdd',
-            name: 'terminalAdd',
-            component: terminalAdd,
-        },
-        {
-            path: '/levels',
-            name: 'LoyaltyLevels',
-            component: LoyaltyLevels,
-        },
-        {
-            path: '/measurementUnit',
-            name: 'MeasurementUnit',
-            component: MeasurementUnit
-        },
-        {
-            path: '/loyaltyBankServices',
-            name: 'LoyaltyBankServices',
-            component: LoyaltyBankServices                        
-        },
-        {
-            path: '/tariffs',
-            name: 'Tariffs',
-            component: Tariffs
-        },
-        {
-            path: '/loyaltyRates',
-            name: 'LoyaltyRates',
-            component: LoyaltyRates
-        },
-        {
-            path: '/cardProduct',
-            name: 'CardProduct',
-            component: CardProduct,
-        },
-        {
-            path: '/settings',
-            name: 'settings',
-            component: Settings
-        },
-        {
-            path: '/profile',
-            name: 'profile',
-            component: Profile
-        },
-        {
-            path: "/currencyRates",
-            name: "currencyRates",
-            component: CurrencyRates
-        },
-        {
-            path: "/deposit",
-            name: "deposit",
-            component: Deposit
-        },
-        {
-            path: "/createDeposit",
-            name: "DepositProductForm",
-            component: DepositProductForm,
-            params: true
-        },
-        {
-            path: "/bank",
-            name: "bank",
-            component: Bank
-        },
-        {
-            path: "/addBank",
-            name: "BankForm",
-            component: BankForm,
-            params: true
-        },
-        /*{
-            path: "/loan",
-            name: "loan",
-            component: Loan
-        },*/
-        {
-            path: "/paynetCategory",
-            name: "PaynetCategory",
-            component: PaynetCategory
-        },
-        {
-            path: "/paynetCategoryForm",
-            name: "PaynetCategoryForm",
-            component: PaynetCategoryForm,
-            params: true
-        },
-        {
-            path: "/paynetServices",
-            name: "PaynetServices",
-            component: PaynetServices
-        },
-        {
-            path: "/paynetServicesForm",
-            name: "PaynetServicesForm",
-            component: PaynetServicesForm,
-            params: true
-        },
-        {
-            path: "/serviceCategory",
-            name: "ServiceCategory",
-            component: ServiceCategory
-        },
-        {
-            path: "/logs",
-            name: "Logs",
-            component: Logs,
-            params: true
-        },
-        {
-            path: "/clients",
-            name: "clients",
-            component: Clients
-        },
-        {
-            path: "/telegrambuttons", 
-            name: "TelegramButtons",
-            component: TelegramButtons,
-        },
-        {
-            path: '/telegramSendMessages',
-            name: 'telegramSendMessages',
-            component: telegramSendMessages
-        },
-        {
-            path: '/telgramMessages',
-            name: 'telegramMessages',
-            component: telegramMessages,
-        },
-        {
-            path: "/chat",
-            name: 'chat',
-            component: Chat,
-            params: true,
-        },
-        {
-            path: "/archivechat",
-            name: 'archiveChat',
-            component: ArchiveChat
-        },
-        {
-            path: "/chatting",
-            name: "chatting",
-            component: Chatting
-        },
-        {
-            path: "/chatbot",
-            name: "chatbot",
-            component: Chatbot
-        },
-        {
-            path: "/operationCodes",
-            name: "operationCodes",
-            component: OperationCodes
-        },
-        {
-            path: "/operationCodesForm",
-            name: "OperationCodesForm",
-            component: OperationCodesForm,
-            params: true
-        },
-        {
-            path: "/operations",
-            name: "operations",
-            component: Operations
-        },
-        {
-            path: "/report",
-            name: "report",
-            component: Report
-        },
-        {
-                path: '/reportByActiveClients',
-                name: 'ReportByActiveClients',
-                component: ReportByActiveClients
-        },
-        {
-            path: "/reportAllBanks",
-            name: "reportAllBanks",
-            component: ReportAllBanks
-        },
-        {
-            path: "/reportTransactions",
-            name: "reportTransactions",
-            component: ReportByTransactions
-        },
-        {
-            path: "/reportDeposit",
-            name: "reportDeposit",
-            component: ReportDeposit
-        },
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes: [
+    {
+      path: '/reportP2pUcell',
+      name: 'ReportP2pUcell',
+      component: ReportP2pUcell
+    },
+    /*{
+        path:'/marketProviders',
+        name: 'MarketProviders',
+        component: MarketProviders
+    },*/
+    {
+      path: '/autonotifications',
+      name: 'Autonotifications',
+      component: Autonotifications
+    },
+    /*{
+        path:'/bannedWords',
+        name: 'BannedWords',
+        component: BannedWords
+    },*/
+    /*{
+        path: '/reportUcellComponent',
+        name: 'ReportUcellComponent',
+        component: ReportUcellComponent
+    },*/
+    /*{
+        path:'/weather',
+        name: 'Weather',
+        component: Weather
+    },*/
+    {
+      path: '/localPaymentCategory',
+      name: 'LocalPaymentCategory',
+      component: LocalPaymentCategory
+    },
+    {
+      path: '/reportVisaDirect',
+      name: 'reportVisaDirect',
+      component: reportVisaDirect
+    },
+    {
+      path: '/socialMedia',
+      name: 'SocialMedia',
+      component: SocialMedia
+    },
+    {
+      path: '/reportOfDeposit',
+      name: 'reportOfDeposit',
+      component: reportOfDeposit
+    },
+    {
+      path: '/reportOfCredit',
+      name: 'reportOfCredit',
+      component: reportOfCredit
+    },
+    /*{
+        path: '/bonus',
+        name: 'Bonus',
+        component: Bonus
+    },*/
+    {
+      path: '/creditAsia',
+      name: 'creditAsia',
+      component: CreditAsia
+    },
+    {
+      path: '/countries',
+      name: 'Countries',
+      component: Countries
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/faq',
+      name: 'Faq',
+      component: Faq
+    },
+    /*{
+        path: '/publication',
+        name: 'Publication',
+        component: Publication
+    },*/
+    {
+      path: '/reverse',
+      name: 'reverse',
+      component: Reverse,
+    },
+    /*{
+        path: '/eposHistory',
+        name: 'EposHistory',
+        component: EposHistory
+    },*/
+    {
+      path: '/cardProductOrder',
+      name: 'CardProductOrder',
+      component: CardProductOrder,
+    },
+    {
 
-        {
-            path: "/reportCredit",
-            name: "reportCredit",
-            component: ReportCredit
-        },
-        {
-            path: "/reportService",
-            name: "reportService",
-            component: ReportService
-        },
-        {
-            path: "/reportClientAndCards",
-            name: "reportClientAndCards",
-            component: ReportByClientAndCards
-        },
-        {
-            path: "/reportRegisteredUsers",
-            name: "reportRegisteredUsers",
-            component: ReportRegisteredUsers
-        },        
-        {
-            path: "/reportCrossConversion",
-            name: "reportCrossConversion",
-            component: ReportCrossConversion
-        },
-        {
-            path: "/reportConversion",
-            name: "reportConversion",
-            component: ReportConversion
-        },
-        {
-            path: "/branch",
-            name: "branch",
-            component: Branch
-        },
-        {
-            path: "/branchForm",
-            name: "branchForm",
-            component: BranchForm,
-            params: true
-        },
-        {
-            path: "/atm",
-            name: "atm",
-            component: atm
-        },
-        {
-            path: "/atmForm",
-            name: "atmForm",
-            component: atmForm,
-            params: true
-        },
-        {
-            path: "/clientForm",
-            name: "clientForm",
-            component: ClientForm
-        },
-        {
-            path: "/clientCredential",
-            name: "clientCredential",
-            component: ClientCredential
-        },
-        {
-            path: "/appVersion",
-            name: "appVersion",
-            component: appVersion
-        },
-        {
-            path: "/appVersionForm",
-            name: "appVersionForm",
-            component: appVersionForm
-        },
-        {
-            path: "/blockedDevices",
-            name: "blockedDevices",
-            component: BlockedDevices
-        },
-        {
-            path: "/blockedAccount",
-            name: "blockedAccount",
-            component: BlockedAccount
-        },
-        {
-            path: '/notificationStatistics',
-            name: 'notificationStatistics',
-            component: NotificationStatistics,
-        },
-        {
-            path: "/notification",
-            name: "notification",
-            component: Notification
-        },
-        {
-            path: "/notificationForm",
-            name: "notificationForm",
-            component: NotificationForm
-        },
-        {
-            path: "/messages",
-            name: "messages",
-            component: Messages
-        },
-        {
-            path: "/messagesForm",
-            name: "messagesForm",
-            component: MessagesForm
-        },
-        
-        {
-            path: "/partialVipClients",
-            name: "PartialVipClients",
-            component: PartialVipClients
-        },
-        {
-            path: "/vipClients",
-            name: "vipClients",
-            component: VipClients
-        },
-        {
-            path: "/vipClientsForm",
-            name: "vipClientsForm",
-            component: VipClientsForm
-        },
-        {
-            path: "/partialVipClientsForm",
-            name: "partialVipClientsForm",
-            component: PartialVipClientsForm
-        },
-        {
-            path: "/limits",
-            name: "limits",
-            component: Limits
-        },
-        {
-            path: "/limitForm",
-            name: "limitsForm",
-            component: LimitsForm
-        },
-        {
-            path: "/serviceLimits",
-            name: "serviceLimits",
-            component: ServiceLimits,
-        },
-        {
-            path: "/epos",
-            name: "epos",
-            component: EPOS
-        },
-        {
-            path: "/eposForm",
-            name: "eposForm",
-            component: EPOSform
-        },
-        {
-            path: "/commission",
-            name: "commission",
-            component: Commission
-        },
-        {
-            path: "/commissionForm",
-            name: "commissionForm",
-            component: CommissionForm
-        },
-        {
-            path: "/depositType",
-            name: "depositType",
-            component: DepositType
-        },
-        {
-            path: "/depositTypeForm",
-            name: "depositTypeForm",
-            component: DepositTypeForm
-        },
-        {
-            path: '/stories',
-            name: 'Stories',
-            component: Stories
-        },
-        {
-            path: "/story",
-            name: "story",
-            component: Story
-        },
-        {
-            path: "/storyForm",
-            name: "storyForm",
-            component: StoryForm
-        },
-        {
-            path: "/externalServices",
-            name: "externalServices",
-            component: ExternalServices
-        },
-        {
-            path: "/cardHistory",
-            name: "cardHistory",
-            component: CardHistory,
-            params: true,
-        },
-        {
-            path: "/failedRegistration",
-            name: "failedRegistration",
-            component: FailedRegistration
-        },
-        {
-            path: "/antifraud",
-            name: 'Antifraud',
-            component: Antifraud,
-        },
-        {
-            path: "/pivotTable",
-            name: 'pivotTable',
-            component: pivotTable,
-        },
-        {
-            path: "/newPivotTable",
-            name: 'newPivotTable',
-            component: newPivotTable,
-        },
-        {
-            path: '/eposRevise',
-            name: "eposRevise",
-            component: eposRevise,
-        },
-        {
-            path: '/employeeList',
-            name: "employeeList",
-            component: employeeList,
-        },
-        {
-            path: '/employeesList',
-            name: "employeesList",
-            component: employeesList
-        },
-        {
-            path: '/avtoloan',
-            name: "avtoloan",
-            component: avtoloan,
-        },
-        {
-            path: '/detail',
-            name: "detail",
-            component: detail,
-        }
-    ]
+      path: '/virtualCardAccountType',
+      name: 'VirtualCardAccountType',
+      component: virtualCardAccountType,
+    },
+    {
+      path: '/reportRequisite',
+      name: 'ReportRequisite',
+      component: ReportRequisite,
+    },
+    /*{
+        path: '/whiteList',
+        name: 'WhiteList',
+        component: WhiteList,
+    }, */
+    {
+      path: '/accountWalletHistory',
+      name: 'AccountWalletHistory',
+      component: AccountWalletHistory
+    },
+    /*{
+        path: '/reportBeeline',
+        name: 'ReportBeeline',
+        component: ReportBeeline
+    },
+    {
+        path: '/reportUcell',
+        name: 'ReportUcell',
+        component: ReportUcell
+    },*/
+    /*{
+        path: '/categoryList',
+        name: 'CategoryList',
+        component: CategoryList
+    },*/
+    /*{
+        path:'/recommendedStatus',
+        name: 'RecommendedStatus',
+        component: RecommendedStatus
+    },*/
+    {
+      path: '/virtualCardHistory',
+      name: 'virtualCardHistory',
+      component: virtualCardHistory
+    },
+    /*{
+        path: '/externalHistoryStatistic',
+        name: 'ExternalHistoryStatistic',
+        component: ExternalHistoryStatistic,
+    },  */
+    {
+      path: '/cache',
+      name: 'Cache',
+      component: Cache,
+    },
+    {
+      path: '/usersByAddedCards',
+      name: 'usersByAddedCards',
+      component: UsersByAddedCards,
+    },
+    {
+      path: '/virtualCards',
+      name: 'VirtualCards',
+      component: VirtualCards,
+    },
+    {
+      path: '/reportBySummery',
+      name: 'ReportBySummery',
+      component: ReportBySummery,
+    },
+    {
+      path: '/checkService',
+      name: 'CheckService',
+      component: CheckService,
+    },
+    /*{
+        path: '/loyaltyRecommended',
+        name: 'LoyaltyRecommended',
+        component: LoyaltyRecommended
+    },*/
+    {
+      path: '/сhatStaffMonitoring',
+      name: 'ChatStaffMonitoring',
+      component: ChatStaffMonitoring,
+    },
+    {
+      path: '/chatDataMonitoring',
+      name: 'ChatDataMonitoring',
+      component: ChatDataMonitoring,
+    },
+    {
+      path: '/showBalance',
+      name: 'ShowBalance',
+      component: ShowBalance,
+    },
+    /*{
+        path: '/publishings',
+        name: 'Publishings',
+        component: Publishings,
+    },*/
+    /*{
+        path: '/serviceproviders',
+        name: 'ServiceProviders',
+        component: ServiceProviders,
+    }, */
+    /*{
+        path: '/specialClients',
+        name: 'specialClients',
+        component: specialClients
+    },*/
+    {
+      path: '/loyaltyFilterAccount',
+      name: 'LoyaltyFilterAccount',
+      component: LoyaltyFilterAccount,
+    },
+    {
+      path: '/loyaltyFilterTransactions',
+      name: 'LoyaltyFilterTransactions',
+      component: LoyaltyFilterTransactions,
+    },
+    {
+      path: '/loyaltyFilterTariffs',
+      name: 'LoyaltyFilterTariffs',
+      component: LoyaltyFilterTariffs,
+    },
+    /*{
+        path: '/terminalAdd',
+        name: 'terminalAdd',
+        component: terminalAdd,
+    },*/
+    /*{
+        path: '/levels',
+        name: 'LoyaltyLevels',
+        component: LoyaltyLevels,
+    },*/
+    /*{
+        path: '/measurementUnit',
+        name: 'MeasurementUnit',
+        component: MeasurementUnit
+    },*/
+    /*{
+        path: '/loyaltyBankServices',
+        name: 'LoyaltyBankServices',
+        component: LoyaltyBankServices
+    },*/
+    /*{
+        path: '/tariffs',
+        name: 'Tariffs',
+        component: Tariffs
+    },*/
+    /*{
+        path: '/loyaltyRates',
+        name: 'LoyaltyRates',
+        component: LoyaltyRates
+    },*/
+    {
+      path: '/cardProduct',
+      name: 'CardProduct',
+      component: CardProduct,
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Settings
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
+    },
+    {
+      path: "/currencyRates",
+      name: "currencyRates",
+      component: CurrencyRates
+    },
+    {
+      path: "/deposit",
+      name: "deposit",
+      component: Deposit
+    },
+    {
+      path: "/createDeposit",
+      name: "DepositProductForm",
+      component: DepositProductForm,
+      params: true
+    },
+    {
+      path: "/bank",
+      name: "bank",
+      component: Bank
+    },
+    {
+      path: "/addBank",
+      name: "BankForm",
+      component: BankForm,
+      params: true
+    },
+    /*{
+        path: "/loan",
+        name: "loan",
+        component: Loan
+    },*/
+    {
+      path: "/paynetCategory",
+      name: "PaynetCategory",
+      component: PaynetCategory
+    },
+    {
+      path: "/paynetCategoryForm",
+      name: "PaynetCategoryForm",
+      component: PaynetCategoryForm,
+      params: true
+    },
+    {
+      path: "/paynetServices",
+      name: "PaynetServices",
+      component: PaynetServices
+    },
+    {
+      path: "/paynetServicesForm",
+      name: "PaynetServicesForm",
+      component: PaynetServicesForm,
+      params: true
+    },
+    {
+      path: "/serviceCategory",
+      name: "ServiceCategory",
+      component: ServiceCategory
+    },
+    /*{
+        path: "/logs",
+        name: "Logs",
+        component: Logs,
+        params: true
+    },*/
+    {
+      path: "/clients",
+      name: "clients",
+      component: Clients
+    },
+    {
+      path: "/user-white-list",
+      component: () => import('@/views/white-list/layout'),
+      children: [
+        { path: '', name: "userWhiteList", component: () => import('@/views/white-list/index')},
+        { path: 'add', name: "userWhiteListAdd", component: () => import('@/views/white-list/add')},
+        { path: 'update/:id', name: "userWhiteListUpdate", component: () => import('@/views/white-list/update')}
+      ]
+    },
+    /*{
+        path: "/telegrambuttons",
+        name: "TelegramButtons",
+        component: TelegramButtons,
+    },*/
+    /*{
+        path: '/telegramSendMessages',
+        name: 'telegramSendMessages',
+        component: telegramSendMessages
+    },*/
+    /*{
+        path: '/telgramMessages',
+        name: 'telegramMessages',
+        component: telegramMessages,
+    },*/
+    {
+      path: "/chat",
+      name: 'chat',
+      component: Chat,
+      params: true,
+    },
+    {
+      path: "/archivechat",
+      name: 'archiveChat',
+      component: ArchiveChat
+    },
+    {
+      path: "/chatting",
+      name: "chatting",
+      component: Chatting
+    },
+    {
+      path: "/chatbot",
+      name: "chatbot",
+      component: Chatbot
+    },
+    {
+      path: "/operationCodes",
+      name: "operationCodes",
+      component: OperationCodes
+    },
+    {
+      path: "/operationCodesForm",
+      name: "OperationCodesForm",
+      component: OperationCodesForm,
+      params: true
+    },
+    {
+      path: "/operations",
+      name: "operations",
+      component: Operations
+    },
+    {
+      path: "/report",
+      name: "report",
+      component: Report
+    },
+    {
+      path: '/reportByActiveClients',
+      name: 'ReportByActiveClients',
+      component: ReportByActiveClients
+    },
+    {
+      path: "/reportAllBanks",
+      name: "reportAllBanks",
+      component: ReportAllBanks
+    },
+    {
+      path: "/reportTransactions",
+      name: "reportTransactions",
+      component: ReportByTransactions
+    },
+    {
+      path: "/reportDeposit",
+      name: "reportDeposit",
+      component: ReportDeposit
+    },
+
+    {
+      path: "/reportCredit",
+      name: "reportCredit",
+      component: ReportCredit
+    },
+    {
+      path: "/reportService",
+      name: "reportService",
+      component: ReportService
+    },
+    {
+      path: "/reportClientAndCards",
+      name: "reportClientAndCards",
+      component: ReportByClientAndCards
+    },
+    {
+      path: "/reportRegisteredUsers",
+      name: "reportRegisteredUsers",
+      component: ReportRegisteredUsers
+    },
+    {
+      path: "/reportCrossConversion",
+      name: "reportCrossConversion",
+      component: ReportCrossConversion
+    },
+    {
+      path: "/reportConversion",
+      name: "reportConversion",
+      component: ReportConversion
+    },
+    {
+      path: "/branch",
+      name: "branch",
+      component: Branch
+    },
+    {
+      path: "/branchForm",
+      name: "branchForm",
+      component: BranchForm,
+      params: true
+    },
+    {
+      path: "/atm",
+      name: "atm",
+      component: atm
+    },
+    {
+      path: "/atmForm",
+      name: "atmForm",
+      component: atmForm,
+      params: true
+    },
+    {
+      path: "/clientForm",
+      name: "clientForm",
+      component: ClientForm
+    },
+    {
+      path: "/clientCredential",
+      name: "clientCredential",
+      component: ClientCredential
+    },
+    {
+      path: "/appVersion",
+      name: "appVersion",
+      component: appVersion
+    },
+    {
+      path: "/appVersionForm",
+      name: "appVersionForm",
+      component: appVersionForm
+    },
+    {
+      path: "/blockedDevices",
+      name: "blockedDevices",
+      component: BlockedDevices
+    },
+    {
+      path: "/blockedAccount",
+      name: "blockedAccount",
+      component: BlockedAccount
+    },
+    {
+      path: '/notificationStatistics',
+      name: 'notificationStatistics',
+      component: NotificationStatistics,
+    },
+    {
+      path: "/notification",
+      name: "notification",
+      component: Notification
+    },
+    {
+      path: "/notificationForm",
+      name: "notificationForm",
+      component: NotificationForm
+    },
+    {
+      path: "/messages",
+      name: "messages",
+      component: Messages
+    },
+    {
+      path: "/messagesForm",
+      name: "messagesForm",
+      component: MessagesForm
+    },
+
+    {
+      path: "/partialVipClients",
+      name: "PartialVipClients",
+      component: PartialVipClients
+    },
+    {
+      path: "/vipClients",
+      name: "vipClients",
+      component: VipClients
+    },
+    {
+      path: "/vipClientsForm",
+      name: "vipClientsForm",
+      component: VipClientsForm
+    },
+    {
+      path: "/partialVipClientsForm",
+      name: "partialVipClientsForm",
+      component: PartialVipClientsForm
+    },
+    {
+      path: "/limits",
+      name: "limits",
+      component: Limits
+    },
+    {
+      path: "/limitForm",
+      name: "limitsForm",
+      component: LimitsForm
+    },
+    {
+      path: "/serviceLimits",
+      name: "serviceLimits",
+      component: ServiceLimits,
+    },
+    /*{
+        path: "/epos",
+        name: "epos",
+        component: EPOS
+    },
+    {
+        path: "/eposForm",
+        name: "eposForm",
+        component: EPOSform
+    },*/
+    {
+      path: "/commission",
+      name: "commission",
+      component: Commission
+    },
+    {
+      path: "/commissionForm",
+      name: "commissionForm",
+      component: CommissionForm
+    },
+    {
+      path: "/depositType",
+      name: "depositType",
+      component: DepositType
+    },
+    {
+      path: "/depositTypeForm",
+      name: "depositTypeForm",
+      component: DepositTypeForm
+    },
+    /*{
+        path: '/stories',
+        name: 'Stories',
+        component: Stories
+    },*/
+    {
+      path: "/story",
+      name: "story",
+      component: Story
+    },
+    {
+      path: "/storyForm",
+      name: "storyForm",
+      component: StoryForm
+    },
+    {
+      path: "/externalServices",
+      name: "externalServices",
+      component: ExternalServices
+    },
+    {
+      path: "/cardHistory",
+      name: "cardHistory",
+      component: CardHistory,
+      params: true,
+    },
+    {
+      path: "/failedRegistration",
+      name: "failedRegistration",
+      component: FailedRegistration
+    },
+    {
+      path: "/antifraud",
+      name: 'Antifraud',
+      component: Antifraud,
+    },
+    {
+      path: "/pivotTable",
+      name: 'pivotTable',
+      component: pivotTable,
+    },
+    {
+      path: "/newPivotTable",
+      name: 'newPivotTable',
+      component: newPivotTable,
+    },
+    /*{
+        path: '/eposRevise',
+        name: "eposRevise",
+        component: eposRevise,
+    },*/
+    {
+      path: '/employeeList',
+      name: "employeeList",
+      component: employeeList,
+    },
+    {
+      path: '/employeesList',
+      name: "employeesList",
+      component: employeesList
+    },
+    {
+      path: '/avtoloan',
+      name: "avtoloan",
+      component: avtoloan,
+    },
+    {
+      path: '/detail',
+      name: "detail",
+      component: detail,
+    }
+  ]
 });

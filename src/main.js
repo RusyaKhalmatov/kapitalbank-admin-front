@@ -32,12 +32,15 @@ import VueChatScroll from 'vue-chat-scroll'
 import VueClipboard from 'vue-clipboard2'
 import VueScrollTo from 'vue-scrollto'
 
+import { Form } from 'ant-design-vue'
+import '@/assets/css/update.css';
+
 Vue.use(VueChatScroll)
 Vue.use(VueTheMask)
 Vue.use(VueClipboard)
 Vue.use(VueScrollTo)
 
-
+Vue.use(Form)
 
 // CodeMirror options
 Vue.use(VueLivePreview, {
