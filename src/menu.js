@@ -542,7 +542,17 @@ const menuItems = {
                     title: 'Виды Кредитов',
                     icon: 'mdi-cash-multiple',
                     action: 'depositType'
-                },   
+                },
+                {
+                    title: 'Типы Кредитов',
+                    icon: 'mdi-cash-multiple',
+                    action: 'loanTypeList'
+                },
+                {
+                    title: 'Фоновое изображение',
+                    icon: 'mdi-cash-multiple',
+                    action: 'backgroundImageList'
+                },
                 {
                     title: 'Банки',
                     icon: 'mdi-bank-outline',

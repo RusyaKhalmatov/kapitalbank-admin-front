@@ -26,6 +26,14 @@
           {{ allow ? 'Разрешен' : 'Заблокирован' }}
         </a-tag>
       </template>
+      <template slot="tag" slot-scope="text">
+        <a-tag :color="'#012354'">
+          {{ text }}
+        </a-tag>
+      </template>
+      <template slot="image" slot-scope="src">
+        <img src="http://192.168.131.2:8091/download/background-image/1614776569285.png"/>
+      </template>
       <template
         slot="action"
         slot-scope="item"

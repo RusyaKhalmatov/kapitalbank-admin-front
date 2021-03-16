@@ -145,6 +145,33 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: "/user-white-list",
+      component: () => import('@/views/white-list/layout'),
+      children: [
+        { path: '', name: "userWhiteList", component: () => import('@/views/white-list/index')},
+        { path: 'add', name: "userWhiteListAdd", component: () => import('@/views/white-list/add')},
+        { path: 'update/:id', name: "userWhiteListUpdate", component: () => import('@/views/white-list/update')}
+      ]
+    },
+    {
+      path: "/background-image",
+      component: () => import('@/views/background-image/layout'),
+      children: [
+        { path: '', name: "backgroundImageList", component: () => import('@/views/background-image/index')},
+        { path: 'add', name: "backgroundImageAdd", component: () => import('@/views/background-image/add')},
+        { path: 'update/:id', name: "backgroundImageUpdate", component: () => import('@/views/background-image/update')}
+      ]
+    },
+    {
+      path: "/loan-type",
+      component: () => import('@/views/loan-type/layout'),
+      children: [
+        { path: '', name: "loanTypeList", component: () => import('@/views/loan-type/index')},
+        { path: 'add', name: "loanTypeAdd", component: () => import('@/views/loan-type/add')},
+        { path: 'update/:id', name: "loanTypeUpdate", component: () => import('@/views/loan-type/update')}
+      ]
+    },
+    {
       path: '/reportP2pUcell',
       name: 'ReportP2pUcell',
       component: ReportP2pUcell
@@ -484,15 +511,6 @@ export default new Router({
       path: "/clients",
       name: "clients",
       component: Clients
-    },
-    {
-      path: "/user-white-list",
-      component: () => import('@/views/white-list/layout'),
-      children: [
-        { path: '', name: "userWhiteList", component: () => import('@/views/white-list/index')},
-        { path: 'add', name: "userWhiteListAdd", component: () => import('@/views/white-list/add')},
-        { path: 'update/:id', name: "userWhiteListUpdate", component: () => import('@/views/white-list/update')}
-      ]
     },
     /*{
         path: "/telegrambuttons",

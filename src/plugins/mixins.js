@@ -3,7 +3,12 @@ const globalHandler = {
     Vue.mixin({
       data() {
         return {
-          loader: false
+          loader: false,
+          formRules(){
+            return {
+              required: { required: true, message: 'Это поле обязательно к заполнению' }
+            }
+          }
         }
       },
       methods: {
