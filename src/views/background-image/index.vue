@@ -27,15 +27,15 @@
             key: 'index'
           },
           {
-            title: 'name',
-            dataIndex: 'name',
-            key: 'name',
-          },
-          {
             title: 'Фото',
             dataIndex: 'imageUrl',
             key: 'imageUrl',
             scopedSlots: { customRender: 'image' },
+          },
+          {
+            title: 'name',
+            dataIndex: 'name',
+            key: 'name',
           },
           {
             title: 'Язык',
@@ -62,12 +62,12 @@
       idevTable: () => import('@/helpers/idev-table')
     },
     computed: {
-      ...mapGetters(['newApiUrl2'])
+      ...mapGetters(['newApiUrl'])
     },
     methods: {
       getList() {
         return new Promise((resolve, reject) => {
-          this.$http.get(`${this.newApiUrl2}/background-image`)
+          this.$http.get(`${this.newApiUrl}/background-image`)
             .then(response => {
               if (response.ok) {
                 resolve(response.body)
@@ -79,7 +79,7 @@
       },
       deleteContent(id) {
         return new Promise((resolve, reject) => {
-          this.$http.delete(`${this.newApiUrl2}/background-image/delete/${id}`)
+          this.$http.delete(`${this.newApiUrl}/background-image/delete/${id}`)
             .then(response => {
               if (response.ok) {
                 resolve()

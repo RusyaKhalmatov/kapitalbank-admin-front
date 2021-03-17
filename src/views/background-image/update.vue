@@ -18,14 +18,14 @@
       }
     },
     computed: {
-      ...mapGetters(['newApiUrl2'])
+      ...mapGetters(['newApiUrl'])
     },
     components: {
       formFields: () => import('./__fileds')
     },
     methods: {
       getContent(){
-        this.$http.get(`${this.newApiUrl2}/background-image/get/${this.$route.params.id}`)
+        this.$http.get(`${this.newApiUrl}/background-image/${this.$route.params.id}`)
           .then(response => {
             delete response.body.data.id
             this.data = response.body.data

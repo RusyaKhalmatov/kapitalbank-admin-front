@@ -28,20 +28,15 @@ userWhiteList
             key: 'index'
           },
           {
-            title: 'username',
-            dataIndex: 'username',
-            key: 'username',
+            title: 'Фото',
+            dataIndex: 'iconUrl',
+            key: 'iconUrl',
+            scopedSlots: { customRender: 'image' },
           },
           {
-            title: 'Логин',
-            dataIndex: 'login',
-            key: 'login',
-          },
-          {
-            title: 'Доступ',
-            dataIndex: 'allow',
-            key: 'allow',
-            scopedSlots: { customRender: 'allow' },
+            title: 'name',
+            dataIndex: 'name',
+            key: 'name',
           },
           {
             title: 'Action',
@@ -57,12 +52,12 @@ userWhiteList
       idevTable: () => import('@/helpers/idev-table')
     },
     computed: {
-      ...mapGetters(['newApiUrl','newApiUrl2'])
+      ...mapGetters(['newApiUrl'])
     },
     methods: {
       getList() {
         return new Promise((resolve, reject) => {
-          this.$http.get(`${this.newApiUrl2}/loan-type/all`)
+          this.$http.get(`${this.newApiUrl}/loan-type/all`)
             .then(response => {
               if (response.ok) {
                 resolve(response.body)

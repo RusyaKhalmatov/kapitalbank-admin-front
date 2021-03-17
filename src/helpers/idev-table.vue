@@ -32,7 +32,7 @@
         </a-tag>
       </template>
       <template slot="image" slot-scope="src">
-        <img src="http://192.168.131.2:8091/download/background-image/1614776569285.png"/>
+        <img :src="src" width="80"/>
       </template>
       <template
         slot="action"

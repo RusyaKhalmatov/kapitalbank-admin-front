@@ -12,15 +12,15 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapState } from 'vuex'
 
   export default {
     data(){
       return {
         formFields: {
-          login: null,
-          username: null,
-          allow: true
+          imageUrl: null,
+          lang: null,
+          name: null
         }
       }
     },
@@ -35,23 +35,23 @@
       }
     },
     computed: {
-      ...mapGetters(['newApiUrl2']),
+      ...mapGetters(['newApiUrl']),
+      ...mapState(['languageList']),
       formColumns(){
         return {
-          login: {
+          name: {
             type: 'text',
             rules: [this.formRules.required]
           },
-          username: {
-            type: 'text',
+          lang: {
+            type: 'select',
+            list: this.languageList,
+            defaultValue: "UZ",
             rules: [this.formRules.required]
           },
-          allow: {
-            type: 'radio',
-            list: [
-              { text: "Allow", value: true },
-              { text: "Disallow", value: false }
-            ]
+          imageUrl: {
+            type: 'image',
+            uploadUrl: `http://192.168.118.47:8082/api/background-image/imageUrl`
           }
         }
       }
@@ -63,7 +63,7 @@
       setContent(fields){
         return new Promise((resolve, reject) => {
           if (!!this.updateId) {
-            this.$http.put(`${this.newApiUrl2}/background-image/update/${this.updateId}`, {...fields})
+            this.$http.put(`${this.newApiUrl}/background-image/update/${this.updateId}`, {...fields})
               .then(response => {
                 if (response.ok) {
                   resolve()
@@ -72,7 +72,7 @@
                 }
               }, this.handleError);
           } else {
-            this.$http.post(`${this.newApiUrl2}/background-image/create`, {...fields})
+            this.$http.post(`${this.newApiUrl}/background-image/create`, {...fields})
               .then(response => {
                 if (response.ok) {
                   resolve()

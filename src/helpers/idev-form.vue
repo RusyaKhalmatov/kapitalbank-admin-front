@@ -30,6 +30,42 @@
             :disabled="formDisabled"
           />
         </template>
+        <template v-if="v.type === 'select'">
+          <a-select
+            v-decorator="[
+              key,
+              {
+                rules: hasItem(v, 'rules', []),
+                defaultValue: hasItem(v,'defaultValue') ? v.defaultValue : false
+              }
+            ]"
+            :disabled="formDisabled"
+          >
+            <a-select-option
+              v-for="l in v.list"
+              :value="l.key"
+              :key="`so_${l.key}`"
+            >{{ l.value }}</a-select-option>
+          </a-select>
+        </template>
+        <template v-if="v.type === 'image'">
+          <a-upload
+            name="file"
+            list-type="picture-card"
+            class="avatar-uploader"
+            :action="v.uploadUrl"
+            :show-upload-list="false"
+            @change="changeUploadInput($event, key)"
+          >
+            <img v-if="formFields[key]" :src="formFields[key]" class="avatar" />
+            <div v-else>
+              <a-icon :type="imgLoading ? 'loading' : 'plus'" />
+              <div class="ant-upload-text">
+                Upload
+              </div>
+            </div>
+          </a-upload>
+        </template>
         <template v-else-if="v.type === 'radio'">
           <a-radio-group
             v-decorator="[
@@ -68,8 +104,8 @@
 
 <script>
   import {
-    Button, Card,
-    Form, Input, Select, Radio
+    Button, Card, Icon,
+    Form, Input, Select, Radio, Upload
   } from "ant-design-vue";
 
   export default {
@@ -77,7 +113,8 @@
     data(){
       return {
         form: this.$form.createForm(this, {...this.formFields}),
-        formDisabled: false
+        formDisabled: false,
+        imgLoading: false
       }
     },
     props: {
@@ -113,6 +150,8 @@
       [Radio.name]: Radio,
       [Radio.Group.name]: Radio.Group,
       [Button.name]: Button,
+      [Icon.name]: Icon,
+      [Upload.name]: Upload,
       [Card.name]: Card
     },
     methods: {
@@ -132,7 +171,39 @@
               })
           }
         });
+      },
+      changeUploadInput(info, field_name){
+        console.log("INFO: ", info, field_name)
+        if (info.file.status === 'uploading') {
+          this.imgLoading = true
+          return;
+        }
+        if (info.file.status === 'done') {
+          this.getImageBase64(info.file.originFileObj, imageUrl => {
+            this.formFields[field_name] = imageUrl
+            this.imgLoading = false
+          });
+        }
       }
     }
   }
 </script>
+<style>
+  .avatar-uploader > .ant-upload {
+    width: 100%;
+    height: 128px !important;
+    max-height: 220px !important;
+  }
+  .avatar-uploader img{
+    max-width: 100%;
+    max-height: 220px !important;
+  }
+  .ant-upload-select-picture-card i {
+    font-size: 32px;
+    color: #999;
+  }
+  .ant-upload-select-picture-card .ant-upload-text {
+    margin-top: 8px;
+    color: #666;
+  }
+</style>

@@ -18,14 +18,14 @@
       }
     },
     computed: {
-      ...mapGetters(['newApiUrl2'])
+      ...mapGetters(['newApiUrl'])
     },
     components: {
       formFields: () => import('./__fileds')
     },
     methods: {
       getContent(){
-        this.$http.get(`${this.newApiUrl2}/loan-type/get/${this.$route.params.id}`)
+        this.$http.get(`${this.newApiUrl}/loan-type/get/${this.$route.params.id}`)
           .then(response => {
             delete response.body.data.id
             this.data = response.body.data

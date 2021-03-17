@@ -56,12 +56,12 @@
       idevTable: () => import('@/helpers/idev-table')
     },
     computed: {
-      ...mapGetters(['newApiUrl2'])
+      ...mapGetters(['newApiUrl'])
     },
     methods: {
       getList() {
         return new Promise((resolve, reject) => {
-          this.$http.get(`${this.newApiUrl2}/registration-white-user/all`)
+          this.$http.get(`${this.newApiUrl}/registration-white-user/all`)
             .then(response => {
               if (response.ok) {
                 resolve(response.body)
@@ -73,7 +73,7 @@
       },
       deleteContent(id) {
         return new Promise((resolve, reject) => {
-          this.$http.delete(`${this.newApiUrl2}/registration-white-user/delete/${id}`)
+          this.$http.delete(`${this.newApiUrl}/registration-white-user/delete/${id}`)
             .then(response => {
               if (response.ok) {
                 resolve()

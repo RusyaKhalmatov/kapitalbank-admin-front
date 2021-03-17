@@ -3,17 +3,27 @@ const globalHandler = {
     Vue.mixin({
       data() {
         return {
-          loader: false,
-          formRules(){
-            return {
-              required: { required: true, message: 'Это поле обязательно к заполнению' }
-            }
+          loader: false
+        }
+      },
+      computed: {
+        formRules(){
+          return {
+            required: { required: true, message: 'Это поле обязательно к заполнению' }
           }
         }
       },
       methods: {
         hasItem(obj, key, default_value = null){
           return typeof obj[key] !== 'undefined' ? obj[key] : default_value
+        },
+        parseImageUrl(src){
+          return src.replace('https://t-online.kapitalbank.uz', 'http://192.168.131.2:8091')
+        },
+        getImageBase64(img, callback) {
+          const reader = new FileReader();
+          reader.addEventListener('load', () => callback(reader.result));
+          reader.readAsDataURL(img);
         },
         registerDevice() {
           let self = this;

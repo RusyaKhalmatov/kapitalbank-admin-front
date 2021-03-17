@@ -35,7 +35,7 @@
       }
     },
     computed: {
-      ...mapGetters(['newApiUrl2']),
+      ...mapGetters(['newApiUrl']),
       formColumns(){
         return {
           login: {
@@ -63,7 +63,7 @@
       setContent(fields){
         return new Promise((resolve, reject) => {
           if (!!this.updateId) {
-            this.$http.put(`${this.newApiUrl2}/loan-type/update/${this.updateId}`, {...fields})
+            this.$http.put(`${this.newApiUrl}/loan-type/update/${this.updateId}`, {...fields})
               .then(response => {
                 if (response.ok) {
                   resolve()
@@ -72,7 +72,7 @@
                 }
               }, this.handleError);
           } else {
-            this.$http.post(`${this.newApiUrl2}/loan-type/create`, {...fields})
+            this.$http.post(`${this.newApiUrl}/loan-type/create`, {...fields})
               .then(response => {
                 if (response.ok) {
                   resolve()
