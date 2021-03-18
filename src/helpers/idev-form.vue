@@ -24,9 +24,9 @@
         <template v-if="v.type === 'text'">
           <a-input
             v-decorator="[
-            key,
-            { rules: hasItem(v, 'rules', []) }
-          ]"
+              key,
+              { rules: hasItem(v, 'rules', []) }
+            ]"
             :disabled="formDisabled"
           />
         </template>
@@ -50,12 +50,14 @@
         </template>
         <template v-if="v.type === 'image'">
           <a-upload
+            v-decorator="[key]"
             name="file"
             list-type="picture-card"
             class="avatar-uploader"
             :action="v.uploadUrl"
             :show-upload-list="false"
             @change="changeUploadInput($event, key)"
+            :headers="uploadHeaders"
           >
             <img v-if="formFields[key]" :src="formFields[key]" class="avatar" />
             <div v-else>
@@ -98,6 +100,7 @@
           :loading="formDisabled"
         >Отменить</a-button>
       </a-form-item>
+      <pre>{{ formFields }}</pre>
     </a-form>
   </a-card>
 </template>
@@ -107,6 +110,7 @@
     Button, Card, Icon,
     Form, Input, Select, Radio, Upload
   } from "ant-design-vue";
+  import {mapGetters} from "vuex";
 
   export default {
     name: "idev-form",
@@ -115,6 +119,17 @@
         form: this.$form.createForm(this, {...this.formFields}),
         formDisabled: false,
         imgLoading: false
+      }
+    },
+    computed: {
+      ...mapGetters(['token', 'deviceId', 'appVersion']),
+      uploadHeaders(){
+        return {
+          token: this.token,
+          ['device-id']: this.deviceId,
+          ['app-version']: this.appVersion,
+          lang: 'ru'
+        }
       }
     },
     props: {
@@ -137,6 +152,9 @@
     watch: {
       updateFields(val){
         if (val) {
+          for (let i in val) {
+            this.$set(this.formFields, i, val[i])
+          }
           this.form.setFieldsValue(val)
         }
       }
@@ -158,10 +176,19 @@
       formSubmit(){
         this.form.validateFields((err, values) => {
           if (!err) {
+            console.log("values ", values)
+            for (let key of ['iconUrl', 'imageUrl']) {
+              if (this.hasItem(values, key)) {
+                if (this.hasItem(values[key], 'file')) {
+                  values[key] = values[key].file.response.data
+                } else {
+                  values[key] = null
+                }
+              }
+            }
             this.formDisabled = true
             this.setContent(values)
               .then(() => {
-                console.log("SUCCESS")
                 this.formDisabled = false
                 this.$router.push({name: this.backRouteName})
               })
@@ -173,16 +200,17 @@
         });
       },
       changeUploadInput(info, field_name){
-        console.log("INFO: ", info, field_name)
         if (info.file.status === 'uploading') {
           this.imgLoading = true
           return;
         }
         if (info.file.status === 'done') {
-          this.getImageBase64(info.file.originFileObj, imageUrl => {
+          this.formFields[field_name] = info.file.response.data
+          this.imgLoading = false
+          /*this.getImageBase64(info.file.originFileObj, imageUrl => {
             this.formFields[field_name] = imageUrl
             this.imgLoading = false
-          });
+          });*/
         }
       }
     }

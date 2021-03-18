@@ -79,7 +79,7 @@
       },
       deleteContent(id) {
         return new Promise((resolve, reject) => {
-          this.$http.delete(`${this.newApiUrl}/background-image/delete/${id}`)
+          this.$http.delete(`${this.newApiUrl}/background-image/${id}`)
             .then(response => {
               if (response.ok) {
                 resolve()

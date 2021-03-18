@@ -79,11 +79,11 @@ Vue.use(Vuetify, {
 });
 Vue.config.productionTip = false;
 
-Vue.http.headers.common['Content-Type'] = 'application/json';
+Vue.http.headers.common['Content-Type'] = 'application/json'
 Vue.http.headers.common['token'] = store.getters.token;
 Vue.http.headers.common['device-id'] = store.getters.deviceId;
 Vue.http.headers.common['app-version'] = store.getters.appVersion;
-Vue.http.headers.common['lang'] = 'ru';
+Vue.http.headers.common['lang'] = 'ru'
 
 // var uname = 'AVtO_L0aN_8f234_Ssmeiq';
 // var pass = '&*sk92jf8.1521aydd3810bx742n54kiygh2';

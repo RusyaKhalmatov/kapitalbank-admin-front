@@ -25,7 +25,7 @@
     },
     methods: {
       getContent(){
-        this.$http.get(`${this.newApiUrl}/loan-type/get/${this.$route.params.id}`)
+        this.$http.get(`${this.newApiUrl}/loan-type/${this.$route.params.id}`)
           .then(response => {
             delete response.body.data.id
             this.data = response.body.data
