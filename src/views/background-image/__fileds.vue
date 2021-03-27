@@ -51,7 +51,7 @@
           },
           imageUrl: {
             type: 'image',
-            uploadUrl: `http://192.168.118.47:8082/api/background-image/imageUrl`
+            uploadUrl: `${this.newApiUrl}/background-image/imageUrl`
           }
         }
       }
@@ -63,7 +63,7 @@
       setContent(fields){
         return new Promise((resolve, reject) => {
           if (!!this.updateId) {
-            this.$http.put(`${this.newApiUrl}/background-image/update/${this.updateId}`, {...fields})
+            this.$http.put(`${this.newApiUrl}/background-image/${this.updateId}`, {...fields})
               .then(response => {
                 if (response.ok) {
                   resolve()
@@ -72,7 +72,7 @@
                 }
               }, this.handleError);
           } else {
-            this.$http.post(`${this.newApiUrl}/background-image/create`, {...fields})
+            this.$http.post(`${this.newApiUrl}/background-image`, {...fields})
               .then(response => {
                 if (response.ok) {
                   resolve()

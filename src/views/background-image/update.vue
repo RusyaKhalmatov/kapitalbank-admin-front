@@ -28,7 +28,11 @@
         this.$http.get(`${this.newApiUrl}/background-image/${this.$route.params.id}`)
           .then(response => {
             delete response.body.data.id
-            this.data = response.body.data
+            this.data = {
+              name: response.body.data.name,
+              lang: response.body.data.lang,
+              imageUrl: response.body.data.imageUrl
+            }
           }, this.handleError);
       }
     },

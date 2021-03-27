@@ -18,9 +18,9 @@
     data(){
       return {
         formFields: {
-          login: null,
-          username: null,
-          allow: true
+          name: null,
+          description: null,
+          iconUrl: null
         }
       }
     },
@@ -38,20 +38,17 @@
       ...mapGetters(['newApiUrl']),
       formColumns(){
         return {
-          login: {
+          name: {
             type: 'text',
             rules: [this.formRules.required]
           },
-          username: {
+          description: {
             type: 'text',
             rules: [this.formRules.required]
           },
-          allow: {
-            type: 'radio',
-            list: [
-              { text: "Allow", value: true },
-              { text: "Disallow", value: false }
-            ]
+          iconUrl: {
+            type: 'image',
+            uploadUrl: `${this.newApiUrl}/loan-type/iconUrl`
           }
         }
       }
@@ -63,7 +60,7 @@
       setContent(fields){
         return new Promise((resolve, reject) => {
           if (!!this.updateId) {
-            this.$http.put(`${this.newApiUrl}/loan-type/update/${this.updateId}`, {...fields})
+            this.$http.put(`${this.newApiUrl}/loan-type/${this.updateId}`, {...fields})
               .then(response => {
                 if (response.ok) {
                   resolve()
@@ -72,7 +69,7 @@
                 }
               }, this.handleError);
           } else {
-            this.$http.post(`${this.newApiUrl}/loan-type/create`, {...fields})
+            this.$http.post(`${this.newApiUrl}/loan-type`, {...fields})
               .then(response => {
                 if (response.ok) {
                   resolve()

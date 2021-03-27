@@ -3,7 +3,7 @@
     v-bind="{
       tableColumns: columns,
       tableData: data,
-      tableTitle: 'Белый список',
+      tableTitle: 'Типы кредитов',
       getList: getList,
       deleteContent: deleteContent,
       updateRouteName: 'loanTypeUpdate',
