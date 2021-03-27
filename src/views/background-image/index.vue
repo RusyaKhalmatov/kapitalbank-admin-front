@@ -3,7 +3,7 @@
     v-bind="{
       tableColumns: columns,
       tableData: data,
-      tableTitle: 'Фоновое изображение',
+      tableTitle: 'Баннеры',
       getList: getList,
       deleteContent: deleteContent,
       updateRouteName: 'backgroundImageUpdate',

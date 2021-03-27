@@ -549,7 +549,7 @@ const menuItems = {
                     action: 'loanTypeList'
                 },
                 {
-                    title: 'Фоновое изображение',
+                    title: 'Баннеры',
                     icon: 'mdi-cash-multiple',
                     action: 'backgroundImageList'
                 },
