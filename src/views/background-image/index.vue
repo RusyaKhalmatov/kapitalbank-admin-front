@@ -62,12 +62,12 @@
       idevTable: () => import('@/helpers/idev-table')
     },
     computed: {
-      ...mapGetters(['newApiUrl'])
+      ...mapGetters(['newApiUrl2'])
     },
     methods: {
       getList() {
         return new Promise((resolve, reject) => {
-          this.$http.get(`${this.newApiUrl}/background-image`)
+          this.$http.get(`${this.newApiUrl2}/background-image`)
             .then(response => {
               if (response.ok) {
                 resolve(response.body)
@@ -79,7 +79,7 @@
       },
       deleteContent(id) {
         return new Promise((resolve, reject) => {
-          this.$http.delete(`${this.newApiUrl}/background-image/${id}`)
+          this.$http.delete(`${this.newApiUrl2}/background-image/${id}`)
             .then(response => {
               if (response.ok) {
                 resolve()

@@ -35,7 +35,7 @@
       }
     },
     computed: {
-      ...mapGetters(['newApiUrl']),
+      ...mapGetters(['newApiUrl2']),
       ...mapState(['languageList']),
       formColumns(){
         return {
@@ -51,7 +51,7 @@
           },
           imageUrl: {
             type: 'image',
-            uploadUrl: `${this.newApiUrl}/background-image/imageUrl`
+            uploadUrl: `${this.newApiUrl2}/background-image/imageUrl`
           }
         }
       }
@@ -63,7 +63,7 @@
       setContent(fields){
         return new Promise((resolve, reject) => {
           if (!!this.updateId) {
-            this.$http.put(`${this.newApiUrl}/background-image/${this.updateId}`, {...fields})
+            this.$http.put(`${this.newApiUrl2}/background-image/${this.updateId}`, {...fields})
               .then(response => {
                 if (response.ok) {
                   resolve()
@@ -72,7 +72,7 @@
                 }
               }, this.handleError);
           } else {
-            this.$http.post(`${this.newApiUrl}/background-image`, {...fields})
+            this.$http.post(`${this.newApiUrl2}/background-image`, {...fields})
               .then(response => {
                 if (response.ok) {
                   resolve()
