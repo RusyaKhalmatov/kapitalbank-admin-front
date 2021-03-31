@@ -26,14 +26,23 @@ const globalHandler = {
           reader.readAsDataURL(img);
         },
         registerDevice() {
-          let self = this;
-          self.$fingerPrint.then(value => {
-            self.device.deviceId = value;
-            self.device.name = "ADMIN";
-            self.$http.post(self.$store.getters.newApiUrl + '/device', self.device)
-              .then(() => {
-                self.$store.commit('deviceId', value);
-              }, self.handleError);
+          return new Promise((resolve, reject) => {
+            let self = this;
+            self.$fingerPrint.then(value => {
+              /*self.device.deviceId = value;
+              self.device.name = "ADMIN";*/
+              self.$http.post(self.$store.getters.newApiUrl + '/device', {
+                deviceId: value,
+                name: "ADMIN"
+              })
+                .then(() => {
+                  self.$store.commit('deviceId', value);
+                  resolve({
+                    deviceId: value,
+                    name: "ADMIN"
+                  })
+                }, self.handleError);
+            })
           })
         },
         handleError(response) {

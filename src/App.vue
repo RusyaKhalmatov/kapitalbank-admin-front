@@ -80,7 +80,10 @@
       // }
     },
     mounted() {
-      this.getLanguageList()
+      this.registerDevice()
+        .then(() => {
+          this.getLanguageList()
+        })
       // if (!self.userName) {
       //     self.loadUser();
       // }
