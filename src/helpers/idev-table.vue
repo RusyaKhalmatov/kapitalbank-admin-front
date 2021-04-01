@@ -3,7 +3,7 @@
     class="idev-page-card"
     :loading="tableLoading"
   >
-    <template slot="title">
+    <template slot="title">+
       <h1>{{ tableTitle }}</h1>
     </template>
     <template slot="extra">

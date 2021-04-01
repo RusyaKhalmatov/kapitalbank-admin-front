@@ -242,10 +242,14 @@ export default new Vuex.Store({
   },
   actions: {
     getLanguageList({state, commit}){
-      this._vm.$http.get(`${state.prodApiUrl}/loan-type/lang`)
-        .then(response => {
-          commit('setField',{languageList: response.body.data})
-        }, this._vm.handleError);
+      return new Promise((resolve, reject) => {
+        this._vm.$http.get(`${state.prodApiUrl}/loan-type/lang`)
+          .then(response => {
+            commit('setField',{languageList: response.body.data})
+            resolve()
+          })
+          .catch(err => reject(err));
+      })
     }
   }
 });

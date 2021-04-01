@@ -58,7 +58,11 @@ const globalHandler = {
           this.$store.commit('errorMessage', response.data.errorMessage);
         },
         redirect(name, params) {
-          this.$router.push({name: name, params: params});
+          if (this.$route.name !== name) {
+            this.$router.push({name: name, params: params});
+          } else {
+            console.info("DUPLICATE CHANGE ROUTER: ", name)
+          }
         },
         successMessage(response) {
           this.$store.commit('successMessage', response);

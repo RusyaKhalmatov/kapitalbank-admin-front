@@ -83,7 +83,11 @@
       this.registerDevice()
         .then(() => {
           this.getLanguageList()
+            .catch(err => this.handleError(err))
         })
+      if (this.$route.name !== 'login') {
+        console.log("TESTING....")
+      }
       // if (!self.userName) {
       //     self.loadUser();
       // }
