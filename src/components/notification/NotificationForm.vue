@@ -16,8 +16,8 @@
           <v-flex xs8 md8 sm12>
             <v-flex xs12>
               <img :src="data.imageUrl" height="50px" />
+
               <v-file-picker
-                :disabled="loader"
                 v-model="newImage"
                 accept="image/*"
                 label="Изображение"
@@ -28,34 +28,36 @@
               <v-layout row wrap>
                 <v-flex>
                   <v-radio-group v-model="selected" row class="text-center">
-                    <v-radio label="Ввести логин" value="login" />
+                    <v-radio label="Получатель" value="recipient_phone" />
                     <v-radio
-                      label="Добавить логины из файла"
-                      value="logins_fromFile"
+                      label="Получатели из файла"
+                      value="recipient_phones"
                     />
                   </v-radio-group>
 
-                  <template v-if="selected === 'login'">
+                  <template v-if="selected === 'recipient_phone'">
                     <v-text-field
-                      v-model="phone"
+                      v-model="data.phone"
                       autofocus
                       :disabled="all"
-                      label="Логин"
+                      label="Получатель(телефон)"
+                      placeholder="998(90) 999-99-99"
+                      mask="###(##) ###-##-##"
                     />
                   </template>
-                  <template v-if="selected === 'logins_fromFile'">
-                    <div class="send-notification text-center">
+                  <template v-if="selected === 'recipient_phones'">
+                    <div class="text-center file">
                       <input
-                        class="file"
                         type="file"
+                        autofocus
                         accept=".xlsx"
                         @change="onFileContentChange($event)"
                         ref="fileupload"
                       />
-                      <span class="file-content" v-if="fileContentRowsLength">
+                      <div class="file-content" v-if="fileContentRowsLength">
                         Загружено строк:
                         <strong>{{ fileContentRowsLength }}</strong>
-                      </span>
+                      </div>
                     </div>
                   </template>
                 </v-flex>
@@ -131,7 +133,7 @@ export default {
       lastData: [],
       id: '',
       file: '',
-      selected: 'fill_form',
+      selected: 'recipient_phone',
       fileContentRowsLength: null
     };
   },
@@ -143,7 +145,6 @@ export default {
         this.$refs.fileupload.value = null;
         this.file = '';
       } else this.file = files[0];
-      console.log(files[0]);
 
       let self = this;
       const reader = new FileReader();
@@ -170,16 +171,18 @@ export default {
             {header: 'A'}
           );
           const result = XL_row_object.map((el) => el['A'].toString());
+
           if (result && result.length) {
-            console.log('selected = ', self.selected);
             self.fileContentRowsLength = result.length;
           }
+
           self.data['phoneNumbers'] = result;
         });
       };
       reader.readAsBinaryString(this.file);
     },
-    sendFileContent() {
+
+    sendDataWithRecepiens() {
       if (!this.data['phoneNumbers']) {
         return;
       }
@@ -194,26 +197,18 @@ export default {
         title: this.data.title
       };
 
-      console.log('this.data = ', this.data.body);
-      console.log('formData DATA = ', formData);
-
       this.$http
         .post(
           this.$store.getters.apiUrl + `/notification/directPushFromFile`,
           JSON.stringify(formData),
-          {
-            headers: {'Content-Type': 'application/json'}
-          }
+          {headers: {'Content-Type': 'application/json'}}
         )
         .then(() => {
           this.successMessage('Успешно');
-          this.$refs.fileupload.value = null;
-          this.file = '';
-          this.fileData = '';
-          this.id = '';
-          this.getLast();
+          setTimeout(self.redirect('notification'), 1000);
         }, this.handleError);
     },
+
     loadNotificationTypes() {
       let self = this;
       self.$http
@@ -222,37 +217,39 @@ export default {
           self.notificationTypes = response.data.data;
         }, self.handleError);
     },
-    save() {
-      // let data = new FormData();
-      // console.log('Save data data = ', data);
 
+    save() {
       let self = this;
-      console.log('self.selected === ', self.selected);
-      if (self.selected === 'logins_fromFile') {
-        self.sendFileContent();
+
+      if (self.selected === 'recipient_phones') {
+        self.sendDataWithRecepiens();
         return;
       }
-      if (self.all === true) {
-        self.$http
-          .post(
-            self.$store.getters.apiUrl + '/notification/push/common/byParam',
-            self.data
-          )
-          .then(() => {
-            self.redirect('notification');
-          }, self.handleError);
-      } else {
-        self.$http
-          .post(
-            self.$store.getters.apiUrl +
-              `/notification/push/direct/${self.phone}`,
-            self.data
-          )
-          .then(() => {
-            self.redirect('notification');
-          }, self.handleError);
-      }
+
+      // if (self.all === true) {
+      //   self.$http
+      //     .post(
+      //       self.$store.getters.apiUrl + '/notification/push/common/byParam',
+      //       self.data
+      //     )
+      //     .then(() => {
+      //       self.redirect('notification');
+      //     }, self.handleError);
+      // } else {
+
+      self.$http
+        .post(
+          self.$store.getters.apiUrl +
+            `/notification/push/direct/${self.data.phone}`,
+          self.data
+        )
+        .then(() => {
+          self.redirect('notification');
+        }, self.handleError);
+
+      // }
     },
+
     getLast() {
       this.$http
         .get(this.$store.getters.apiUrl + `/notification/last?size=5`)
@@ -260,29 +257,6 @@ export default {
           // console.log(response.data.data)
           this.lastData = response.data.data;
         }, this.handleError);
-    },
-    sendFile() {
-      console.log(this.file);
-      let data = new FormData();
-      data.append('file', this.file);
-      const {appVersion, deviceId} = this.$store.getters;
-      console.log('id = ', appVersion, deviceId);
-      if (this.$store.getters.deviceId) {
-        this.id = this.$store.getters.deviceId;
-        this.$http
-          .post(this.$store.getters.apiUrl + `/notification/fromFile/`, data, {
-            headers: {'Content-Type': 'multipart/form-data'}
-          })
-          .then((response) => {
-            this.successMessage('Успешно');
-            setTimeout(() => {
-              this.$refs.fileupload.value = null;
-              this.file = '';
-              this.id = '';
-              this.getLast();
-            }, 500);
-          }, this.handleError);
-      }
     },
 
     isNumber: function(evt) {
@@ -299,6 +273,7 @@ export default {
       }
     }
   },
+
   mounted() {
     if (this.$route.params.notification) {
       this.data = this.$route.params.notification;
@@ -306,6 +281,7 @@ export default {
     this.loadNotificationTypes();
     this.getLast();
   },
+
   watch: {
     newImage(image) {
       let self = this;
@@ -320,11 +296,10 @@ export default {
       self.$set(self.data, 'imageUrl', '');
     },
     selected(selectedText) {
-      if (selectedText === 'login') {
+      if (selectedText === 'recipient_phone') {
         this.fileContentRowsLength = null;
         this.fileData = null;
       }
-      console.log('selectedText = ', selectedText);
     }
   }
 };
@@ -378,6 +353,15 @@ export default {
 .align-center {
   display: flex;
   align-items: center;
+}
+
+.file {
+  color: rgba(0, 0, 0, 0.54);
+  font: 16px 'Roboto', sans-serif;
+}
+
+.file input[type='file']:focus {
+  color: red;
 }
 
 .file-content {
