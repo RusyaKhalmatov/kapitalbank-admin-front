@@ -20,7 +20,7 @@ export default new Vuex.Store({
     // apiUrl: 'https://mobile.kapitalbank.uz/api',
     prodApiUrl: 'http://192.168.131.2:8082/api',
     prodApiUrl2: 'http://192.168.131.2:8091/api',
-    apiUrl: 'http://192.168.131.2:8091/api',
+    apiUrl: 'http://192.168.131.2:8082/api',
     // apiUrl: 'http://192.168.132.1:8091/api',
 
     //avtoApiUrl: 'https://dev.kapitalbank.uz/api',
@@ -44,15 +44,14 @@ export default new Vuex.Store({
     apiStomp: 'http://192.168.120.23:8082/ws',
     // apiStomp: 'http://192.168.120.51:8082/ws',
 
-
     // apiStomp: 'http://mobile.kapitalbank.uz/ws',
     message: '',
     color: '',
     excelMeta: [
       [
         {
-          'key': 'charset',
-          'value': 'utf-8'
+          key: 'charset',
+          value: 'utf-8'
         }
       ]
     ],
@@ -84,72 +83,72 @@ export default new Vuex.Store({
     employeeAutoloan: '',
     userId: '',
     socketUrl: {},
-    newChatApiUrl: 'http://192.168.120.14:8081/api',
+    newChatApiUrl: 'http://192.168.120.14:8081/api'
   },
   getters: {
-    socketUrl: state => {
-      return `http://192.168.120.14:8081/support?token=${state.token}&device-id=${state.deviceId}&lang=RU&app-version=${state.appVersion}`
+    socketUrl: (state) => {
+      return `http://192.168.120.14:8081/support?token=${state.token}&device-id=${state.deviceId}&lang=RU&app-version=${state.appVersion}`;
     },
-    newChatApiUrl: state => state.newChatApiUrl,
-    ucellApiUrl: state => state.ucellApiUrl,
-    prodApiUrl: state => state.prodApiUrl,
-    uname: state => state.uname,
-    pass: state => state.pass,
-    socketApi: state => state.apiStomp,
-    token: state => state.token,
-    cacheToken: state => {
-      return atob(state.cacheToken)
+    newChatApiUrl: (state) => state.newChatApiUrl,
+    ucellApiUrl: (state) => state.ucellApiUrl,
+    prodApiUrl: (state) => state.prodApiUrl,
+    uname: (state) => state.uname,
+    pass: (state) => state.pass,
+    socketApi: (state) => state.apiStomp,
+    token: (state) => state.token,
+    cacheToken: (state) => {
+      return atob(state.cacheToken);
     },
-    deviceId: state => state.deviceId,
-    roles: state => {
+    deviceId: (state) => state.deviceId,
+    roles: (state) => {
       if (state.roles.length === 0) {
         state.roles = JSON.parse(window.localStorage.getItem('roles'));
       }
       return state.roles;
     },
-    navigation: state => state.navigation,
-    toolbar: state => state.toolbar,
-    apiUrl: state => state.apiUrl,
-    beelineUrl: state => state.beelineUrl,
-    ucellUrl: state => state.ucellUrl,
-    newApiUrl: state => state.prodApiUrl,
-    newApiUrl2: state => state.prodApiUrl2,
-    chatApiUrl: state => state.chatApiUrl,
-    avtoApiUrl: state => state.avtoApiUrl,
-    loyaltyUrl: state => state.loyaltyUrl,
-    message: state => state.message,
-    color: state => state.color,
-    userName: state => {
-      state.userName = window.localStorage.getItem('userName')
-      return state.userName
+    navigation: (state) => state.navigation,
+    toolbar: (state) => state.toolbar,
+    apiUrl: (state) => state.apiUrl,
+    beelineUrl: (state) => state.beelineUrl,
+    ucellUrl: (state) => state.ucellUrl,
+    newApiUrl: (state) => state.prodApiUrl,
+    newApiUrl2: (state) => state.prodApiUrl2,
+    chatApiUrl: (state) => state.chatApiUrl,
+    avtoApiUrl: (state) => state.avtoApiUrl,
+    loyaltyUrl: (state) => state.loyaltyUrl,
+    message: (state) => state.message,
+    color: (state) => state.color,
+    userName: (state) => {
+      state.userName = window.localStorage.getItem('userName');
+      return state.userName;
     },
-    menu: state => {
+    menu: (state) => {
       if (state.roles.length === 0) {
         state.roles = JSON.parse(window.localStorage.getItem('roles'));
       }
       return state.roles && menu[state.roles] ? menu[state.roles] : [];
     },
-    pagination: state => {
+    pagination: (state) => {
       return state.pagination;
     },
-    excelMeta: state => state.excelMeta,
-    chatBotName: state => {
+    excelMeta: (state) => state.excelMeta,
+    chatBotName: (state) => {
       return state.chatBotName;
     },
-    appVersion: state => state.appVersion,
-    statusAutoloan: state => state.statusAutoloan,
-    branchAutoloan: state => state.branchAutoloan,
-    employeeAutoloan: state => state.employeeAutoloan,
-    userId: state => {
-      state.userId = window.localStorage.getItem('userId')
-      return state.userId
+    appVersion: (state) => state.appVersion,
+    statusAutoloan: (state) => state.statusAutoloan,
+    branchAutoloan: (state) => state.branchAutoloan,
+    employeeAutoloan: (state) => state.employeeAutoloan,
+    userId: (state) => {
+      state.userId = window.localStorage.getItem('userId');
+      return state.userId;
     }
   },
   mutations: {
-    setField(state, data){
+    setField(state, data) {
       for (let i in data) {
         if (typeof state[i] !== 'undefined') {
-          state[i] = data[i]
+          state[i] = data[i];
         }
       }
     },
@@ -238,18 +237,19 @@ export default new Vuex.Store({
     },
     employeeAutoloan(state, employeeAutoloan) {
       state.employeeAutoloan = employeeAutoloan;
-    },
+    }
   },
   actions: {
-    getLanguageList({state, commit}){
+    getLanguageList({state, commit}) {
       return new Promise((resolve, reject) => {
-        this._vm.$http.get(`${state.prodApiUrl}/loan-type/lang`)
-          .then(response => {
-            commit('setField',{languageList: response.body.data})
-            resolve()
+        this._vm.$http
+          .get(`${state.prodApiUrl}/loan-type/lang`)
+          .then((response) => {
+            commit('setField', {languageList: response.body.data});
+            resolve();
           })
-          .catch(err => reject(err));
-      })
+          .catch((err) => reject(err));
+      });
     }
   }
 });
