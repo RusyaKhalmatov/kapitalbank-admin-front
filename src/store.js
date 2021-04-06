@@ -20,7 +20,7 @@ export default new Vuex.Store({
     // apiUrl: 'https://mobile.kapitalbank.uz/api',
     prodApiUrl: 'http://192.168.131.2:8082/api',
     prodApiUrl2: 'http://192.168.131.2:8091/api',
-    apiUrl: 'http://192.168.131.2:8082/api',
+    apiUrl: 'http://192.168.131.2:8091/api',
     // apiUrl: 'http://192.168.132.1:8091/api',
 
     //avtoApiUrl: 'https://dev.kapitalbank.uz/api',
