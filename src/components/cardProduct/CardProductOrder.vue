@@ -1182,7 +1182,7 @@
 
         }
         // //console.log(data)
-        self.$http.post(self.$store.getters.apiUrl + `/proposal/card-order/${this.proposalId}/emission/ready`, data)
+        self.$http.post(self.$store.getters.prodApiUrl + `/proposal/card-order/${this.proposalId}/emission/ready`, data)
           .then((response) => {
             //console.log(response.data.data);
             if (self.isSearch)
@@ -1322,7 +1322,7 @@
     created() {
       var date = new Date();
       // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1)
-      var firstDay = new Date('2020', '03', '01')
+      var firstDay = new Date('2021', '00', '01')
       this.date1 = firstDay.getFullYear() + '-' + ('0' + (firstDay.getMonth() + 1)).substr(-2) + '-' + ('0' + 1).substr(-2);
       this.date2 = new Date().toISOString().substr(0, 10);
     },

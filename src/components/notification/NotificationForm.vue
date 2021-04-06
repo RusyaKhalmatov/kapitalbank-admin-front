@@ -36,14 +36,23 @@
                   </v-radio-group>
 
                   <template v-if="selected === 'recipient_phone'">
-                    <v-text-field
-                      v-model="data.phone"
-                      autofocus
-                      :disabled="all"
-                      label="Получатель(телефон)"
-                      placeholder="998(90) 999-99-99"
-                      mask="###(##) ###-##-##"
-                    />
+                    <v-layout row wrap>
+                      <v-flex xs10>
+                        <v-text-field
+                          v-model="data.phone"
+                          autofocus
+                          :disabled="all"
+                          label="Получатель(телефон)"
+                          placeholder="998(90) 999-99-99"
+                          mask="###(##) ###-##-##"
+                        >
+                        </v-text-field>
+                      </v-flex>
+                      <v-flex xs2>
+                        <v-checkbox v-model="all" label="Отправить всем">
+                        </v-checkbox>
+                      </v-flex>
+                    </v-layout>
                   </template>
                   <template v-if="selected === 'recipient_phones'">
                     <div class="text-center file">
@@ -187,6 +196,8 @@ export default {
         return;
       }
 
+      let self = this;
+
       const formData = {
         body: this.data.body,
         imageUrl: this.data.imageUrl,
@@ -226,28 +237,26 @@ export default {
         return;
       }
 
-      // if (self.all === true) {
-      //   self.$http
-      //     .post(
-      //       self.$store.getters.apiUrl + '/notification/push/common/byParam',
-      //       self.data
-      //     )
-      //     .then(() => {
-      //       self.redirect('notification');
-      //     }, self.handleError);
-      // } else {
-
-      self.$http
-        .post(
-          self.$store.getters.apiUrl +
-            `/notification/push/direct/${self.data.phone}`,
-          self.data
-        )
-        .then(() => {
-          self.redirect('notification');
-        }, self.handleError);
-
-      // }
+      if (self.all === true) {
+        self.$http
+          .post(
+            self.$store.getters.apiUrl + '/notification/push/common/byParam',
+            self.data
+          )
+          .then(() => {
+            self.redirect('notification');
+          }, self.handleError);
+      } else {
+        self.$http
+          .post(
+            self.$store.getters.apiUrl +
+              `/notification/push/direct/${self.data.phone}`,
+            self.data
+          )
+          .then(() => {
+            self.redirect('notification');
+          }, self.handleError);
+      }
     },
 
     getLast() {
