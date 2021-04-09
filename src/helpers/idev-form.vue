@@ -100,7 +100,6 @@
           :loading="formDisabled"
         >Отменить</a-button>
       </a-form-item>
-      <pre>{{ formFields }}</pre>
     </a-form>
   </a-card>
 </template>

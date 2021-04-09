@@ -41,6 +41,7 @@
         return {
           name: {
             type: 'text',
+            label: "Имя",
             rules: [this.formRules.required]
           },
           lang: {

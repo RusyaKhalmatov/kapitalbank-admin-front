@@ -18,19 +18,19 @@ export default new Vuex.Store({
     userName: '',
     toolbar: true,
     // apiUrl: 'https://mobile.kapitalbank.uz/api',
-    prodApiUrl: 'http://192.168.131.2:8082/api',
-    prodApiUrl2: 'http://192.168.131.2:8091/api',
-    apiUrl: 'http://192.168.131.2:8091/api',
+    prodApiUrl: 'https://online.kapitalbank.uz/api',
+    prodApiUrl2: 'http://192.168.132.12:8091/api',
+    apiUrl: 'http://192.168.132.12:8091/api',
     // apiUrl: 'http://192.168.132.1:8091/api',
 
     //avtoApiUrl: 'https://dev.kapitalbank.uz/api',
     avtoApiUrl: 'https://dev.kapitalbank.uz/api',
     //avtoApiUrl: 'http://192.168.120.10:8080/api',
     // newApiUrl: 'http://192.168.118.34:8091/api',
-    newApiUrl: 'http://192.168.131.2:8091/api',
+    newApiUrl: 'http://192.168.132.12:8091/api',
 
     // chatApiUrl: 'https://preprod-mobile.kapitalbank.uz/api',
-    chatApiUrl: 'http://192.168.131.2:8091/api',
+    chatApiUrl: 'http://192.168.132.12:8091/api',
 
     // newApiUrl: 'http://192.168.117.51:8091/api',
     // apiUrl: 'https://mobile.kapitalbank.uz/api',
@@ -75,7 +75,7 @@ export default new Vuex.Store({
     beelineUrl: 'http://192.168.120.22:8078/api',
 
     // loyaltyUrl: 'http://192.168.120.51:8083/api',
-    loyaltyUrl: 'http://192.168.131.2:8091/api',
+    loyaltyUrl: 'http://192.168.132.12:8091/api',
     // loyaltyUrl: 'http://192.168.117.47:8083/api',
 
     statusAutoloan: '',
