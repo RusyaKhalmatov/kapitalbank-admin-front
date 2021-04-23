@@ -83,7 +83,7 @@
         methods: {
             loadCategories() {
                 let self = this;
-                self.$http.get(self.$store.getters.apiUrl + '/payment/admin').then(
+                self.$http.get(self.$store.getters.newApiUrl + '/payment/categories').then(
                     response => {
                         self.allCategories = [{value: 0, text: ""}];
                         response.data.data.forEach(category => {
@@ -98,13 +98,13 @@
             saveCategories() {
                 let self = this;
                 if (self.isNew === true) {
-                    self.$http.post(self.$store.getters.apiUrl + '/payment', self.formItems)
+                    self.$http.post(self.$store.getters.newApiUrl + '/payment/addNewCategory', self.formItems)
                         .then(() => {
                             self.loader = false;
                             self.redirect("PaynetCategory");
                         }, self.handleError);
                 } else {
-                    self.$http.put(self.$store.getters.apiUrl + '/payment', self.formItems)
+                    self.$http.put(self.$store.getters.newApiUrl + '/payment/updateCategory', self.formItems)
                         .then(() => {
                             self.loader = false;
                             self.redirect("PaynetCategory");

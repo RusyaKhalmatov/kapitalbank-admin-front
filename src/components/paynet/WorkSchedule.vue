@@ -1,16 +1,20 @@
 <template>
     <div class="main">
-        <p>Рабочие часы</p>
-        <v-btn depressed small @click="dialog=true">Добавить</v-btn>
-         <v-data-table
+        <v-divider class="my-3"></v-divider>
+        <div style="display:flex; align-items:center">
+            <h3 class="mb-0">Рабочие часы</h3>
+            <v-btn depressed small @click="dialog=true">Добавить</v-btn>
+        </div>
+        <v-data-table
+            rows-per-page-text="Количество страниц" 
+            :pagination.sync="pagination"
             v-if="data.length!=0"
             :headers="headers"
             :items="data"
-            class="elevation-1"
         >
             <template v-slot:items="props">
                 <td>{{ props.item.hours }}</td>
-                <td>{{ props.item.workDay.dayRu }}</td>
+                <td>{{ props.item.workDay ? props.item.workDay.dayRu:''  }}</td>
                 <td>
                     <v-btn @click="openEditBox(props.item)" icon><v-icon small>mdi-pencil</v-icon></v-btn>
                     <v-btn @click="openRemoveBox(props.item)" icon><v-icon small>delete</v-icon></v-btn>
@@ -21,7 +25,7 @@
         <v-dialog v-model="dialog" persistent max-width="400">
             <v-card>
                 <v-card-title class="headline">
-                    <v-text-field v-model="putData.hours" label="Рабочие часы"></v-text-field>
+                    <v-text-field v-model.trim="putData.hours" label="Рабочие часы"></v-text-field>
                     <v-select v-model="putData.workDay" :items="workDayData" label="День недели"></v-select>
                 </v-card-title>
                 <v-card-actions style="text-align: center">
@@ -83,7 +87,9 @@ export default {
             isEdit: false,
             deleteDialog: false,
             deleteId: '',
-
+            pagination: {
+                rowsPerPage: 10
+            },
         }
     },
     methods:{
@@ -107,29 +113,34 @@ export default {
             this.dialog = true
         },
         addPaymentServices(){
-            this.loader = true;
-            let putData = {
-                serviceId: this.serviceId,
-                workScheduleDataDto: [
-                    {
-                        hours: this.putData.hours,
-                        workDay: this.putData.workDay
-                    }
-                ]
+            if(Object.keys(this.putData).length != 0){
+                this.loader = true;
+                let putData = {
+                    serviceId: this.serviceId,
+                    workScheduleDataDto: [
+                        {
+                            hours: this.putData.hours,
+                            workDay: this.putData.workDay
+                        }
+                    ]
+                }
+                this.$http.put(this.$store.getters.newApiUrl+`/payment-service/${this.serviceId}`, putData)
+                .then(response=>{
+                    // console.log(response.data.data)
+                    this.loader = false;
+                    this.dialog = false;
+                    this.getWorkScheduleData(this.id);
+                }, this.handleError)
             }
-            this.$http.put(this.$store.getters.newApiUrl+`/payment-service/${this.serviceId}`, putData)
-            .then(response=>{
-                console.log(response.data.data)
-                this.loader = false;
-                this.dialog = false;
-                this.getWorkScheduleData(this.id);
-            }, this.handleError)
+            else{
+                this.errorMessage('Пустые поля')
+            }
         },
         removeWorkHours(){
             this.loader =true;
             this.$http.delete(this.$store.getters.newApiUrl+`/payment-service/work-schedule-data/${this.deleteId}`)
             .then(response=>{
-                console.log(response.data.data)
+                // console.log(response.data.data)
                 this.loader = false;
                 this.deleteDialog = false;
                 this.getWorkScheduleData(this.id);
@@ -145,7 +156,7 @@ export default {
             }
             this.$http.put(this.$store.getters.newApiUrl+`/payment-service/work-schedule-data/${this.putData.id}`, putData)
             .then(response=>{
-                console.log(response.data.data)
+                // console.log(response.data.data)
                 this.loader = false;
                 this.dialog = false;
                 this.getWorkScheduleData(this.id);
@@ -156,7 +167,7 @@ export default {
         if(this.id){
             this.getWorkScheduleData(this.id);
         }
-        console.log('workSchedule - ', this.id)
+        // console.log('workSchedule - ', this.id)
     }
 }
 </script>

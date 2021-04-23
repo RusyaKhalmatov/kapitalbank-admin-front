@@ -74,7 +74,7 @@
         methods: {
             getAllCategories() {
                 let self = this;
-                self.$http.get(self.$store.getters.apiUrl + '/payment/admin')
+                self.$http.get(self.$store.getters.apiUrl + '/payment/categories')
                     .then(response => {
                         self.categoryId = [];
                         response.data.data.forEach(category => {
