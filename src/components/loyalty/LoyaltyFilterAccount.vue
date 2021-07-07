@@ -196,7 +196,7 @@ export default {
                 if(this.filterType!='NONE'){
                     Object.assign(data, {filter_value: this.filterValue});
                 }
-                self.$http.get(self.$store.getters.newApiUrl + '/dashboard/loyalty/filter/account',{
+                self.$http.get(self.$store.getters.newApiUrl2 + '/dashboard/loyalty/filter/account',{
                     params: data
                 })
                 .then(response=>{
@@ -229,7 +229,7 @@ export default {
                 if(this.filterType!='NONE'){
                     Object.assign(data, {filter_value: this.filterValue});
                 }
-                self.$http.get(self.$store.getters.newApiUrl + '/dashboard/loyalty/filter/account',{
+                self.$http.get(self.$store.getters.newApiUrl2 + '/dashboard/loyalty/filter/account',{
                     params: data
                 })
                 .then(response=>{

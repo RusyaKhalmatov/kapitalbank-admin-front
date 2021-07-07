@@ -210,7 +210,7 @@
             loadReports() {
                 let self = this;
                 self.loader = true;
-                self.$http.post(self.$store.getters.apiUrl + '/report/deposit', self.operation)
+                self.$http.post(self.$store.getters.newApiUrl2 + '/report/deposit', self.operation)
                     .then(response => {
                         self.operationsList = response.data.data;
                         self.transactions = self.operationsList.operations;

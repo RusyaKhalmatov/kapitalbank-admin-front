@@ -115,14 +115,14 @@ export default {
                 'id': this.id,
                 'allowed': this.allowed
             }            
-            this.$http.put(this.$store.getters.apiUrl+`/admin/external-history/white-list`, putData)
+            this.$http.put(this.$store.getters.newApiUrl+`/admin/external-history/white-list`, putData)
             .then(response=>{
                 this.getWhiteList();
                 this.editDialog = false;
             }, this.handleError)
         },
         deleteWhiteList(){        
-            this.$http.delete(this.$store.getters.apiUrl+`/admin/external-history/white-list/${this.id}`)
+            this.$http.delete(this.$store.getters.newApiUrl+`/admin/external-history/white-list/${this.id}`)
             .then(response=>{
                 this.getWhiteList();
                 this.deleteDialog = false;
@@ -140,7 +140,7 @@ export default {
         },
         getWhiteList(){
             this.data = [];
-            this.$http.get(this.$store.getters.apiUrl+`/admin/external-history/white-list`)
+            this.$http.get(this.$store.getters.newApiUrl+`/admin/external-history/white-list`)
             .then(response=>{
                 console.log(response.data.data);
                 this.data = response.data.data;

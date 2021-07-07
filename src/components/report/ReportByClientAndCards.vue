@@ -145,7 +145,7 @@ export default {
                 delete postData.dateTo
             // this.content = []
             this.loader = true;
-            this.$http.post(this.$store.getters.newApiUrl+`/report/client_card/excel`, postData)
+            this.$http.post(this.$store.getters.newApiUrl2+`/report/client_card/excel`, postData)
             .then(response=>{
                 // console.log(response.data.data);
                 this.excelData = response.data.data;  
@@ -196,7 +196,7 @@ export default {
                 delete postData.dateTo
             // this.content = []
             this.loader = true;
-            this.$http.post(this.$store.getters.newApiUrl+`/report/client_card?page=${page-1}&size=10`, postData)
+            this.$http.post(this.$store.getters.newApiUrl2+`/report/client_card?page=${page-1}&size=10`, postData)
             .then(response=>{
                 console.log(response.data.data);
                 this.content = response.data.data.content;
@@ -206,7 +206,7 @@ export default {
             }, this.handleError);
         },
         getAccountType(){
-            this.$http.get(this.$store.getters.newApiUrl+`/report/client_card/types`)
+            this.$http.get(this.$store.getters.newApiUrl2+`/report/client_card/types`)
             .then(response=>{
                 console.log(response.data.data);
                 this.accountTypeData = response.data.data;

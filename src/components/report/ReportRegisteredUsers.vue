@@ -426,7 +426,7 @@ export default {
             this.newchartdata.datasets[3].data = []
             this.newchartdata.datasets[4].data = []
             this.newchartdata.datasets[5].data = []
-            this.$http.post(this.$store.getters.newApiUrl + `/report/registeredUsers/v3/date`, this.data)
+            this.$http.post(this.$store.getters.newApiUrl2 + `/report/registeredUsers/v3/date`, this.data)
             .then(response => {
                 // this.isShow = true
                 console.log(response.data.data)
@@ -469,7 +469,7 @@ export default {
                 delete this.data.search
             if(this.date.fromDate!=""){
                 this.isnotAllPeriod = true;
-                this.$http.post(this.$store.getters.newApiUrl + `/report/registeredUsers/v3/excel`, this.data)
+                this.$http.post(this.$store.getters.newApiUrl2 + `/report/registeredUsers/v3/excel`, this.data)
                     .then(response => {
                         this.graphicData = response.data.data.users;
                             // console.log('FF: ', this.diffDates(new Date(this.dateStart.split('+')[0]), new Date(this.dateEnd.split('+')[0])))
@@ -558,14 +558,14 @@ export default {
             // this.operationAmount = {}            
         },
         loadAmount(){
-            this.$http.post(this.$store.getters.newApiUrl + `/report/registeredUsers/v3/amount`, this.data)
+            this.$http.post(this.$store.getters.newApiUrl2 + `/report/registeredUsers/v3/amount`, this.data)
                 .then(response => {
                     this.amountData = response.data.data;                
                 }, this.handleError);
         },
         getList(page){
             this.loader = true;
-            this.$http.post(this.$store.getters.newApiUrl + `/report/registeredUsers/v3?page=${page-1}&size=10`, this.data)
+            this.$http.post(this.$store.getters.newApiUrl2 + `/report/registeredUsers/v3?page=${page-1}&size=10`, this.data)
                 .then(response => {
                     this.loader = false;
                     // console.log(response.data.users.content)
@@ -618,7 +618,7 @@ export default {
             else if(this.data.search)
                 delete this.data.search
             this.loader = true
-            this.$http.post(this.$store.getters.newApiUrl + `/report/registeredUsers/v3/excel`, this.data)
+            this.$http.post(this.$store.getters.newApiUrl2 + `/report/registeredUsers/v3/excel`, this.data)
                 .then(response => {
                     this.loader = false;
                     console.log(response.data)
@@ -633,7 +633,7 @@ export default {
                 }, this.handleError);
         },
         getTypes(){
-            this.$http.get(this.$store.getters.newApiUrl+`/report/registeredUsers/v2/userType`)
+            this.$http.get(this.$store.getters.newApiUrl2+`/report/registeredUsers/v2/userType`)
             .then(response=>{
                 // console.log(response.data.data);
                 this.typesData = response.data.data;

@@ -116,7 +116,7 @@ export default {
                 delete postData.dateTo;
             }
             if(this.cardProduct.length!=0){
-                this.$http.post(this.$store.getters.newApiUrl+`/report/virtual_card/excel`, postData)
+                this.$http.post(this.$store.getters.newApiUrl2+`/report/virtual_card/excel`, postData)
                 .then(response=>{
                     this.excelData = response.data.data;  
                     if(this.excelData.length!=0){
@@ -173,7 +173,7 @@ export default {
                     delete postData.dateTo;
                 }
                 this.countData = {};
-                this.$http.post(this.$store.getters.newApiUrl+`/report/virtual_card/count`, postData)
+                this.$http.post(this.$store.getters.newApiUrl2+`/report/virtual_card/count`, postData)
                 .then(response=>{
                     this.countData = response.data.data;
                 }, this.handleError)

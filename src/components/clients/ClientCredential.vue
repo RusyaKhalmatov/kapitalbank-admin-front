@@ -274,7 +274,7 @@
                 "userId": this.userInfo.id,
                 "allowed": this.whiteListAllowed
               }
-              this.$http.post(this.$store.getters.apiUrl+`/admin/external-history/white-list`, postData)
+              this.$http.post(this.$store.getters.newApiUrl+`/admin/external-history/white-list`, postData)
               .then(response=>{
                 this.$router.push('whiteList');
               }, this.handleError)
@@ -292,7 +292,7 @@
             getBranches(){
                 //alert("Hello");
                 let self = this;
-                self.$http.get(self.$store.getters.apiUrl + `/branch/list`)
+                self.$http.get(self.$store.getters.prodApiUrl + `/branch/list`)
                     .then(response => {
                         self.barches = response.data.data;
                         //console.log(response.data.data);
@@ -319,7 +319,7 @@
                   };
                   let self = this;
                   self.$http
-                      .post(self.$store.getters.newApiUrl + "/card-employee/add", postData)
+                      .post(self.$store.getters.newApiUrl + "/card-employee/v2/add", postData)
                       .then(() => {
                           //console.log(response.data.data);
                       }, self.handleError);
@@ -377,7 +377,7 @@
             getWhiteList(){
                 this.whiteListData = [];
                 this.isAdmin = false;
-                this.$http.get(this.$store.getters.apiUrl+`/admin/external-history/white-list`)
+                this.$http.get(this.$store.getters.newApiUrl+`/admin/external-history/white-list`)
                 .then(response=>{
                     console.log(response.data.data);
                     this.whiteListData = response.data.data;

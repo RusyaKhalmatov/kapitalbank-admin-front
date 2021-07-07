@@ -100,7 +100,7 @@ export default {
                 "dateTo": this.toDate,
                 "branchId": this.branchId   
             };
-            self.$http.post(self.$store.getters.newApiUrl + "/card-product-order/summery/card", data)
+            self.$http.post(self.$store.getters.newApiUrl2 + "/card-product-order/summery/card", data)
 			.then((response) => {
                 //console.log(response.data.data);
                 self.summeryData = response.data.data;
@@ -116,7 +116,7 @@ export default {
         },
         getBranchList(){
             let self = this;
-            self.$http.get(self.$store.getters.apiUrl + "/branch/list")
+            self.$http.get(self.$store.getters.prodApiUrl + "/branch/list")
 			.then((response) => {
                 //console.log(response.data.data);       
                 self.branchData = response.data.data;   

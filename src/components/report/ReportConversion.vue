@@ -295,7 +295,7 @@
                     this.page = 1;
             },
             getStatus(){
-                this.$http.get(this.$store.getters.newApiUrl+`/report/conversion/status`)
+                this.$http.get(this.$store.getters.newApiUrl2+`/report/conversion/status`)
                 .then(response=>{
                     console.log(response.data.data);
                     this.statusData = response.data.data;
@@ -308,7 +308,7 @@
             getExcel(){
                 this.loader = true;
                 this.excelData = [];
-                this.$http.post(this.$store.getters.newApiUrl+`/report/conversion/excel?q=${this.search}`, this.postData)
+                this.$http.post(this.$store.getters.newApiUrl2+`/report/conversion/excel?q=${this.search}`, this.postData)
                 .then(response=>{
                     console.log(response.data.data)
                     this.excelData = response.data.data;
@@ -325,7 +325,7 @@
             getConversionData(page) {
                 let self = this;
                 self.loader = true;
-                self.$http.post(self.$store.getters.newApiUrl + '/report/conversion?page='+(page-1)+'&size=10&q='+this.search, self.postData)
+                self.$http.post(self.$store.getters.newApiUrl2 + '/report/conversion?page='+(page-1)+'&size=10&q='+this.search, self.postData)
                     .then(response => {
                         self.result = response.data.data;
                         self.totalPages = response.data.data.totalPages;
@@ -336,7 +336,7 @@
             getConversionDataAmount() {
                 let self = this;
                 this.resultAmount = [];
-                self.$http.post(self.$store.getters.newApiUrl + '/report/conversion/amount?q='+this.search, self.postData)
+                self.$http.post(self.$store.getters.newApiUrl2 + '/report/conversion/amount?q='+this.search, self.postData)
                     .then(response => {
                         self.resultAmount = response.data.data;
                         console.log(self.resultAmount)
@@ -345,7 +345,7 @@
             getOperationTypes(){
                 let self = this;
                 self.operationType = [];
-                self.$http.get(self.$store.getters.newApiUrl + '/report/conversion/operationTypes')
+                self.$http.get(self.$store.getters.newApiUrl2 + '/report/conversion/operationTypes')
                     .then(response => {
                         self.operationTypes = response.data.data;
                         self.operationType = self.operationTypes;

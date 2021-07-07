@@ -463,7 +463,7 @@
                     delete this.data.dateFrom
                 if(this.date.toDate==="")
                     delete this.data.dateTo
-                self.$http.post(self.$store.getters.newApiUrl + '/report/transaction/excel', self.data)
+                self.$http.post(self.$store.state.prodApiUrl2 + '/report/transaction/excel', self.data)
                 .then(response => {
                     this.graphicData = response.data.data;
                     console.log(this.graphicData)
@@ -536,7 +536,7 @@
                 })
             },
             getStatus(){
-                this.$http.get(this.$store.getters.newApiUrl+`/report/transaction/status`)
+                this.$http.get(this.$store.state.prodApiUrl2+`/report/transaction/status`)
                 .then(response=>{
                     console.log(response.data.data);
                     this.statusData = response.data.data;
@@ -548,7 +548,7 @@
             },
             getTypeOperations() {
                 let self = this;
-                self.$http.get(self.$store.getters.newApiUrl + '/report/transaction/operation-type')
+                self.$http.get(self.$store.state.prodApiUrl2 + '/report/transaction/operation-type')
                     .then(response => {
                         self.operationTypes = response.data.data;
                         this.operationType = self.operationTypes
@@ -593,7 +593,7 @@
             },
             loadAmount() {
                 let self = this;
-                self.$http.post(self.$store.getters.newApiUrl + '/report/transaction/amount', self.data)
+                self.$http.post(self.$store.state.prodApiUrl2 + '/report/transaction/amount', self.data)
                     .then(response => {
                         self.operationAmount = response.data.data;
                         console.log(response.data.data);
@@ -634,7 +634,7 @@
                     delete this.data.dateFrom
                 if(this.date.toDate==="")
                     delete this.data.dateTo
-                self.$http.post(self.$store.getters.newApiUrl + `/report/transaction/excel`, self.data)
+                self.$http.post(self.$store.state.prodApiUrl2 + `/report/transaction/excel`, self.data)
                     .then(response => {
                         self.loader = false;
                         self.excelData = response.data.data;  
@@ -652,7 +652,7 @@
                 self.loader = true;
                 // self.transactions = [];
                 console.log(this.operation)
-                self.$http.post(self.$store.getters.newApiUrl + `/report/transaction?page=${page-1}&size=10`, self.data)
+                self.$http.post(self.$store.getters.newApiUrl2 + `/report/transaction?page=${page-1}&size=10`, self.data)
                     .then(response => {
                         self.loader = false;
                         self.operationsList = response.data.data;

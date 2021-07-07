@@ -87,7 +87,7 @@ export default {
             if(this.filterType === 'STAFF_BY_CHATS_AND_STATUS_TYPE'){
                 Object.assign(data, {status_type: this.statusType})
             }
-            self.$http.get(self.$store.getters.newApiUrl + '/chat/monitoring/filter/staff',{
+            self.$http.get(self.$store.getters.newApiUrl2 + '/chat/monitoring/filter/staff',{
                 params: data
             })
             .then(response=>{

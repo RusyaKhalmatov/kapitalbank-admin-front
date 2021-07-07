@@ -819,7 +819,7 @@ export default {
                 status: "SUCCESS"
             }
             this.crossData = {};
-            self.$http.post(self.$store.getters.newApiUrl+'/report/cross/amount?q='+this.search, postData)
+            self.$http.post(self.$store.getters.newApiUrl2+'/report/cross/amount?q='+this.search, postData)
             .then(response=>{
                 // console.log(response.data.data);
                 this.crossData = response.data.data
@@ -836,7 +836,7 @@ export default {
             }     
             this.crossResult = [];
             this.loader = true;       
-            this.$http.post(this.$store.getters.newApiUrl+`/report/cross?page=${page-1}&size=10&q=${this.search}`, postData)
+            this.$http.post(this.$store.getters.newApiUrl2+`/report/cross?page=${page-1}&size=10&q=${this.search}`, postData)
             .then(response=>{
                 // console.log(response.data.data);
                 this.totalPages = response.data.data.totalPages;
@@ -849,7 +849,7 @@ export default {
             }, this.handleError)
         },
         getCrossCurriencies(){
-            this.$http.get(this.$store.getters.newApiUrl+`/report/cross/currencies`)
+            this.$http.get(this.$store.getters.newApiUrl2+`/report/cross/currencies`)
             .then(response=>{
                 this.currencyData = response.data.data;
             }, this.handleError)
@@ -861,7 +861,7 @@ export default {
             }     
             this.excelData = [];
             this.loader = true;       
-            this.$http.post(this.$store.getters.newApiUrl+`/report/cross/excel?q=SUC`, postData)
+            this.$http.post(this.$store.getters.newApiUrl2+`/report/cross/excel?q=SUC`, postData)
             .then(response=>{
                 this.excelData = response.data.data;
                 if(this.excelData.length!=0){

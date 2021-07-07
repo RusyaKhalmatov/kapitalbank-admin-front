@@ -83,7 +83,7 @@
             },
             getOperationCode() {
                 let self = this;
-                self.$http.get(self.$store.getters.apiUrl + '/operationCode')
+                self.$http.get(self.$store.getters.newApiUrl + '/operationCode')
                     .then(response => {
                         self.filterOperationCode(response.data.data);
                         
@@ -99,7 +99,7 @@
             },
             save() {
                 let self = this;
-                self.$http.put(self.$store.getters.apiUrl + '/limit/vipUser', self.limitUser)
+                self.$http.put(self.$store.getters.newApiUrl + '/limit/vipUser', self.limitUser)
                     .then(() => {
                         self.redirect('vipClients');
                     }, self.handleError);

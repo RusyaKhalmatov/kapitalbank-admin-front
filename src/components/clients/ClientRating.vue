@@ -10,7 +10,7 @@ export default {
     methods:{
         getRating(){
             this.$http
-            .get(this.$store.getters.apiUrl + `/rating?userId=${this.userId}`)
+            .get(this.$store.getters.newApiUrl + `/rating?userId=${this.userId}`)
             .then((response) => {
                 console.log(response.data.data);
             }, this.handleError);

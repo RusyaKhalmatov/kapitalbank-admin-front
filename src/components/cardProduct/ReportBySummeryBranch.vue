@@ -120,7 +120,7 @@ export default {
                 "dateFrom" : this.fromDate,
                 "dateTo": this.toDate,
             };
-            self.$http.post(self.$store.getters.newApiUrl + "/card-product-order/summery/card-branch", data)
+            self.$http.post(self.$store.getters.newApiUrl2 + "/card-product-order/summery/card-branch", data)
 			.then((response) => {
                 //console.log(response.data.data);
                 // self.summeryData = response.data.data;

@@ -138,7 +138,7 @@ export default {
         },
         getCardProductList(){
             this.cardsData = [];
-            this.$http.get(this.$store.getters.newApiUrl+`/report/virtual_card/card_product`)
+            this.$http.get(this.$store.getters.newApiUrl2+`/report/virtual_card/card_product`)
             .then(response=>{
                 // console.log(response.data.data);
                 this.cardsData = response.data.data;

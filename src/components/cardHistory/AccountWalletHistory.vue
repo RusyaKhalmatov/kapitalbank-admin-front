@@ -212,7 +212,7 @@ export default {
             if(this.value){
                 this.loader = true;
                 this.isWallet = false;
-                this.$http.get(this.$store.getters.apiUrl+`/account/admin/statement?account=${this.value}&startDate=${this.fromDate}&endDate=${this.toDate}`)
+                this.$http.get(this.$store.getters.newApiUrl+`/account/admin/statement?account=${this.value}&startDate=${this.fromDate}&endDate=${this.toDate}`)
                 .then(response=>{
                     console.log(response.data.data);
                     this.userFullName = response.data.data.userFullName;

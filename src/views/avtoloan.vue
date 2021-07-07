@@ -213,7 +213,7 @@ export default {
 		},
 		getUserBranch(id){
 			let self = this;
-			self.$http.get(self.$store.getters.newApiUrl + `/card-employee/all`)
+			self.$http.get(self.$store.getters.newApiUrl + `/card-employee/v2/all`)
 				.then(response => {
 					var n = response.data.data.length;
 					for(var i = 0; i < n; i++){
@@ -225,7 +225,7 @@ export default {
 		},
 		getBrach(userBrachId){
 			let self = this;
-			self.$http.get(self.$store.getters.apiUrl + `/branch/list`)
+			self.$http.get(self.$store.getters.prodApiUrl + `/branch/list`)
 				.then(response => {
 					var n = response.data.data.length;
 					for(var i = 0; i < n; i++){

@@ -409,7 +409,7 @@ export default {
                 template = false
                 Object.assign(postData, {templateType: template})
             }
-            self.$http.post(self.$store.getters.newApiUrl + `/report/v2/requisite/excel`, postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + `/report/v2/requisite/excel`, postData)
                 .then(response => {
                     self.loader = false;
                     self.excelData = response.data.data;  
@@ -477,7 +477,7 @@ export default {
             if(this.date.toDate==="")
                 delete postData.dateTo
             this.amountData = [];
-            this.$http.post(this.$store.getters.newApiUrl+`/report/v2/requisite/amount`, postData)
+            this.$http.post(this.$store.getters.newApiUrl2+`/report/v2/requisite/amount`, postData)
             .then(response=>{
                 console.log(response.data.data);
                 this.amountData = response.data.data
@@ -506,7 +506,7 @@ export default {
                 delete postData.dateTo
             // this.content = []
             this.loader = true;
-            this.$http.post(this.$store.getters.newApiUrl+`/report/v2/requisite?page=${page-1}&size=10`, postData)
+            this.$http.post(this.$store.getters.newApiUrl2+`/report/v2/requisite?page=${page-1}&size=10`, postData)
             .then(response=>{
                 console.log(response.data.data);
                 this.content = response.data.data.content;
@@ -515,7 +515,7 @@ export default {
             }, this.handleError);
         },
         getAccountType(){
-            this.$http.get(this.$store.getters.newApiUrl+`/report/requisite/account-type`)
+            this.$http.get(this.$store.getters.newApiUrl2+`/report/requisite/account-type`)
             .then(response=>{
                 console.log(response.data.data);
                 this.accountTypeData = response.data.data;
@@ -526,7 +526,7 @@ export default {
             }, this.handleError);
         },
         getStatus(){
-            this.$http.get(this.$store.getters.newApiUrl+`/report/requisite/status`)
+            this.$http.get(this.$store.getters.newApiUrl2+`/report/requisite/status`)
             .then(response=>{
                 console.log(response.data.data);
                 this.statusData = response.data.data;

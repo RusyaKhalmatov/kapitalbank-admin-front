@@ -203,7 +203,7 @@
             },
             getBranches(){
                 let self = this;
-                self.$http.get(self.$store.getters.apiUrl + `/branch/list`)
+                self.$http.get(self.$store.getters.prodApiUrl + `/branch/list`)
                     .then(response => {
                         self.barches = response.data.data;
                         //console.log(response.data.data);
@@ -212,7 +212,7 @@
             del(){
                 let self = this;
                 self.$http
-                    .delete(self.$store.getters.newApiUrl + "/card-employee/"+this.id)
+                    .delete(self.$store.getters.newApiUrl + "/card-employee/v2/"+this.id)
                     .then(() => {
                         self.deleteDialog = false;
                         self.QueryAll();
@@ -228,7 +228,7 @@
                 };
                 let self = this;
                 self.$http
-                    .post(self.$store.getters.newApiUrl + "/card-employee/edit", postData)
+                    .post(self.$store.getters.newApiUrl + "/card-employee/v2/edit", postData)
                     .then(() => {
                         self.QueryAll();
                     }, self.handleError);
@@ -276,7 +276,7 @@
             QueryAll(){
                 let self = this;
                 this.loader = true;
-                self.$http.get(self.$store.getters.newApiUrl + `/card-employee/all`)
+                self.$http.get(self.$store.getters.newApiUrl + `/card-employee/v2/all`)
                     .then(response => {
                         self.clientsData = response.data.data;
                         self.loader = false;

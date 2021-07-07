@@ -249,7 +249,7 @@ export default {
             var endTime  = new Date(tmpTime[0], tmpTime[1]-1, tmpTime[2], 23,59,59);
             tmpTime = this.date1.split('-');
             var begTime  = new Date(tmpTime[0], tmpTime[1]-1, tmpTime[2], 0,0,0);
-            self.$http.get(self.$store.getters.loyaltyUrl + '/dashboard/loyalty/filter/loyalty/transactions',{
+            self.$http.get(self.$store.getters.newApiUrl2 + '/dashboard/loyalty/filter/loyalty/transactions',{
                 params: {
                     page: 0,
                     size: 10,
@@ -294,7 +294,7 @@ export default {
                 }
             
             }
-            self.$http.get(self.$store.getters.newApiUrl + '/dashboard/loyalty/filter/transactions',{
+            self.$http.get(self.$store.getters.newApiUrl2 + '/dashboard/loyalty/filter/transactions',{
                 params: data
             })
             .then(response=>{
@@ -340,7 +340,7 @@ export default {
                 }
             
             }
-            self.$http.get(self.$store.getters.newApiUrl + '/dashboard/loyalty/filter/transactions',{
+            self.$http.get(self.$store.getters.newApiUrl2 + '/dashboard/loyalty/filter/transactions',{
                 params: data
             })
             .then(response=>{

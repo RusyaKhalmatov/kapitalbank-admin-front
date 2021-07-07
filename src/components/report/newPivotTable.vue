@@ -4533,14 +4533,14 @@ export default {
     },
     methods:{
         getCorAcc(){
-            this.$http.post(this.$store.getters.newApiUrl+'/report/corAcc', {"branch":"01158", "currency":"000"})
+            this.$http.post(this.$store.state.prodApiUrl2+'/report/corAcc', {"branch":"01158", "currency":"000"})
             .then(response=>{
                 // console.log(response.data);
                 this.corAccData = response.data.data;
             }, this.handleError)
         },
         getApelsinCorAcc(){
-            this.$http.post(this.$store.getters.newApiUrl+'/report/corAcc', {"branch":"01184", "currency":"000"})
+            this.$http.post(this.$store.state.prodApiUrl2+'/report/corAcc', {"branch":"01184", "currency":"000"})
             .then(response=>{
                 // console.log(response.data);
                 this.apelsinCorAccData = response.data.data;
@@ -4949,49 +4949,49 @@ export default {
             self.paymentsData = [];
             self.crossData = {};
             self.visaDirectData = {};
-            self.$http.post(self.$store.getters.newApiUrl + '/report/visa-direct/summery', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/report/visa-direct/summery', postData)
             .then(response=>{
                 if(response.status===200){
                     // console.log(response.data.data)
                     self.visaDirectData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/v2/report/summery/deposit', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/v2/report/summery/deposit', postData)
             .then(response=>{
                 if(response.status===200){
                     // console.log(response.data.data)
                     self.depositData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/v2/report/summery/conversion', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/v2/report/summery/conversion', postData)
             .then(response=>{
                 if(response.status===200){
                     // console.log(response.data.data)
                     self.conversionData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/v2/report/summery/transfer', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/v2/report/summery/transfer', postData)
             .then(response=>{
                 if(response.status===200){
                     // console.log(response.data.data)
                     self.transferData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/v2/report/summery/user', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/v2/report/summery/user', postData)
             .then(response=>{
                 if(response.status===200){
                     console.log(response.data.data)
                     self.regUserData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/v2/report/summery/payments', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/v2/report/summery/payments', postData)
             .then(response=>{
                 if(response.status===200){
                     console.log(response.data.data)
                     self.paymentsData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/v2/report/summery/cross', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/v2/report/summery/cross', postData)
             .then(response=>{
                 if(response.status===200){
                     // console.log(response.data.data)
@@ -5018,49 +5018,49 @@ export default {
                 "platform": this.isActivePlatform
             }
             self.visaDirectData = {};
-            self.$http.post(self.$store.getters.newApiUrl + '/report/visa-direct/summery', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/report/visa-direct/summery', postData)
             .then(response=>{
                 if(response.status===200){
                     // console.log(response.data.data)
                     self.visaDirectData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/v2/report/summery/deposit', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/v2/report/summery/deposit', postData)
             .then(response=>{
                 if(response.status===200){
                     // console.log(response.data.data)
                     self.depositData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/v2/report/summery/conversion', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/v2/report/summery/conversion', postData)
             .then(response=>{
                 if(response.status===200){
                     // console.log(response.data.data)
                     self.conversionData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/v2/report/summery/transfer', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/v2/report/summery/transfer', postData)
             .then(response=>{
                 if(response.status===200){
                     // console.log(response.data.data)
                     self.transferData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/v2/report/summery/user', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/v2/report/summery/user', postData)
             .then(response=>{
                 if(response.status===200){
                     console.log(response.data.data)
                     self.regUserData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/v2/report/summery/payments', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/v2/report/summery/payments', postData)
             .then(response=>{
                 if(response.status===200){
                     console.log(response.data.data)
                     self.paymentsData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/v2/report/summery/cross', postData)
+            self.$http.post(self.$store.getters.newApiUrl2 + '/v2/report/summery/cross', postData)
             .then(response=>{
                 if(response.status===200){
                     // console.log(response.data.data)
@@ -5071,7 +5071,7 @@ export default {
         
         },
         getPlatform(){
-            this.$http.get(this.$store.getters.newApiUrl+`/app-version/platform`)
+            this.$http.get(this.$store.state.prodApiUrl2+`/app-version/platform`)
             .then(response=>{
                 // console.log(response.data.data);
                 this.platformData = response.data.data;                

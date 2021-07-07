@@ -128,7 +128,7 @@ export default {
             }
             this.excelData = [];
             if(this.cardProduct.length!=0){
-                this.$http.post(this.$store.getters.newApiUrl+`/report/virtual_card/credit/excel`, postData)
+                this.$http.post(this.$store.getters.newApiUrl2+`/report/virtual_card/credit/excel`, postData)
                 .then(response=>{
                     this.excelData = response.data.data;  
                     if(this.excelData.length!=0){
@@ -154,7 +154,7 @@ export default {
                 delete postData.dateTo;
             }
             if(this.cardProduct.length!=0){
-                this.$http.post(this.$store.getters.newApiUrl+`/report/virtual_card/credit/amount`, postData)
+                this.$http.post(this.$store.getters.newApiUrl2+`/report/virtual_card/credit/amount`, postData)
                 .then(response=>{
                     // console.log(response.data.data)
                     this.amountData = response.data.data;
@@ -175,7 +175,7 @@ export default {
             }
             if(this.cardProduct.length!=0){
 
-                this.$http.post(this.$store.getters.newApiUrl+`/report/virtual_card/credit?page=${page-1}&size=10`, postData)
+                this.$http.post(this.$store.getters.newApiUrl2+`/report/virtual_card/credit?page=${page-1}&size=10`, postData)
                 .then(response=>{
                     // console.log(response.data.data);
                     this.data = response.data.data.content;

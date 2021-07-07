@@ -232,7 +232,7 @@ export default {
             }, this.handleError)
         },
         getBranches(){
-            this.$http.get(this.$store.getters.apiUrl + `/branch/list`)
+            this.$http.get(this.$store.getters.prodApiUrl + `/branch/list`)
                 .then(response => {
                     this.branches = response.data.data;
                     //console.log(response.data.data);

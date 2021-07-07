@@ -330,7 +330,7 @@
                 })
             },
             getStatus(){
-                this.$http.get(this.$store.getters.newApiUrl+`/report/paynet/status`)
+                this.$http.get(this.$store.getters.newApiUrl2+`/report/paynet/status`)
                 .then(response=>{
                     console.log(response.data.data);
                     this.statusData = response.data.data;
@@ -342,7 +342,7 @@
             },
             getTypeOperations() {
                 let self = this;
-                self.$http.get(self.$store.getters.newApiUrl + '/report/paynet/operation_type')
+                self.$http.get(self.$store.getters.newApiUrl2 + '/report/paynet/operation_type')
                     .then(response => {
                         self.operationTypes = response.data.data;
                         this.operationType = self.operationTypes
@@ -393,7 +393,7 @@
                     status: "SUCCESS",
                     types: this.data.operationType
                 }
-                self.$http.post(self.$store.getters.newApiUrl + '/report/paynet/amount', postData)
+                self.$http.post(self.$store.getters.newApiUrl2 + '/report/paynet/amount', postData)
                     .then(response => {
                         self.operationAmount = response.data.data;
                         console.log(response.data.data);
@@ -432,7 +432,7 @@
                     delete this.data.dateFrom
                 if(this.date.toDate==="")
                     delete this.data.dateTo
-                self.$http.post(self.$store.getters.newApiUrl + `/report/paynet/excel?search=${this.search}`, self.data)
+                self.$http.post(self.$store.getters.newApiUrl2 + `/report/paynet/excel?search=${this.search}`, self.data)
                     .then(response => {
                         self.loader = false;
                         self.excelData = response.data.data;  
@@ -450,7 +450,7 @@
                 self.loader = true;
                 // self.transactions = [];
                 // console.log(this.operation)
-                self.$http.post(self.$store.getters.newApiUrl + `/report/paynet/v2?search=${this.search}&page=${page-1}&size=10`, self.data)
+                self.$http.post(self.$store.getters.newApiUrl2 + `/report/paynet/v2?search=${this.search}&page=${page-1}&size=10`, self.data)
                     .then(response => {
                         self.loader = false;
                         self.operationsList = response.data.data;

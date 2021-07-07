@@ -99,7 +99,7 @@
             },
             getOperationCode() {
                 let self = this;
-                self.$http.get(self.$store.getters.apiUrl + '/operationCode')
+                self.$http.get(self.$store.getters.newApiUrl + '/operationCode')
                     .then(response => {
                         self.filterOperationCode(response.data.data);
                     }, self.handleError);
@@ -116,7 +116,7 @@
                 self.limitUser.minAmount = self.limitUser.minAmount * 100;
                 self.limitUser.maxAmount = self.limitUser.maxAmount * 100;
                 self.limitUser.validTill = new Date(self.limitUser.validTill).getTime();
-                self.$http.post(self.$store.getters.loyaltyUrl + '/limit/partialVip', self.limitUser)
+                self.$http.post(self.$store.getters.newApiUrl + '/limit/partialVip', self.limitUser)
                     .then(() => {
                         self.redirect('PartialVipClients');
                     }, self.handleError);

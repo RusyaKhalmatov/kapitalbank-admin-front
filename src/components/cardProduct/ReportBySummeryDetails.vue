@@ -368,7 +368,7 @@ export default {
     methods:{
         getStatus(){
             this.statusData = [];
-            this.$http.get(this.$store.getters.newApiUrl+`/card-product-order/status`)
+            this.$http.get(this.$store.getters.newApiUrl2+`/card-product-order/status`)
             .then(response=>{
                 // console.log(response.data.data);
                 this.statusData = response.data.data;
@@ -411,7 +411,7 @@ export default {
             if(this.isStatus){
                 Object.assign(data, {status: this.status})
             }            
-            self.$http.post(self.$store.getters.newApiUrl + `/card-product-order/summery/excel`, data)
+            self.$http.post(self.$store.getters.newApiUrl2 + `/card-product-order/summery/excel`, data)
 			.then((response) => {
                 console.log(response.data.data);
                 self.excelData = response.data.data
@@ -468,7 +468,7 @@ export default {
             if(this.isStatus){
                 Object.assign(data, {status: this.status})
             }             
-            self.$http.post(self.$store.getters.newApiUrl + `/card-product-order/summery?page=${page-1}&size=10`, data)
+            self.$http.post(self.$store.getters.newApiUrl2 + `/card-product-order/summery?page=${page-1}&size=10`, data)
 			.then((response) => {
                 //console.log(response.data.data);
                 
@@ -487,7 +487,7 @@ export default {
         },
         getBranchList(){
             let self = this;
-            self.$http.get(self.$store.getters.apiUrl + "/branch/list")
+            self.$http.get(self.$store.getters.prodApiUrl + "/branch/list")
 			.then((response) => {
                 //console.log(response.data.data);       
                 self.branchData = response.data.data;   
@@ -495,7 +495,7 @@ export default {
         },
         getCardProduct(){
             this.cardProductData = []
-            this.$http.get(this.$store.getters.newApiUrl+`/card-product-order/card-product`)
+            this.$http.get(this.$store.getters.newApiUrl2+`/card-product-order/card-product`)
             .then(response=>{
                 console.log(response.data.data);
                 this.cardProductData = response.data.data;

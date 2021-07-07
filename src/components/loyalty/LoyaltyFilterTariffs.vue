@@ -124,7 +124,7 @@ export default {
             if(this.filterType!='NONE'){
                 Object.assign(data, {filter_value: this.filterValue});
             }
-            self.$http.get(self.$store.getters.newApiUrl + '/dashboard/loyalty/filter/tariffs',{
+            self.$http.get(self.$store.getters.newApiUrl2 + '/dashboard/loyalty/filter/tariffs',{
                 params: data
             })
             .then(response=>{

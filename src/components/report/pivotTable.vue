@@ -2638,7 +2638,7 @@ export default {
     },
     methods:{
         getCorAcc(){
-            this.$http.post(this.$store.getters.newApiUrl+'/report/corAcc', {"branch":"01158", "currency":"000"})
+            this.$http.post(this.$store.state.prodApiUrl2+'/report/corAcc', {"branch":"01158", "currency":"000"})
             .then(response=>{
                 // console.log(response.data);
                 this.corAccData = response.data.data;
@@ -3028,7 +3028,7 @@ export default {
                     self.paymentsData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/report/cross/summery', postData)
+            self.$http.post(self.$store.state.prodApiUrl2 + '/report/cross/summery', postData)
             .then(response=>{
                 if(response.status===200){
                     console.log(response.data.data)
@@ -3088,7 +3088,7 @@ export default {
                     self.regUserData = response.data.data;
                 }
             }, self.handleError)
-            self.$http.post(self.$store.getters.newApiUrl + '/report/cross/summery', postData)
+            self.$http.post(self.$store.state.prodApiUrl2 + '/report/cross/summery', postData)
             .then(response=>{
                 if(response.status===200){
                     console.log(response.data.data)
@@ -3097,7 +3097,7 @@ export default {
             }, self.handleError)
         },
         getPlatform(){
-            this.$http.get(this.$store.getters.newApiUrl+`/app-version/platform`)
+            this.$http.get(this.$store.getters.newApiUrl2+`/app-version/platform`)
             .then(response=>{
                 console.log(response.data.data);
                 this.platformData = response.data.data.reverse();

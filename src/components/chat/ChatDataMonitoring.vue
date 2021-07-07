@@ -76,7 +76,7 @@ export default {
                 date: this.date.getTime(),
             }
             this.isShow = false;
-            this.$http.get(this.$store.getters.newApiUrl+`/chat/monitoring/filter/chats`, {
+            this.$http.get(this.$store.getters.newApiUrl2+`/chat/monitoring/filter/chats`, {
                 params: data
             })
             .then(response=>{

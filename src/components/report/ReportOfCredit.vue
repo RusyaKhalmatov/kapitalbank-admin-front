@@ -354,7 +354,7 @@ export default {
             if(this.date.toDate==="")
                 delete this.data.dateTo
             this.loader = true;
-            this.$http.post(this.$store.getters.newApiUrl + '/report/loan/v2/excel', this.data)
+            this.$http.post(this.$store.getters.newApiUrl2 + '/report/loan/v2/excel', this.data)
             .then(response => {
                 this.loader = false;
                 this.excelData = response.data.data;  
@@ -397,7 +397,7 @@ export default {
                 }            
         },
         loadAmount(){
-            this.$http.post(this.$store.getters.newApiUrl + '/report/loan/v2/amount', this.data)
+            this.$http.post(this.$store.getters.newApiUrl2 + '/report/loan/v2/amount', this.data)
                 .then(response => {
                     this.operationAmount = response.data.data;
                     console.log(response.data.data);
@@ -406,7 +406,7 @@ export default {
         },
         getList(page){
             this.loader = true;
-            this.$http.post(this.$store.getters.newApiUrl + `/report/loan/v2?page=${page-1}&size=10`, this.data)
+            this.$http.post(this.$store.getters.newApiUrl2 + `/report/loan/v2?page=${page-1}&size=10`, this.data)
                 .then(response => {
                     this.loader = false;
                     this.content = response.data.data.content;
@@ -414,7 +414,7 @@ export default {
                 }, this.handleError);
         },
         getOperationsTypes() {
-            this.$http.get(this.$store.getters.newApiUrl + '/report/loan/v2/type')
+            this.$http.get(this.$store.getters.newApiUrl2 + '/report/loan/v2/type')
                 .then(response => {
                     this.operationTypes = response.data.data;
                     // this.operationType = this.operationTypes
@@ -425,7 +425,7 @@ export default {
                 }, this.handleError);
         },
         getStatus(){
-            this.$http.get(this.$store.getters.newApiUrl+`/report/loan/v2/status`)
+            this.$http.get(this.$store.getters.newApiUrl2+`/report/loan/v2/status`)
             .then(response=>{
                 this.statusData = response.data.data;
                 response.data.data.forEach(x=>{

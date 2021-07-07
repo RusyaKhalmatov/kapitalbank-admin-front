@@ -74,7 +74,7 @@
             },
             getOperationCode() {
                 let self = this;
-                self.$http.get(self.$store.getters.apiUrl + '/operationCode')
+                self.$http.get(self.$store.getters.newApiUrl + '/operationCode')
                     .then(response => {
                         self.filterOperationCode(response.data.data);
                     }, self.handleError);

@@ -147,7 +147,7 @@
                 this.isClick = true;
                 // this.getChartsData();
                 this.isShow = false;
-                self.$http.get(self.$store.getters.apiUrl + '/report/registeredUsers', {
+                self.$http.get(self.$store.getters.newApiUrl2 + '/report/registeredUsers', {
                     params: {
                         dateStart: self.dateStart,
                         dateEnd: self.dateEnd
@@ -220,7 +220,7 @@
             getChartsData() {
                 let self = this;
                 this.isShow = false;
-                self.$http.get(self.$store.getters.apiUrl + '/report/registeredUsers', {
+                self.$http.get(self.$store.getters.newApiUrl2 + '/report/registeredUsers', {
                     params: {
                         dateStart: self.dateStart,
                         dateEnd: self.dateEnd

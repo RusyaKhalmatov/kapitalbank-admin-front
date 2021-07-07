@@ -262,7 +262,7 @@ export default {
             if(this.date.toDate==="")
                 delete this.data.dateTo
             this.loader = true;
-            this.$http.post(this.$store.getters.newApiUrl + `/report/visa-direct/excel?search=${this.search}`, this.data)
+            this.$http.post(this.$store.getters.newApiUrl2 + `/report/visa-direct/excel?search=${this.search}`, this.data)
             .then(response => {
                 this.loader = false;
                 this.excelData = response.data.data;  
@@ -303,7 +303,7 @@ export default {
                 }            
         },
         loadAmount(){
-            this.$http.post(this.$store.getters.newApiUrl + `/report/visa-direct/amount?search=${this.search}`, this.data)
+            this.$http.post(this.$store.getters.newApiUrl2 + `/report/visa-direct/amount?search=${this.search}`, this.data)
                 .then(response => {
                     this.operationAmount = response.data.data;
                     // console.log(response.data.data);
@@ -312,7 +312,7 @@ export default {
         },
         getList(page){
             this.loader = true;
-            this.$http.post(this.$store.getters.newApiUrl + `/report/visa-direct?page=${page-1}&size=10&search=${this.search}`, this.data)
+            this.$http.post(this.$store.getters.newApiUrl2 + `/report/visa-direct?page=${page-1}&size=10&search=${this.search}`, this.data)
                 .then(response => {
                     this.loader = false;
                     this.content = response.data.data.content;
@@ -321,7 +321,7 @@ export default {
         },
 
         getStatus(){
-            this.$http.get(this.$store.getters.newApiUrl+`/report/visa-direct/status`)
+            this.$http.get(this.$store.getters.newApiUrl2+`/report/visa-direct/status`)
             .then(response=>{
                 this.statusData = response.data.data;
                 response.data.data.forEach(x=>{
@@ -331,7 +331,7 @@ export default {
 
         },
         getTypes(){
-            this.$http.get(this.$store.getters.newApiUrl+`/report/visa-direct/operationTypes`)
+            this.$http.get(this.$store.getters.newApiUrl2+`/report/visa-direct/operationTypes`)
             .then(response=>{
                 this.typesData = response.data.data;
                 this.types = this.typesData;            
