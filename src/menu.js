@@ -700,11 +700,11 @@ const menuItems = {
                                     icon: 'mdi-account',
                                     action: 'clients'
                                 },
-                                {
+                                /*{
                                     title: 'Белый список',
                                     icon: 'mdi-account',
                                     action: 'userWhiteList'
-                                },
+                                },*/
                                 {
                                     title: 'VIP-Клиенты',
                                     icon: 'mdi-account-tie',
@@ -770,7 +770,7 @@ const menuItems = {
                             ]
                         },
                         {
-                            title: 'История по счету и кошельку',
+                            title: 'История по счету',
                             icon: 'mdi-mail',
                             action: 'AccountWalletHistory'
                         },
@@ -1135,11 +1135,11 @@ const menuItems = {
             icon: "mdi-file-chart",            
             action: "reportConversion"
         },
-        {
+        /*{
             title: "Отчет по кросс-конвертации валют", 
             icon: "mdi-file-chart",            
             action: "reportCrossConversion"
-        },
+        },*/
         {
             title: "Отчеты Paynet", 
             icon: "mdi-file-chart",            

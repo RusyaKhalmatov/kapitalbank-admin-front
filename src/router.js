@@ -172,6 +172,15 @@ export default new Router({
       ]
     },
     {
+      path: "/clients",
+      component: () => import('@/views/clients/layout'),
+      children: [
+        { path: '', name: "clients", component: () => import('@/views/clients/index')},
+        { path: 'add', name: "clientsAdd", component: () => import('@/views/clients/add')},
+        { path: 'update/:id', name: "clientsUpdate", component: () => import('@/views/clients/update')}
+      ]
+    },
+    {
       path: '/reportP2pUcell',
       name: 'ReportP2pUcell',
       component: ReportP2pUcell
@@ -507,11 +516,11 @@ export default new Router({
         component: Logs,
         params: true
     },*/
-    {
+    /*{
       path: "/clients",
       name: "clients",
       component: Clients
-    },
+    },*/
     /*{
         path: "/telegrambuttons",
         name: "TelegramButtons",

@@ -1,6 +1,12 @@
 <template>
   <div class="main">
-    <h1>Частичные VIP-клиенты</h1>
+    <h1 style="display: flex">
+      Частичные VIP-клиенты
+      <v-spacer></v-spacer>
+      <v-btn icon small @click="editDialog = true">
+        <v-icon small>mdi-plus</v-icon>
+      </v-btn>
+    </h1>
     <v-text-field
       v-model="search"
       prepend-icon="mdi-magnify"
@@ -196,13 +202,23 @@
           "validTill": new Date(this.validTill).getTime(),
           "id": this.id
         }
-        self.$http.put(self.prodApiUrl + '/limit/partialVip', putData)
-          .then((response) => {
-            // console.log(response.data.data);
-            self.loader = false;
-            self.editDialog = false;
-            self.getPartialVipClients();
-          }, self.handleError);
+        if (!!this.id) {
+          self.$http.put(self.prodApiUrl + '/limit/partialVip', putData)
+            .then((response) => {
+              // console.log(response.data.data);
+              self.loader = false;
+              self.editDialog = false;
+              self.getPartialVipClients();
+            }, self.handleError);
+        } else {
+          self.$http.post(self.prodApiUrl + '/limit/partialVip', putData)
+            .then((response) => {
+              // console.log(response.data.data);
+              self.loader = false;
+              self.editDialog = false;
+              self.getPartialVipClients();
+            }, self.handleError);
+        }
       }
     },
     mounted() {

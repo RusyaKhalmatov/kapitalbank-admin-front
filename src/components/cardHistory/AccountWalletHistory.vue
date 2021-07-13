@@ -5,9 +5,9 @@
                 <span class="select">
                     <v-select v-model="type" :items="['СЧЕТ', 'КОШЕЛЕК']"></v-select>
                 </span>
-                <span style="width:300px">
+<!--                <span style="width:300px">
                     <v-text-field v-model="value" :label="type==='СЧЕТ'?'Счет':'Кошелек'"></v-text-field>
-                </span>
+                </span>-->
             </div>
             <div class="param-box">
                 <span class="row">

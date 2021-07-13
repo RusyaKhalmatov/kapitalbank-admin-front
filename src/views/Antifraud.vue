@@ -6,14 +6,14 @@
             <v-btn @click="addMany" :class="[{'active-btn': active === 'btn2'}]">Пользователи, которые добавили много карт</v-btn>
             <v-btn @click="operations" :class="[{'active-btn': active === 'btn4'}]">Отчет о пользовательских операциях</v-btn>
 
-            <v-btn v-if="isClickDisBalance" @click="getDisBalance" :class="[{'active-btn': active === 'btn3'}]">Расхождение по  кошелькам</v-btn>
+<!--            <v-btn v-if="isClickDisBalance" @click="getDisBalance" :class="[{'active-btn': active === 'btn3'}]">Расхождение по  кошелькам</v-btn>
             
             <v-btn style="width:251px" v-else>
                 <v-progress-circular style="height:23px; width: 23px;"            
                 indeterminate
                 color="amber"
                 ></v-progress-circular>
-            </v-btn>
+            </v-btn>-->
 
         </div>
         <div class="param-box" v-if="active!='btn3'">
