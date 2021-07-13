@@ -50,6 +50,12 @@
             sorter: true
           },
           {
+            title: 'Тип',
+            dataIndex: 'userType',
+            key: 'userType',
+            sorter: true
+          },
+          {
             title: 'Статус',
             dataIndex: 'userState',
             key: 'userState',
