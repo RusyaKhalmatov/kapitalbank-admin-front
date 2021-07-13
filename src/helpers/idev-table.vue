@@ -53,6 +53,14 @@
         slot="action"
         slot-scope="item"
       >
+        <template v-for="act in tableActions">
+          <a-button
+            type="primary"
+            shape="circle"
+            :icon="act.icon"
+            @click="act.method(act.key, item)"
+          />
+        </template>
         <a-button
           v-if="!!updateRouteName"
           type="primary"
@@ -96,6 +104,7 @@
     }),
     props: {
       tableColumns: Array,
+      tableActions: Array,
       tableTitle: String,
       getList: Function,
       listSearch: Boolean,

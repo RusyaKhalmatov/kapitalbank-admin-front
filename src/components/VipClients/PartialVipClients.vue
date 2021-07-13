@@ -2,10 +2,10 @@
   <div class="main">
     <h1 style="display: flex">
       Частичные VIP-клиенты
-      <v-spacer></v-spacer>
+<!--      <v-spacer></v-spacer>
       <v-btn icon small @click="editDialog = true">
         <v-icon small>mdi-plus</v-icon>
-      </v-btn>
+      </v-btn>-->
     </h1>
     <v-text-field
       v-model="search"

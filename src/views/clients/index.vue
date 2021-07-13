@@ -4,12 +4,19 @@
       tableColumns: columns,
       tableData: data,
       tableTitle: 'Список пользователей',
+      tableActions: [
+        {
+          key: 'info',
+          icon: 'info-circle',
+          method: this.tableCustomActions,
+          title: 'Информация'
+        },
+      ],
       getList: getList,
       listSearch: true,
-      // updateRouteName: 'clientsUpdate',
       actions: {
         create: { to: {name: 'clientForm'}, title: 'Добавить новый', icon: 'plus'}
-      }
+      },
     }"
   />
 </template>
@@ -68,21 +75,6 @@
             key: 'action',
             scopedSlots: { customRender: 'action' },
           }
-          /*birthday: "1997-06-24T19:00:00.000+0000"
-          customerId: "99059709"
-          email: null
-          firstName: "NOZIMA"
-          fullName: "NOZIMA OQILOVA"
-          id: 362
-          lastName: "OQILOVA"
-          lastUse: 1626167729842
-          phone: "998900024411"
-          platform: ""
-          registeredDate: 1626159341583
-          userRole: "USER"
-          userState: "ACTIVE"
-          userType: "CLIENT"
-          version: "Av1.0.0 (40)"*/
         ],
         data: [],
         totalUsers: 0
@@ -143,6 +135,18 @@
               }
             }, this.handleError);
         })
+      },
+      tableCustomActions(key, item){
+        switch (key) {
+          case 'info':
+            this.$router.push({
+              name: 'clientCredential',
+              params: {
+                user: item
+              }
+            })
+            break
+        }
       }
     }
   }
