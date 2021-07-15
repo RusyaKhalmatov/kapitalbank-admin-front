@@ -368,7 +368,7 @@ export default {
     },
     deleteAccount(userId) {
       let self = this;
-      self.$http.delete(self.$store.getters.apiUrl + `/general/admin/delete-account/${userId}`)
+      self.$http.delete(self.$store.getters.newApiUrl + `/general/admin/delete-account/${userId}`)
         .then(() => {
           self.redirect('clients');
         }, self.handleError);

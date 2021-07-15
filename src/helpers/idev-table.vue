@@ -100,7 +100,8 @@
       pagination: {
         current: 1
       },
-      sortData: {}
+      sortData: {},
+      word: ''
     }),
     props: {
       tableColumns: Array,
@@ -128,6 +129,7 @@
         this.getList({
           pagination: {...this.pagination},
           sort: this.sortData,
+          word: this.word,
           ...params
         })
           .then(res => {
@@ -154,9 +156,9 @@
           .then(() => this.updateContent())
       },
       onSearchContent(val){
-        this.updateContent({
-          word: !!val ? val : ''
-        })
+        this.word = !!val ? val : ''
+        this.$set(this.pagination, 'current', 1)
+        this.updateContent()
       },
       onTableChange(pagination, filters, sorter) {
         // console.log("pagination: ", pagination);

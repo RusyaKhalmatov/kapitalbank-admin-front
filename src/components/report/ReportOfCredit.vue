@@ -36,6 +36,7 @@
         id="excel"
         name="credit.xls"
         :fields="operationExport"
+        stringify-long-num
         :data="excelData">
         <v-btn icon dark color="secondary">
           <v-icon>mdi-file-excel</v-icon>

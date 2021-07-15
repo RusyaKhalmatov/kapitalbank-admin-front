@@ -35,6 +35,8 @@
         v-show="false"
         id="excel"
         name="deposit.xls"
+        :stringify-long-num="true"
+        :stringifyLongNum="true"
         :fields="operationExport"
         :data="excelData">
         <v-btn icon dark color="secondary">
@@ -212,7 +214,7 @@
           </td>
           <td>{{ props.item.sender }}</td>
           <td>{{ props.item.receiver }}</td>
-          <td>{{ props.item.receiverName }}</td>
+          <td>{{ props.item.name }}</td>
           <td>{{ props.item.absId }}</td>
           <td>{{ props.item.operationType }}</td>
           <td>{{ props.item.amount / 100 | number-format }}</td>
@@ -263,7 +265,7 @@ export default {
         {text: "Login", value: "login", sortable: false},
         {text: "Отправитель", value: "sender", sortable: false},
         {text: "Получатель", value: "receiver", sortable: false},
-        {text: "Имя вклада", value: "receiverName", sortable: false},
+        {text: "Имя вклада", value: "name", sortable: false},
         {text: "ABS ID", value: "absId", sortable: false},
         {text: "Тип", value: "operationType", sortable: false},
         {text: "Сумма", value: "amount", sortable: false},
@@ -412,7 +414,15 @@ export default {
       this.$http.post(this.$store.getters.newApiUrl2 + '/report/deposit/v2/excel', this.data)
         .then(response => {
           this.loader = false;
-          this.excelData = response.data.data;
+          let arr = [];
+          for (let i in response.data.data) {
+            let item = response.data.data[i]
+            if (this.hasItem(item, 'login')) {
+              item.login = ` ${item.login}`
+            }
+            arr.push(item)
+          }
+          this.excelData = arr;
           if (this.excelData.length != 0) {
             let elem = document.getElementById('excel');
             setTimeout(() => {

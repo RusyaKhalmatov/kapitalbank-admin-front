@@ -114,7 +114,7 @@
           </v-flex>
           <v-flex xs12 sm12 md4 lg4 xl4>
             <v-checkbox
-              v-model="currentItem.partialEnabled"
+              v-model="currentItem.isPartialEnabled"
               label="Возможность частичного списания">
             </v-checkbox>
           </v-flex>

@@ -67,6 +67,8 @@
                 v-show="false"
                 id="excel"
                 name="p2p.xls"
+                :stringify-long-num="true"
+                :stringifyLongNum="true"
                 :fields="operationExport"
                 :data="excelData">
                 <v-btn icon dark color="secondary">
@@ -636,6 +638,8 @@ export default {
       self.$http.post(self.$store.state.prodApiUrl2 + `/report/transaction/excel`, self.data)
         .then(response => {
           self.loader = false;
+          console.log("DATAS: ", response.data.data)
+          console.log("JSON: ", JSON.stringify(response.data.data))
           self.excelData = response.data.data;
           if (this.excelData.length != 0) {
             let elem = document.getElementById('excel');

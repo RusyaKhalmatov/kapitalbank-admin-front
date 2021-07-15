@@ -92,6 +92,7 @@ export default new Vuex.Store({
     newChatApiUrl: (state) => state.newChatApiUrl,
     ucellApiUrl: (state) => state.ucellApiUrl,
     prodApiUrl: (state) => state.prodApiUrl,
+    prodApiUrl2: (state) => state.prodApiUrl2,
     uname: (state) => state.uname,
     pass: (state) => state.pass,
     socketApi: (state) => state.apiStomp,
