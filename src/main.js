@@ -23,7 +23,7 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import fingerprint from "./plugins/fingerprint";
-
+import moment from 'moment';
 import VueLivePreview from 'vue-live-preview'
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
@@ -49,6 +49,7 @@ Vue.use(VueLivePreview, {
   lineNumbers: true,
 })
 
+Vue.use(moment);
 Vue.use(mixins);
 Vue.use(numberFormatFilter);
 Vue.use(SnackbarMessage);
