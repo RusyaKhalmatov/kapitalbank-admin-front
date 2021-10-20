@@ -121,6 +121,11 @@
 import ReportDateTimePicker from "./ReportDateTimePicker";
 import ShowChart from "../chart/ShowChart";
 import TransactionChart from "../chart/TransactionChart";
+import moment from 'moment';
+
+var d = new Date();
+const MONTH_AGO_DATE = d.setMonth(d.getMonth() - 1);
+const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
 export default {
   name: "ReportByTransactions",
@@ -155,11 +160,11 @@ export default {
         {text: 'Закрытие вклада', value: 'depositClose2wallet'},
       ],
       operation: {
-        dateStart: null,
-        dateEnd: (new Date).toLocaleString(),
-        operationType: [],
+        dateEnd: moment().format(DATE_FORMAT),
+        dateStart: moment(MONTH_AGO_DATE).format(DATE_FORMAT),
+        operationType: ['uzcard2depositOpen'],
         phoneNumber: '',
-        operationStatus: ''
+        operationStatus: 'SUCCESS'
       },
       operationsHeaders: [
         {text: "ID", value: "id"},
@@ -221,7 +226,7 @@ export default {
     loadReports() {
       let self = this;
       self.loader = true;
-      self.$http.post(self.$store.getters.newApiUrl2 + '/report/deposit', self.operation)
+      self.$http.post(self.$store.getters.newApiUrl + '/report/deposit', self.operation)
         .then(response => {
           self.operationsList = response.data.data;
           self.transactions = self.operationsList.operations;
@@ -273,6 +278,7 @@ export default {
         field: "createdDate",
         callback: value => {
           let date = new Date(value);
+          console.log('date = ', (new Date).toLocaleString());
           return date.toLocaleString();
         }
       };
