@@ -30,7 +30,7 @@
   import Navigation from '@/components/navigation/Navigation';
   import ToolbarWidget from '@/components/widget/ToolbarWidget';
   import SnackbarMessage from "@/components/snackbar/SnackbarMessage";
-  import { mapActions } from 'vuex'
+  // import { mapActions } from 'vuex'
 
   export default {
     name: 'app',
@@ -65,20 +65,22 @@
         get() {
           return this.$store.getters.userName;
         },
-        // set(value) {
-        //     this.$store.commit('userName', value);
-        // }
+        set(value) {
+          this.$store.commit('userName', value);
+        }
       }
     },
     methods: {
       // ...mapActions(['getLanguageList']) COMMENT
 
-      // loadUser() {
-      //     let self = this;
-      //     self.$http.get(self.$store.getters.apiUrl + `/user`).then(response => {
-      //         self.userName = response.data.data.message;
-      //     }, self.handleError);
-      // }
+      loadUser() {
+          let self = this;
+          self.$http.get(self.$store.getters.newApiUrl + `/user`).then(response => {
+            const {firstName, lastName} = response.data.data;
+            self.userName = firstName || lastName ? firstName + ' ' + lastName : '  ';
+            // console.log('USER_NAME = ', response.data.data.phoneNumber);
+          }, self.handleError);
+      }
     },
     mounted() {
       // this.registerDevice()
@@ -87,11 +89,12 @@
       //       .catch(err => this.handleError(err))
       //   }) COMMENT
       if (this.$route.name !== 'login') {
-        console.log("TESTING....")
+        console.log("TESTING....", self.userName)
       }
-      // if (!self.userName) {
-      //     self.loadUser();
-      // }
+
+      if (!self.userName) {
+        this.loadUser();
+      }
     }
   }
 </script>
