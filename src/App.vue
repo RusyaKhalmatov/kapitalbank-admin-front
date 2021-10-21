@@ -10,7 +10,7 @@
     >
       <v-toolbar-side-icon @click.stop="navigation = !navigation"/>
       <v-toolbar-title>
-        <span class="headline"><h5 style="margin:0">{{userName}}</h5></span>
+        <span class="headline"><h5 style="margin:0">{{ userName }}</h5></span>
       </v-toolbar-title>
       <v-spacer/>
       <toolbar-widget/>
@@ -41,8 +41,10 @@
     },
     beforeMount() {
       let self = this;
+
       let token = window.localStorage.getItem("token");
       let deviceId = window.localStorage.getItem("deviceId");
+
       if (!token) {
         self.$store.commit('navigation', false);
         self.$store.commit('toolbar', false);
@@ -73,17 +75,18 @@
     methods: {
       // ...mapActions(['getLanguageList']) COMMENT
 
-      loadUser() {
-          let self = this;
-          self.$http.get(self.$store.getters.newApiUrl + `/user`).then(response => {
-            const {firstName, lastName, phoneNumber} = response.data.data;
-            self.userName = firstName || lastName ? firstName + ' ' + lastName : phoneNumber;
-            // console.log('USER_NAME = ', response.data.data.phoneNumber);
-          }, self.handleError);
-      }
+      // loadUser() { 
+      //     let self = this;
+      //     self.$http.get(self.$store.getters.newApiUrl + `/user`).then(response => {
+      //       const {firstName, lastName, phoneNumber} = response.data.data;
+      //       self.userName = firstName || lastName ? firstName + ' ' + lastName : phoneNumber;
+      //       // console.log('USER_NAME = ', response.data.data.phoneNumber);
+      //       this.$store.commit('userName', self.userName);
+      //     }, self.handleError);
+      // } COMMENT
     },
     mounted() {
-      // this.registerDevice()
+      // this.registerDevice() 
       //   .then(() => {
       //     this.getLanguageList()
       //       .catch(err => this.handleError(err))
@@ -92,9 +95,9 @@
         console.log("TESTING....", self.userName)
       }
 
-      if (!self.userName) {
-        this.loadUser();
-      }
+      // if (!self.userName && !self.$store.deviceId) {
+      //   this.loadUser();
+      // } COMMENT
     }
   }
 </script>

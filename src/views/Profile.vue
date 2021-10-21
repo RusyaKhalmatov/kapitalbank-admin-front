@@ -89,13 +89,20 @@
                 let self = this;
                 self.$http.get(self.$store.getters.newApiUrl + "/user")
                     .then(response => {
-                        console.log(response.data)
+                        console.log('USERNAME = ', response.data.data)
 
                         self.userInfo = response.data.data;
                         self.phoneNumber = self.userInfo.phoneNumber;
-                        self.firstname = self.userInfo.firstName;
-                        self.lastname = self.userInfo.lastName;
-                        this.$store.commit('userName', self.userInfo.firstName + " " + self.userInfo.lastName);
+                        // self.firstname = self.userInfo.firstName;
+                        // self.lastname = self.userInfo.lastName;
+                        // this.$store.commit('userName', self.userInfo.firstName + " " + self.userInfo.lastName);
+
+
+                        const {firstName, lastName, phoneNumber} = response.data.data;
+                        self.userName = firstName || lastName ? firstName + ' ' + lastName : phoneNumber;
+                        // console.log('USER_NAME = ', response.data.data.phoneNumber);
+                        this.$store.commit('userName', self.userName);
+
                         this.$store.commit('userId', self.userInfo.userId);
                     }, self.handleError);
             },
