@@ -4643,7 +4643,7 @@ export default {
             this.$http.post(this.$store.state.newApiUrl + '/v2/report/summery/payments-categories',postData)
             .then(response=>{      
                 // console.log(response.data)          
-                if(response.status ===200){
+                if(response.status === 200){
                     // self.userCount = response.data;
                     // console.log(response.data)
                     this.paymentsCategoriesData = response.data.data;
@@ -4655,7 +4655,6 @@ export default {
                         // console.log(x)
 
                     })
-
                 }            
             })
         },
