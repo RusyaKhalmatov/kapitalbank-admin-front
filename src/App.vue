@@ -107,6 +107,10 @@
     padding-top: 25px !important;
   }
 
+  .apelsin-logo{
+    display: none !important;
+  }
+
   @media all and (max-width: 500px) {
     .headline {
       font-size: 15px !important;

@@ -37,7 +37,7 @@ export default {
     return {
       reportList: [
         // {text: "Сводная таблица", value: "pivotTable"},
-        {text: "Сводная таблица v.2", value: "newPivotTable"},
+        // {text: "Сводная таблица v.2", value: "newPivotTable"},
         {text: "Все банки", value: "reportAllBanks"},
         {text: "По Транзакциям", value: "reportTransactions"},
         {text: "По VISA DIRECT", value: "reportVisaDirect"},

@@ -113,7 +113,6 @@
                 <p class="mb-0" v-if="props.item.customerId!=''">{{ props.item.customerId }}</p>
                 <p class="mb-0" v-else>Не клиент</p>
               </template>
-            <td v-else></td>
             </td>
             <td v-else>Не клиент</td>
             <td>{{ props.item.userState }}</td>
