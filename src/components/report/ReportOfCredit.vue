@@ -413,7 +413,7 @@ export default {
       this.$http.post(this.$store.getters.newApiUrl2 + '/report/loan/v2/amount', this.data)
         .then(response => {
           this.operationAmount = response.data.data;
-          console.log(response.data.data);
+          // console.log(response.data.data);
           this.show = true;
         }, this.handleError);
     },

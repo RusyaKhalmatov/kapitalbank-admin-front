@@ -147,7 +147,7 @@ export default {
       ],
       operation: {
         dateStart: null,
-        dateEnd: (new Date).toLocaleString(),
+        dateEnd: (new Date).toLocaleString(`ru-RU`), 
         operationType: [],
         phoneNumber: '',
         operationStatus: ''
@@ -211,7 +211,7 @@ export default {
     loadReports() {
       let self = this;
       self.loader = true;
-      self.$http.post(self.$store.getters.newApiUrl2 + '/report/deposit', self.operation)
+      self.$http.post(self.$store.getters.newApiUrl + '/report/deposit', self.operation)
         .then(response => {
           self.operationsList = response.data.data;
           self.transactions = self.operationsList.operations;
@@ -263,7 +263,7 @@ export default {
         field: "createdDate",
         callback: value => {
           let date = new Date(value);
-          return date.toLocaleString();
+          return date.toLocaleString('ru-RU');
         }
       };
       return result;
