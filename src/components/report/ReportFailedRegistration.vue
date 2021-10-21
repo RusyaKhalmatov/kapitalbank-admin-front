@@ -134,11 +134,12 @@
             },
             getFailedRegistration(page) {
                 let self = this;
-                self.$http.post(self.$store.getters.newApiUrl + `/failedRegistration?page=${page-1}&size=10`, {})
+                self.$http.get(self.$store.getters.newApiUrl + `/failedRegistration?page=${page-1}&size=10`, {})
                     .then(response => {
-                        self.loader = false;                        
-                        self.failedData = response.data.data.content;
-                        self.totalPages = response.data.data.totalPages
+                        self.loader = false;
+                        self.failedData = response.data.data;
+                        // self.failedData = response.data.data.content;
+                        self.totalPages = response.data.data.totalPages;
                     }, self.handleError);
             },
             getExcelData(){
@@ -146,7 +147,6 @@
                 self.$http.get(self.$store.getters.newApiUrl + `/failedRegistration`)
                 .then(response => {
                     response.data.data.forEach(item=>{
-                        
                         self.excelData.push({id: item.id, phone: item.phone, details: item.details,dateTime: item.dateTime, userInfo: JSON.stringify(item.userInfo)})
                     })
                     // self.excelData = response.data.data;
