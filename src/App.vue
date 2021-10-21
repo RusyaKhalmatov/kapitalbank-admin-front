@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <navigation/>
+    <navigation class="pt_25"/>
     <v-toolbar
       app
       :clipped-left="$vuetify.breakpoint.mdAndUp"
@@ -76,8 +76,8 @@
       loadUser() {
           let self = this;
           self.$http.get(self.$store.getters.newApiUrl + `/user`).then(response => {
-            const {firstName, lastName} = response.data.data;
-            self.userName = firstName || lastName ? firstName + ' ' + lastName : '  ';
+            const {firstName, lastName, phoneNumber} = response.data.data;
+            self.userName = firstName || lastName ? firstName + ' ' + lastName : phoneNumber;
             // console.log('USER_NAME = ', response.data.data.phoneNumber);
           }, self.handleError);
       }
@@ -100,6 +100,10 @@
 </script>
 
 <style>
+  .pt_25{
+    padding-top: 25px !important;
+  }
+
   @media all and (max-width: 500px) {
     .headline {
       font-size: 15px !important;
