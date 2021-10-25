@@ -359,22 +359,23 @@ const menuItems = {
                     action: "EposHistory"
                 },*/
                 
-                {
-                    title: "Виртуальная карта",
-                    icon: "cloud",
-                    child: [
-                        {
-                            title: 'История виртуальных карт',
-                            icon: 'cloud_upload',
-                            action: 'virtualCardHistory'
-                        },
-                        {
-                            title: 'Список виртуальных карт',
-                            icon: 'cloud_upload',
-                            action: 'VirtualCardAccountType'
-                        }
-                    ]
-                },
+                // {
+                //     title: "Виртуальная карта",
+                //     icon: "cloud",
+                //     child: [
+                //         {
+                //             title: 'История виртуальных карт',
+                //             icon: 'cloud_upload',
+                //             action: 'virtualCardHistory'
+                //         },
+                //         {
+                //             title: 'Список виртуальных карт',
+                //             icon: 'cloud_upload',
+                //             action: 'VirtualCardAccountType'
+                //         }
+                //     ]
+                // },
+                
                 {
                     title: "Информация об оплате сервиса",
                     icon: "mdi-alpha-p-circle-outline",
@@ -481,22 +482,23 @@ const menuItems = {
                     action: "EposHistory"
                 },*/
                 
-                {
-                    title: "Виртуальная карта",
-                    icon: "cloud",
-                    child: [
-                        {
-                            title: 'История виртуальных карт',
-                            icon: 'cloud_upload',
-                            action: 'virtualCardHistory'
-                        },
-                        {
-                            title: 'Список виртуальных карт',
-                            icon: 'cloud_upload',
-                            action: 'VirtualCardAccountType'
-                        }
-                    ]
-                },
+                // {
+                //     title: "Виртуальная карта",
+                //     icon: "cloud",
+                //     child: [
+                //         {
+                //             title: 'История виртуальных карт',
+                //             icon: 'cloud_upload',
+                //             action: 'virtualCardHistory'
+                //         },
+                //         {
+                //             title: 'Список виртуальных карт',
+                //             icon: 'cloud_upload',
+                //             action: 'VirtualCardAccountType'
+                //         }
+                //     ]
+                // },
+
                 /*{
                     title: 'Белый список по скорингу',
                     icon: 'list_alt',

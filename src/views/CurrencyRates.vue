@@ -3,7 +3,7 @@
         <v-card min-height="600">
             <v-card-title> 
                 <h1>Курс валют</h1> 
-                <v-progress-linear v-if="!rates.length" indeterminate color="yellow darken-2" ></v-progress-linear>
+                <v-progress-linear v-if="!rates.length" indeterminate color="yellow" ></v-progress-linear>
             </v-card-title>
             <v-card-text v-if="rates.length">
                 <v-layout row wrap>

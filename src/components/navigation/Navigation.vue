@@ -6,38 +6,8 @@
       v-model="navigation"
   >
     <v-list dense>
-      <!-- <template v-for="(naviItem, naviIndex) in menuProp">
-          <v-list-group
-                  v-if="naviItem.child"
-                  :key="naviIndex">
-              <v-list-tile slot="activator" class="cursor-pointer">
-                  <v-list-tile-avatar>
-                      <v-icon v-text="naviItem.icon" color="primary"></v-icon>
-                  </v-list-tile-avatar>
-                  <v-list-tile-content>
-                      <v-list-tile-title v-text="naviItem.title"></v-list-tile-title>
-                  </v-list-tile-content>
-              </v-list-tile>
-                  <v-list-tile v-for="(naviItemChild,i) in naviItem.child" :key="i"
-                              @click.stop="redirect(naviItemChild.action)" class="cursor-pointer">
-                      <v-list-tile-avatar>
-                          <v-icon v-text="naviItemChild.icon" color="primary"></v-icon>
-                      </v-list-tile-avatar>
-                      <v-list-tile-content>
-                          <v-list-tile-title v-text="naviItemChild.title"></v-list-tile-title>
-                      </v-list-tile-content>
-                  </v-list-tile>
-          </v-list-group>
-          <v-list-tile v-else :key="naviIndex" @click.stop="redirectTo(naviItem)" class="cursor-pointer">
-              <v-list-tile-avatar>
-                  <v-icon v-text="naviItem.icon" color="primary"></v-icon>
-              </v-list-tile   -avatar>
-              <v-list-tile-content>
-                  <v-list-tile-title v-text="naviItem.title"></v-list-tile-title>
-              </v-list-tile-content>
-          </v-list-tile>
-      </template>          -->
       <v-list v-for="(naviItem, naviIndex) in menuProp" :key="naviIndex">
+
         <v-list-group
             v-if="naviItem.child"
             :key="naviIndex">
@@ -49,6 +19,7 @@
               <v-list-tile-title v-text="naviItem.title"/>
             </v-list-tile-content>
           </v-list-tile>
+
           <v-list v-for="(naviItemChild, i) in naviItem.child" :key="i">
             <v-list-group v-if="naviItemChild.child" :key="i">
               <v-list-tile slot="activator" class="cursor-pointer">
@@ -100,6 +71,7 @@
             </v-list-tile>
           </v-list>
         </v-list-group>
+
         <v-list-tile v-else :key="naviIndex" @click.stop="redirectTo(naviItem)" class="cursor-pointer">
           <v-list-tile-avatar>
             <v-icon v-text="naviItem.icon" color="primary"/>
@@ -146,5 +118,10 @@ export default {
 
 .v-list {
   padding: 0 !important;
+}
+
+.v-list.v-list--active{
+  background-color: red;
+  color: white;
 }
 </style>

@@ -3,8 +3,9 @@
         <v-card min-height="600">
             <v-card-title>
                 <h1>Внешний Сервис</h1>
+                <v-progress-linear v-if="!extServData.length" indeterminate color="yellow" ></v-progress-linear>
             </v-card-title>
-            <v-card-text>
+            <v-card-text v-if="extServData.length">
                 <v-layout column wrap>
                     <v-text-field
                             v-model="search"

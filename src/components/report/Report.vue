@@ -41,6 +41,7 @@ export default {
         {text: "Все банки", value: "reportAllBanks"},
         {text: "По Транзакциям", value: "reportTransactions"},
         {text: "По VISA DIRECT", value: "reportVisaDirect"},
+        {text: "По MONEY SEND", value: "reportMoneySend"},
         {text: "По Вкладам", value: "reportDeposit"},
         {text: "По вкладам v2", value: "reportOfDeposit"},
         // {text: "По Кредитам", value: "reportCredit"},
@@ -63,8 +64,6 @@ export default {
         /*{text: "Beeline отчет", value: "ReportBeeline"},
         {text: "Ucell отчет", value: "ReportUcellComponent"},
         {text: "Количество запросов по скорингу", value: "ExternalHistoryStatistic"},*/
-
-
       ]
     }
   },

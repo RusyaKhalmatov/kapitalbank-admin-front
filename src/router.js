@@ -77,6 +77,7 @@ import newPivotTable from "./components/report/newPivotTable";
 import reportOfDeposit from "./components/report/ReportOfDeposit";
 import reportOfCredit from "./components/report/ReportOfCredit";
 import reportVisaDirect from "./components/report/ReportVisaDirect";
+import reportMoneySend from "./components/report/ReportMoneySend";
 
 import eposRevise from "./views/EposRevise.vue"
 import Reverse from './views/Reverse.vue'
@@ -219,6 +220,11 @@ export default new Router({
       path: '/reportVisaDirect',
       name: 'reportVisaDirect',
       component: reportVisaDirect
+    },
+    {
+      path: '/reportMoneySend',
+      name: 'reportMoneySend',
+      component: reportMoneySend
     },
     {
       path: '/socialMedia',

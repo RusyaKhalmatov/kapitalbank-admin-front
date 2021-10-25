@@ -2,13 +2,14 @@
     <v-flex xs12>
         <v-card min-height="600">
             <v-card-title>
-                <h1>Комиссия</h1>
+                <h1>Комиссии</h1>
                 <v-spacer/>
                 <v-btn icon small @click="redirect('commissionForm')">
                     <v-icon small>mdi-plus</v-icon>
                 </v-btn>
+                <v-progress-linear v-if="!commissionData.length" indeterminate color="yellow" ></v-progress-linear>
             </v-card-title>
-            <v-card-text>
+            <v-card-text v-if="commissionData.length">
                 <v-layout column wrap>
                     <v-text-field
                             v-model="search"

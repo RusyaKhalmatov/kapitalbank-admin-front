@@ -2,13 +2,14 @@
     <v-flex xs12>
         <v-card min-height="600">
             <v-card-title>
-                <h1>Messages</h1>
+                <h1>Сообщения ошибок</h1>
                 <v-spacer></v-spacer>
                 <v-btn icon small @click="redirect('messagesForm')">
                     <v-icon small>mdi-plus</v-icon>
                 </v-btn>
+                <v-progress-linear v-if="!messageData.length" indeterminate color="yellow" ></v-progress-linear>
             </v-card-title>
-            <v-card-text>
+            <v-card-text v-if="messageData.length">
                 <v-layout row wrap>
                     <v-text-field
                             v-model="search"
