@@ -3,8 +3,9 @@
     <v-card min-height="600">
       <v-card-title>
         <h1>Операции</h1>
+        <v-progress-linear v-if="!operations.length" indeterminate color="yellow darken-2" ></v-progress-linear>
       </v-card-title>
-      <v-card-text>
+      <v-card-text v-if="operations.length" >
         <v-layout row wrap>
           <v-flex xs12 sm12 md12 lg12 xl12>
             <v-text-field

@@ -1,19 +1,14 @@
 <template>
     <v-layout column wrap>
         <v-card min-height="600">
-            <v-card-title>
-                <h1>Курс валют</h1>
+            <v-card-title> 
+                <h1>Курс валют</h1> 
+                <v-progress-linear v-if="!rates.length" indeterminate color="yellow darken-2" ></v-progress-linear>
             </v-card-title>
-            <v-card-text>
+            <v-card-text v-if="rates.length">
                 <v-layout row wrap>
                     <v-flex xs12 sm12 md12 lg12 xl12>
-                        <v-data-table
-                                :headers="ratesHeaders"
-                                :items="rates"
-                                :loading="loader"
-                                :search="search"
-                                :pagination.sync="pagination"
-                                :item-key="rates.isoCode">
+                        <v-data-table :headers="ratesHeaders" :items="rates" :loading="loader" :search="search" :pagination.sync="pagination" :item-key="rates.isoCode">
                             <template slot="items" slot-scope="props">
                                 <tr @click="props.expanded = !props.expanded">
                                     <td>{{ props.item.iso_code }}</td>

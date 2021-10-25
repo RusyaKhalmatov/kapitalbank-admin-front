@@ -19,8 +19,8 @@
                     </v-flex>
                     <v-layout row wrap>
                         <v-radio-group v-model="banks.operationType" row>
-                            <v-radio key="uzcard2uzcard" label="U2U" value="uzcard2uzcard"/>
-                            <v-radio key="humo2humo" label="H2H" value="humo2humo"/>
+                            <v-radio  key="uzcard2uzcard" label="U2U" value="uzcard2uzcard" />
+                            <v-radio  key="humo2humo" label="H2H" value="humo2humo"/>
                         </v-radio-group>
                     </v-layout>
                     <v-flex xs12 v-if="allBanks.length > 0">
@@ -157,10 +157,15 @@
 </template>
 
 <script>
+    import moment from 'moment';
     import ReportDateTimePicker from "./ReportDateTimePicker";
     import colors from "../../colors";
     import BarChart from "../chart/BarChart";
     import ShowChart from "../chart/ShowChart";
+
+    var d = new Date();
+    const MONTH_AGO_DATE = d.setMonth(d.getMonth() - 1);
+    const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
     export default {
         name: "ReportAllBanks",
@@ -186,9 +191,9 @@
                     descending: true
                 },
                 banks: {
-                    dateStart: null,
-                    dateEnd: (new Date()).toLocaleString(),
-                    operationType: ''
+                    dateEnd: moment().format(DATE_FORMAT),
+                    dateStart: moment(MONTH_AGO_DATE).format(DATE_FORMAT),
+                    operationType: 'uzcard2uzcard'
                 },
                 chartOptions: {
                     maintainAspectRatio: false,
