@@ -3,163 +3,220 @@
     <v-flex xs12>
       <div class="main">
         <v-card-text>
-          <h1 class="mb-3 headline">Отчет Paynet</h1>
+          <h1 class="mb-4 headline">Детализированные отчеты Paynet</h1>
 
-          <v-layout row wrap>
-            <date-component @date="getDate"></date-component>
-            <v-flex xs12>
-              <v-select
-                label="Операции"
-                :items="operationTypes"
-                v-model="operationType"
-                placeholder="Выберите опериции"
-                attach
-                chips
-                multiple>
-                <template v-slot:prepend-item>
-                  <v-list-tile ripple @click="toggle">
-                    <v-list-tile-action>
-                      <v-icon :color="operationType.length > 0 ? 'primary' : ''">{{ icon }}</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                      <v-list-tile-title>Выбрать все</v-list-tile-title>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                  <v-divider class="mt-2"></v-divider>
-                </template>
+          <v-tabs color="#f9ca03" slider-color="black" grow fixed-tabs show-arrows>
+            <v-tab> Общая сумма оплат </v-tab>
+            <v-tab> Оплата провайдера </v-tab>
+            <v-tab> Общее колличество проверок </v-tab>
+            <v-tab> Проверки провайдеров </v-tab>
+            <v-tab> Операции </v-tab>
 
-              </v-select>
-            </v-flex>
-            <!-- <v-flex xs12>
-                <v-btn-toggle multiple v-model="filterToggle" key="all" class="selectedFilter">
-                    <v-btn dark color="primary" @click="selectFilters('all')">Все</v-btn>
-                    <v-btn dark color="accent" v-for="(filterItem,k) in operationTypes" :key="k"
-                        @click="selectFilters(filterItem)">
-                        {{filterItem}}
-                    </v-btn>
-                </v-btn-toggle>
-            </v-flex> -->
-            <!-- <v-flex xs12 class="mt-3">
-                <report-date-time-picker :date-time-start.sync="operation.dateFrom"
-                                        :date-time-end.sync="operation.dateTo">
-                    <v-btn :to="{name: 'clients'}" dark color="primary">Клиенты</v-btn>
-                    <v-btn dark color="primary" @click="load" :loading="loader">Получить</v-btn>
-                </report-date-time-picker>
-            </v-flex> -->
-            <v-flex xs12>
-              <!-- <v-radio-group v-model="operation.operationStatus" row>
-                  <v-radio key="success" label="Success" value="SUCCESS"/>
-                  <v-radio key="failed" label="Failed" value="FAILED"/>
-              </v-radio-group> -->
-              <div class="d-flex flex-wrap checkbox">
-                <v-checkbox v-for="(item,index) in statusData" :key="index" v-model="status" :label="item.value"
-                            :value="item.key"></v-checkbox>
-              </div>
-            </v-flex>
-            <div class="button-box">
-              <v-btn dark color="primary" class="get-btn" @click="load" :loading="loader">Получить</v-btn>
-              <v-btn class="mt-3 excel-btn" :loading="loader" @click="getExcel">Скачать Excel</v-btn>
-              <download-excel
-                v-show="false"
-                id="excel"
-                name="paynet.xls"
-                stringify-long-num
-                :fields="operationExport"
-                :data="excelData">
-                <v-btn icon dark color="secondary">
-                  <v-icon>mdi-file-excel</v-icon>
-                </v-btn>
-              </download-excel>
-            </div>
 
-            <div class="amount-box">
-              <span v-for="(item,key,index) in operationAmount" :key="index" class="amount-box-child">
-                  <h2>{{ item.title }}:</h2>
-                  <span class="d-flex align-center">
-                      <p class="amount-text">UZS:</p>
-                      <p class="amount-value">{{ item.uzs / 100|number-format }}</p>
-                  </span>
-                  <span class="d-flex align-center">
-                      <p class="amount-text">USD:</p>
-                      <p class="amount-value">{{ item.usd / 100|number-format }}</p>
-                  </span>
-              </span>
-              <p class="success-text" v-if="operationAmount.paynetTotal">*Сумма успешных платежей</p>
-            </div>
-            <template v-if="transactions.length !== 0">
-              <div class="dflex">
-                <v-text-field
-                  style="width:500px"
-                  v-model="search"
-                  prepend-icon="mdi-magnify"
-                  label="Поиск">
-                </v-text-field>
-                <v-btn @click="load">Поиск</v-btn>
-              </div>
-            </template>
-            <v-flex xs12 v-if="show">
-              <v-data-table
-                :headers="operationsHeaders"
-                :items="transactions"
-                :loading="loader"
-                :pagination.sync="pagination"
-                item-key="id"
-                hide-actions
-              >
-                <template slot="items" slot-scope="props">
-                  <tr @click="props.expanded = !props.expanded">
-                    <td>{{ props.item.serviceId }}</td>
-                    <td>{{ props.item.serviceName }}</td>
-                    <td>{{ props.item.gatewayName }}</td>
-                    <td>{{ props.item.login.split(":")[0] }}
-                      {{ phoneFormat(props.item.login.split(":")[1]) | timestamp-to-date }}
-                    </td>
-                    <td>{{ props.item.sender }}</td>
-                    <td style="min-width:150px">{{ props.item.amount / 100 | number-format }}
-                      {{ props.item.currency }}
-                    </td>
-                    <td>{{ props.item.feeAmount / 100 | number-format }} {{ props.item.feeCurrency }}</td>
-                    <td>{{ props.item.allFee / 100 | number-format }} {{ props.item.feeCurrency }}</td>
-                    <td>{{ props.item.fee / 100 | number-format }} {{ props.item.feeCurrency }}</td>
+            <v-tab-item transition="fade-transition"> 
+              <v-card flat>
+                <v-card-text>
+                  <p>
+                    Общая сумма оплат
+                  </p>
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
 
-                    <td>{{ props.item.status }}</td>
-                    <td>{{ props.item.details }}</td>
-                    <td>{{ props.item.platform }}</td>
-                    <td>{{ props.item.appVersion }}</td>
-                    <td>{{ props.item.endTime | timestamp-to-date }}</td>
-                    <td>
-                      <v-btn depressed small v-if="props.item.errorInfo" @click="showErrorInfo(props.item.errorInfo)">
-                        Подробнее
-                      </v-btn>
-                    </td>
+            <v-tab-item >
+              <v-card flat>
+                <v-card-text>
+                  <p>
+                    Suspendisse feugiat. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In hac habitasse platea dictumst. Fusce ac felis sit amet ligula pharetra condimentum.
+                  </p>
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
 
-                  </tr>
+            <v-tab-item>
+              <v-card flat>
+                <v-card-text>
+                  <p>
+                    Fusce a quam. Phasellus nec sem in justo pellentesque facilisis. Nam eget dui. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In dui magna, posuere eget, vestibulum et, tempor auctor, justo.
+                  </p>
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
 
-                </template>
-                <template slot="actions-append">
-                  <download-excel
-                    :fields="operationExport"
-                    name="ReportByTransactions"
-                    :data="operationsList.operations">
-                    <v-btn icon dark color="secondary">
-                      <v-icon>mdi-file-excel</v-icon>
-                    </v-btn>
-                  </download-excel>
-                </template>
-                <template slot="actions-prepend">
-                  <show-chart v-model="showCharts"/>
-                </template>
-              </v-data-table>
-              <v-pagination
-                v-if="transactions.length"
-                :disabled="loader"
-                class="center"
-                v-model="page"
-                :length="totalPages"
-                :total-visible="10"
-              ></v-pagination>
-            </v-flex>
-          </v-layout>
+            <v-tab-item>
+              <v-card flat>
+                <v-card-text>
+                  <p>
+                    Fusce a quam. Phasellus nec sem in justo pellentesque facilisis. Nam eget dui. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In dui magna, posuere eget, vestibulum et, tempor auctor, justo.
+                  </p>
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item>
+              <v-card flat>
+                <v-card-text>
+                  <v-layout row wrap>
+
+                    <date-component @date="getDate"></date-component>
+                    <v-flex xs12>
+                      <v-select
+                        label="Операции"
+                        :items="operationTypes"
+                        v-model="operationType"
+                        placeholder="Выберите опериции"
+                        attach
+                        chips
+                        multiple>
+                        <template v-slot:prepend-item>
+                          <v-list-tile ripple @click="toggle">
+                            <v-list-tile-action>
+                              <v-icon :color="operationType.length > 0 ? 'primary' : ''">{{ icon }}</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                              <v-list-tile-title>Выбрать все</v-list-tile-title>
+                            </v-list-tile-content>
+                          </v-list-tile>
+                          <v-divider class="mt-2"></v-divider>
+                        </template>
+
+                      </v-select>
+                    </v-flex>
+                    <!-- <v-flex xs12>
+                        <v-btn-toggle multiple v-model="filterToggle" key="all" class="selectedFilter">
+                            <v-btn dark color="primary" @click="selectFilters('all')">Все</v-btn>
+                            <v-btn dark color="accent" v-for="(filterItem,k) in operationTypes" :key="k"
+                                @click="selectFilters(filterItem)">
+                                {{filterItem}}
+                            </v-btn>
+                        </v-btn-toggle>
+                    </v-flex> -->
+                    <!-- <v-flex xs12 class="mt-3">
+                        <report-date-time-picker :date-time-start.sync="operation.dateFrom"
+                                                :date-time-end.sync="operation.dateTo">
+                            <v-btn :to="{name: 'clients'}" dark color="primary">Клиенты</v-btn>
+                            <v-btn dark color="primary" @click="load" :loading="loader">Получить</v-btn>
+                        </report-date-time-picker>
+                    </v-flex> -->
+                    <v-flex xs12>
+                      <!-- <v-radio-group v-model="operation.operationStatus" row>
+                          <v-radio key="success" label="Success" value="SUCCESS"/>
+                          <v-radio key="failed" label="Failed" value="FAILED"/>
+                      </v-radio-group> -->
+                      <div class="d-flex flex-wrap checkbox">
+                        <v-checkbox v-for="(item,index) in statusData" :key="index" v-model="status" :label="item.value"
+                                    :value="item.key"></v-checkbox>
+                      </div>
+                    </v-flex>
+                    <div class="button-box">
+                      <v-btn dark color="primary" class="get-btn" @click="load" :loading="loader">Получить</v-btn>
+                      <v-btn class="mt-3 excel-btn" :loading="loader" @click="getExcel">Скачать Excel</v-btn>
+                      <download-excel
+                        v-show="false"
+                        id="excel"
+                        name="paynet.xls"
+                        stringify-long-num
+                        :fields="operationExport"
+                        :data="excelData">
+                        <v-btn icon dark color="secondary">
+                          <v-icon>mdi-file-excel</v-icon>
+                        </v-btn>
+                      </download-excel>
+                    </div>
+
+                    <div v-if="operationAmount.length" class="amount-box">
+                      <span v-for="(item,key,index) in operationAmount" :key="index" class="amount-box-child">
+                          <h2>{{ item.title }}:</h2>
+                          <span class="d-flex align-center">
+                              <p class="amount-text">UZS:</p>
+                              <p class="amount-value">{{ item.uzs / 100|number-format }}</p>
+                          </span>
+                          <span class="d-flex align-center">
+                              <p class="amount-text">USD:</p>
+                              <p class="amount-value">{{ item.usd / 100|number-format }}</p>
+                          </span>
+                      </span>
+                      <p class="success-text" v-if="operationAmount.paynetTotal">*Сумма успешных платежей</p>
+                    </div>
+                    <template v-if="transactions.length !== 0">
+                      <div class="dflex">
+                        <v-text-field
+                          style="width:500px"
+                          v-model="search"
+                          prepend-icon="mdi-magnify"
+                          label="Поиск">
+                        </v-text-field>
+                        <v-btn @click="load">Поиск</v-btn>
+                      </div>
+                    </template>
+                    <v-flex xs12 v-if="show">
+                      <v-data-table
+                        :headers="operationsHeaders"
+                        :items="transactions"
+                        :loading="loader"
+                        :pagination.sync="pagination"
+                        item-key="id"
+                        hide-actions
+                      >
+                        <template slot="items" slot-scope="props">
+                          <tr @click="props.expanded = !props.expanded">
+                            <td>{{ props.item.serviceId }}</td>
+                            <td>{{ props.item.serviceName }}</td>
+                            <td>{{ props.item.gatewayName }}</td>
+                            <td>{{ props.item.login.split(":")[0] }}
+                              {{ phoneFormat(props.item.login.split(":")[1]) | timestamp-to-date }}
+                            </td>
+                            <td>{{ props.item.sender }}</td>
+                            <td style="min-width:150px">{{ props.item.amount / 100 | number-format }}
+                              {{ props.item.currency }}
+                            </td>
+                            <td>{{ props.item.feeAmount / 100 | number-format }} {{ props.item.feeCurrency }}</td>
+                            <td>{{ props.item.allFee / 100 | number-format }} {{ props.item.feeCurrency }}</td>
+                            <td>{{ props.item.fee / 100 | number-format }} {{ props.item.feeCurrency }}</td>
+
+                            <td>{{ props.item.status }}</td>
+                            <td>{{ props.item.details }}</td>
+                            <td>{{ props.item.platform }}</td>
+                            <td>{{ props.item.appVersion }}</td>
+                            <td>{{ props.item.endTime | timestamp-to-date }}</td>
+                            <td>
+                              <v-btn depressed small v-if="props.item.errorInfo" @click="showErrorInfo(props.item.errorInfo)">
+                                Подробнее
+                              </v-btn>
+                            </td>
+
+                          </tr>
+
+                        </template>
+                        <template slot="actions-append">
+                          <download-excel
+                            :fields="operationExport"
+                            name="ReportByTransactions"
+                            :data="operationsList.operations">
+                            <v-btn icon dark color="secondary">
+                              <v-icon>mdi-file-excel</v-icon>
+                            </v-btn>
+                          </download-excel>
+                        </template>
+                        <template slot="actions-prepend">
+                          <show-chart v-model="showCharts"/>
+                        </template>
+                      </v-data-table>
+                      <v-pagination
+                        v-if="transactions.length"
+                        :disabled="loader"
+                        class="center"
+                        v-model="page"
+                        :length="totalPages"
+                        :total-visible="10"
+                      ></v-pagination>
+                    </v-flex>
+                  </v-layout>
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+          </v-tabs>
+
         </v-card-text>
       </div>
     </v-flex>
@@ -591,7 +648,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .center {
   display: flex;
   justify-content: center;
@@ -767,5 +824,10 @@ h1 {
 .bg-color {
   background: #efefef !important;
 }
+
+a{
+  color: #000 !important;
+}
+
 
 </style>

@@ -82,6 +82,7 @@
             <a-radio
               v-for="l in v.list"
               :value="l.value"
+              :key="l.value"
             >{{ l.text }}</a-radio>
           </a-radio-group>
         </template>
