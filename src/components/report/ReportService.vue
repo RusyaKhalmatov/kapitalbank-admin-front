@@ -50,7 +50,7 @@
             <v-tab-item :transition="false" :reverseTransition="false">
               <v-card flat>
                 <v-card-text>
-                  <ReportServicePay />
+                  <report-service-pay />
                 </v-card-text>
               </v-card>
             </v-tab-item>
