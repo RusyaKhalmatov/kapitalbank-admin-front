@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h1 class="text-xs-center mb-3 mt-3">Общее колличество проверок провайдеров</h1>
+    <h1 class="text-xs-center mb-3 mt-3">Общее колличество проверок провайдеров_</h1>
     <date-component @date="getDate"></date-component>
+    <report-total amount="2000" label="Количество"/>
   </div>
 </template>
 
@@ -10,9 +11,10 @@ import moment from 'moment';
 import ReportDateTimePicker from './ReportDateTimePicker.vue';
 import { DATE_FORMAT, MONTH_AGO_DATE } from './ReportAllBanks.vue';
 import DateComponent from '../date/DateComponent.vue';
+import ReportTotal from '../../views/ReportTotal.vue';
 
 export default {
-  components: { ReportDateTimePicker, DateComponent },
+  components: { ReportDateTimePicker, DateComponent, ReportTotal },
   name: "ReportServiceProvidersTolal",
   data() {
     return {
