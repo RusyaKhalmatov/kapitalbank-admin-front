@@ -6,18 +6,17 @@
           <h1 class="mb-4 headline">Детализированные отчеты Paynet</h1>
 
           <v-tabs color="#f9ca03" slider-color="black" grow fixed-tabs show-arrows>
-            <v-tab> Общая сумма оплат </v-tab>
-            <v-tab> Оплата провайдера </v-tab>
-            <v-tab> Общее колличество проверок </v-tab>
             <v-tab> Проверки провайдеров </v-tab>
+            <v-tab> Общее колличество проверок </v-tab>
+            <v-tab> Оплата провайдера </v-tab>
+            <v-tab> Общая сумма оплат </v-tab>
+
             <v-tab> Операции </v-tab>
 
-            <v-tab-item> 
+            <v-tab-item>
               <v-card flat>
                 <v-card-text>
-                  <p>
-                    Общая сумма оплат
-                  </p>
+                  <ReportServiceProviders />
                 </v-card-text>
               </v-card>
             </v-tab-item>
@@ -26,7 +25,7 @@
               <v-card flat>
                 <v-card-text>
                   <p>
-                    Suspendisse feugiat. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In hac habitasse platea dictumst. Fusce ac felis sit amet ligula pharetra condimentum.
+                    Общее колличество проверок
                   </p>
                 </v-card-text>
               </v-card>
@@ -36,7 +35,7 @@
               <v-card flat>
                 <v-card-text>
                   <p>
-                    Fusce a quam. Phasellus nec sem in justo pellentesque facilisis. Nam eget dui. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In dui magna, posuere eget, vestibulum et, tempor auctor, justo.
+                    Оплата провайдера
                   </p>
                 </v-card-text>
               </v-card>
@@ -45,9 +44,7 @@
             <v-tab-item>
               <v-card flat>
                 <v-card-text>
-                  <p>
-                    Fusce a quam. Phasellus nec sem in justo pellentesque facilisis. Nam eget dui. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In dui magna, posuere eget, vestibulum et, tempor auctor, justo.
-                  </p>
+                  Общая сумма оплат
                 </v-card-text>
               </v-card>
             </v-tab-item>
@@ -94,10 +91,11 @@ import ShowChart from "../chart/ShowChart";
 import TransactionChart from "../chart/TransactionChart";
 import DateComponent from '@/components/date/DateComponent'
 import ReportServicePay from "@/components/report/ReportServicePay";
+import ReportServiceProviders from './ReportServiceProviders.vue';
 
 export default {
   name: "ReportService",
-  components: {ReportServicePay, ReportDateTimePicker, ShowChart, TransactionChart, DateComponent},
+  components: {ReportDateTimePicker, ShowChart, TransactionChart, DateComponent, ReportServicePay,  ReportServiceProviders},
   data() {
     return {
       search: '',
@@ -240,7 +238,7 @@ export default {
     getStatus() {
       this.$http.get(this.$store.getters.newApiUrl2 + `/report/paynet/status`)
         .then(response => {
-          console.log(response.data.data);
+          // console.log(response.data.data);
           this.statusData = response.data.data;
           response.data.data.forEach(x => {
             this.status.push(x.key);

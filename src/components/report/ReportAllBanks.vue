@@ -164,8 +164,8 @@
     import ShowChart from "../chart/ShowChart";
 
     var d = new Date();
-    const MONTH_AGO_DATE = d.setMonth(d.getMonth() - 1);
-    const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
+    export const MONTH_AGO_DATE = d.setMonth(d.getMonth() - 1);
+    export const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
     export default {
         name: "ReportAllBanks",

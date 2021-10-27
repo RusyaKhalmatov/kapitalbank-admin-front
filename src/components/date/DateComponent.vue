@@ -47,7 +47,7 @@
         <div class="date-box" v-if="isDate">
             <p class="date-text">С {{ fromDate | timestamp-to-date}}</p>
             <p class="date-text">До {{ toDate | timestamp-to-date}}</p>
-        </div>        
+        </div>
         <div class="select-date-box" v-if="isSelect">
             <span class="select-date-box-child">
                 <!-- <v-menu
@@ -165,10 +165,10 @@ export default {
             var endDay = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1, 23, 59,59);
             this.fromDate = begDay.getTime();
             this.toDate = endDay.getTime();
-            // console.log(this.fromDate, ' - ', this.toDate);    
-            this.getData() 
+            // console.log(this.fromDate, ' - ', this.toDate);
+            this.getData()
 
-            // this.getData();                    
+            // this.getData();
         },
         Today(){
             this.isDate = true;
@@ -178,9 +178,9 @@ export default {
             var begDay = new Date(date.getFullYear(), date.getMonth(),date.getDate());
             var endDay = new Date(date.getFullYear(), date.getMonth(),date.getDate(), 23, 59,59)
             this.fromDate = begDay.getTime();
-            this.toDate = endDay.getTime();   
-            // this.getData();       
-            this.getData() 
+            this.toDate = endDay.getTime();
+            // this.getData();
+            this.getData()
         },
         LastMonth(){
             this.active = 'btn3';
@@ -191,9 +191,9 @@ export default {
             this.fromDate = firstDay.getTime();
             var endDay = new Date(date.getFullYear(), date.getMonth(), 0, 23, 59, 59);
             this.toDate = endDay.getTime();
-            this.getData() 
+            this.getData()
 
-            // this.getData();                                
+            // this.getData();
         },
         Month(){
             this.active = 'btn4';
@@ -205,9 +205,9 @@ export default {
 
             this.fromDate = firstDay.getTime();
             this.toDate = endDay.getTime();
-            this.getData() 
+            this.getData()
 
-            // this.getData();        
+            // this.getData();
 
         },
         All(){
@@ -230,7 +230,7 @@ export default {
             this.fromDate = begTime.getTime();
             this.toDate = endTime.getTime();
             console.log(this.date2, ' - ', this.date1)
-        }, 
+        },
         getData(){
             let self = this;
             self.data = [];
@@ -250,7 +250,7 @@ export default {
 
 
             // }, self.handleError);
-        }       
+        }
     },
     mounted(){
         this.Today();
@@ -286,7 +286,8 @@ export default {
         border-radius: 28px;
     }
     .active-btn {
-        background: #fbc100 !important;
+        background: rgb(249, 202, 3) !important;
+        color: #000 !important;
     }
     .active-select-btn{
         background:#f3d559 !important;

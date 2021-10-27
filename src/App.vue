@@ -75,7 +75,7 @@
     methods: {
       // ...mapActions(['getLanguageList']) COMMENT
 
-      // loadUser() { 
+      // loadUser() {
       //     let self = this;
       //     self.$http.get(self.$store.getters.newApiUrl + `/user`).then(response => {
       //       const {firstName, lastName, phoneNumber} = response.data.data;
@@ -86,13 +86,13 @@
       // } COMMENT
     },
     mounted() {
-      // this.registerDevice() 
+      // this.registerDevice()
       //   .then(() => {
       //     this.getLanguageList()
       //       .catch(err => this.handleError(err))
       //   }) COMMENT
       if (this.$route.name !== 'login') {
-        console.log("TESTING....", self.userName)
+        // console.log("TESTING....", self.userName)
       }
 
       // if (!self.userName && !self.$store.deviceId) {

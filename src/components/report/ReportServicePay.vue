@@ -307,7 +307,7 @@ export default {
     getStatus() {
       this.$http.get(this.$store.getters.newApiUrl2 + `/report/paynet/status`)
         .then(response => {
-          console.log(response.data.data);
+          // console.log(response.data.data);
           this.statusData = response.data.data;
           response.data.data.forEach(x => {
             this.status.push(x.key);
