@@ -1,103 +1,170 @@
 <template>
-  <v-layout column wrap>
-    <v-flex xs12>
-      <div class="main">
-        <v-card-text>
-          <h1 class="mb-4 headline">Детализированные отчеты Paynet</h1>
+    <v-layout row wrap>
+        <date-component @date="getDate"></date-component>
+            <v-flex xs12>
+                <v-select
+                label="Операции"
+                :items="operationTypes"
+                v-model="operationType"
+                placeholder="Выберите опериции"
+                attach
+                chips
+                multiple>
+                <template v-slot:prepend-item>
+                    <v-list-tile ripple @click="toggle">
+                    <v-list-tile-action>
+                        <v-icon :color="operationType.length > 0 ? 'primary' : ''">{{ icon }}</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>Выбрать все</v-list-tile-title>
+                    </v-list-tile-content>
+                    </v-list-tile>
+                    <v-divider class="mt-2"></v-divider>
+                </template>
 
-          <v-tabs color="#f9ca03" slider-color="black" grow fixed-tabs show-arrows>
-            <v-tab> Общая сумма оплат </v-tab>
-            <v-tab> Оплата провайдера </v-tab>
-            <v-tab> Общее колличество проверок </v-tab>
-            <v-tab> Проверки провайдеров </v-tab>
-            <v-tab> Операции </v-tab>
+                </v-select>
+            </v-flex>
+            <!-- <v-flex xs12>
+                <v-btn-toggle multiple v-model="filterToggle" key="all" class="selectedFilter">
+                    <v-btn dark color="primary" @click="selectFilters('all')">Все</v-btn>
+                    <v-btn dark color="accent" v-for="(filterItem,k) in operationTypes" :key="k"
+                        @click="selectFilters(filterItem)">
+                        {{filterItem}}
+                    </v-btn>
+                </v-btn-toggle>
+            </v-flex> -->
+            <!-- <v-flex xs12 class="mt-3">
+                <report-date-time-picker :date-time-start.sync="operation.dateFrom"
+                                        :date-time-end.sync="operation.dateTo">
+                    <v-btn :to="{name: 'clients'}" dark color="primary">Клиенты</v-btn>
+                    <v-btn dark color="primary" @click="load" :loading="loader">Получить</v-btn>
+                </report-date-time-picker>
+            </v-flex> -->
+            <v-flex xs12>
+                <!-- <v-radio-group v-model="operation.operationStatus" row>
+                    <v-radio key="success" label="Success" value="SUCCESS"/>
+                    <v-radio key="failed" label="Failed" value="FAILED"/>
+                </v-radio-group> -->
+                <div class="d-flex flex-wrap checkbox">
+                <v-checkbox v-for="(item,index) in statusData" :key="index" v-model="status" :label="item.value"
+                            :value="item.key"></v-checkbox>
+                </div>
+            </v-flex>
+            <div class="button-box">
+                <v-btn dark color="primary" class="get-btn" @click="load" :loading="loader">Получить</v-btn>
+                <v-btn class="mt-3 excel-btn" :loading="loader" @click="getExcel">Скачать Excel</v-btn>
+                <download-excel
+                v-show="false"
+                id="excel"
+                name="paynet.xls"
+                stringify-long-num
+                :fields="operationExport"
+                :data="excelData">
+                <v-btn icon dark color="secondary">
+                    <v-icon>mdi-file-excel</v-icon>
+                </v-btn>
+                </download-excel>
+            </div>
 
-            <v-tab-item> 
-              <v-card flat>
-                <v-card-text>
-                  <p>
-                    Общая сумма оплат
-                  </p>
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-
-            <v-tab-item >
-              <v-card flat>
-                <v-card-text>
-                  <p>
-                    Suspendisse feugiat. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In hac habitasse platea dictumst. Fusce ac felis sit amet ligula pharetra condimentum.
-                  </p>
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-
-            <v-tab-item>
-              <v-card flat>
-                <v-card-text>
-                  <p>
-                    Fusce a quam. Phasellus nec sem in justo pellentesque facilisis. Nam eget dui. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In dui magna, posuere eget, vestibulum et, tempor auctor, justo.
-                  </p>
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-
-            <v-tab-item>
-              <v-card flat>
-                <v-card-text>
-                  <p>
-                    Fusce a quam. Phasellus nec sem in justo pellentesque facilisis. Nam eget dui. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In dui magna, posuere eget, vestibulum et, tempor auctor, justo.
-                  </p>
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-
-            <v-tab-item>
-              <v-card flat>
-                <v-card-text>
-                  <ReportServicePay />
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-          </v-tabs>
-
-        </v-card-text>
-      </div>
-    </v-flex>
-    <v-dialog v-model="errorDialog" persistent max-width="950">
-      <v-card>
-        <v-card-title class="headline">Устройства</v-card-title>
-        <v-card-text>
-          <v-data-table :pagination.sync="pagination" :items="errorInfo" :headers="dialogHeaders">
-            <template slot="items" slot-scope="props">
-              <tr>
-                <td>{{ props.item.response }}</td>
-                <td>{{ props.item.transactionStatus }}</td>
-                <td>{{ props.item.transactionType }}</td>
-                <td>{{ props.item.dateTime | timestamp-to-date }}</td>
-              </tr>
+            <div v-if="operationAmount.length" class="amount-box">
+                <span v-for="(item,key,index) in operationAmount" :key="index" class="amount-box-child">
+                    <h2>{{ item.title }}:</h2>
+                    <span class="d-flex align-center">
+                        <p class="amount-text">UZS:</p>
+                        <p class="amount-value">{{ item.uzs / 100|number-format }}</p>
+                    </span>
+                    <span class="d-flex align-center">
+                        <p class="amount-text">USD:</p>
+                        <p class="amount-value">{{ item.usd / 100|number-format }}</p>
+                    </span>
+                </span>
+                <p class="success-text" v-if="operationAmount.paynetTotal">*Сумма успешных платежей</p>
+            </div>
+            <template v-if="transactions.length !== 0">
+                <div class="dflex">
+                <v-text-field
+                    style="width:500px"
+                    v-model="search"
+                    prepend-icon="mdi-magnify"
+                    label="Поиск">
+                </v-text-field>
+                <v-btn @click="load">Поиск</v-btn>
+                </div>
             </template>
-          </v-data-table>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn depressed text @click="errorDialog = false">Закрыть</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-layout>
+            <v-flex xs12 v-if="show">
+                <v-data-table
+                :headers="operationsHeaders"
+            :items="transactions"
+            :loading="loader"
+            :pagination.sync="pagination"
+            item-key="id"
+            hide-actions
+            >
+            <template slot="items" slot-scope="props">
+                <tr @click="props.expanded = !props.expanded">
+                <td>{{ props.item.serviceId }}</td>
+                <td>{{ props.item.serviceName }}</td>
+                <td>{{ props.item.gatewayName }}</td>
+                <td>{{ props.item.login.split(":")[0] }}
+                    {{ phoneFormat(props.item.login.split(":")[1]) | timestamp-to-date }}
+                </td>
+                <td>{{ props.item.sender }}</td>
+                <td style="min-width:150px">{{ props.item.amount / 100 | number-format }}
+                    {{ props.item.currency }}
+                </td>
+                <td>{{ props.item.feeAmount / 100 | number-format }} {{ props.item.feeCurrency }}</td>
+                <td>{{ props.item.allFee / 100 | number-format }} {{ props.item.feeCurrency }}</td>
+                <td>{{ props.item.fee / 100 | number-format }} {{ props.item.feeCurrency }}</td>
+
+                <td>{{ props.item.status }}</td>
+                <td>{{ props.item.details }}</td>
+                <td>{{ props.item.platform }}</td>
+                <td>{{ props.item.appVersion }}</td>
+                <td>{{ props.item.endTime | timestamp-to-date }}</td>
+                <td>
+                    <v-btn depressed small v-if="props.item.errorInfo" @click="showErrorInfo(props.item.errorInfo)">
+                    Подробнее
+                    </v-btn>
+                </td>
+
+                </tr>
+
+            </template>
+            <template slot="actions-append">
+                <download-excel
+                :fields="operationExport"
+                name="ReportByTransactions"
+                :data="operationsList.operations">
+                <v-btn icon dark color="secondary">
+                    <v-icon>mdi-file-excel</v-icon>
+                </v-btn>
+                </download-excel>
+            </template>
+            <template slot="actions-prepend">
+                <show-chart v-model="showCharts"/>
+            </template>
+            </v-data-table>
+            <v-pagination
+            v-if="transactions.length"
+            :disabled="loader"
+            class="center"
+            v-model="page"
+            :length="totalPages"
+            :total-visible="10"
+            ></v-pagination>
+        </v-flex>
+    </v-layout>
 </template>
 
 <script>
 import ReportDateTimePicker from "./ReportDateTimePicker";
 import ShowChart from "../chart/ShowChart";
 import TransactionChart from "../chart/TransactionChart";
-import DateComponent from '@/components/date/DateComponent'
-import ReportServicePay from "@/components/report/ReportServicePay";
+import DateComponent from '@/components/date/DateComponent';
 
 export default {
-  name: "ReportService",
-  components: {ReportServicePay, ReportDateTimePicker, ShowChart, TransactionChart, DateComponent},
+  name: "ReportServicePay",
+  components: { ReportDateTimePicker, ShowChart, TransactionChart, DateComponent},
   data() {
     return {
       search: '',
@@ -488,190 +555,7 @@ export default {
   mounted() {
     this.getTypeOperations();
     this.getStatus();
+    // this.loadReports(1);
   }
 }
 </script>
-
-<style>
-.center {
-  display: flex;
-  justify-content: center;
-  margin: 15px;
-}
-
-.main {
-  width: 100%;
-}
-
-.headline {
-  text-align: center;
-}
-
-.selectedFilter {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.get-btn {
-  border-radius: 20px;
-}
-
-.checkbox {
-  background: #fff;
-  padding: 0 10px;
-  border-radius: 15px;
-  margin: 15px 0;
-  flex-wrap: wrap;
-}
-
-.v-item-group {
-  flex-wrap: wrap !important;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.epos-box {
-  margin: auto;
-}
-
-/* hr{
-    display: none;
-    height: 1px;
-    border: none;
-    background: #c4c4c4;
-} */
-.new {
-  display: block;
-  margin: 20px 0;
-  background: white;
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  margin: 15px;
-  flex-wrap: wrap;
-}
-
-.excel-btn {
-  border-radius: 29px;
-  background: #3d9c3d !important;
-  color: #FFFF !important;
-  margin: 20px 0;
-}
-
-.success-text {
-  position: absolute;
-  margin: -15px;
-  font-style: italic;
-  color: #7b7b7b;
-}
-
-.amount-text {
-  margin: 0;
-  font-style: italic;
-  font-size: 16px;
-}
-
-.dflex {
-  display: flex;
-}
-
-.amount-value {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0 7px;
-}
-
-.amount-box {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  flex-wrap: wrap;
-  margin: 10px 0 25px 0;
-}
-
-.amount-box-child {
-  padding: 10px 20px;
-  border: 1px solid silver;
-  border-radius: 17px;
-  margin: 10px 20px;
-}
-
-.epos-content {
-  height: 500px;
-  overflow: auto;
-}
-
-.button-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  align-items: center;
-  margin: 10px;
-}
-
-.v-btn {
-  margin: 5px 10px 5px 0px !important;
-
-}
-
-@media only screen and (max-width: 820px) {
-  .v-btn {
-    margin: 5px 10px 5px 0px !important;
-
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  /* hr{
-      display: block;
-      height: 1px;
-      border: none;
-      background: #c4c4c4;
-  } */
-}
-
-.right {
-  margin-right: 50px;
-}
-
-.column {
-  flex-direction: column;
-}
-
-.amount-box-child {
-  width: 310px;
-}
-
-h1 {
-  margin-bottom: 5px;
-}
-
-.dialog-text {
-  width: 200px;
-  margin: 10px;
-}
-
-.dialog {
-  text-align: center;
-  padding: 0;
-}
-
-.dialog-header {
-  background: #eadaa0;
-  padding: 16px;
-  flex-wrap: nowrap;
-}
-
-.bg-color {
-  background: #efefef !important;
-}
-
-a{
-  color: #000 !important;
-}
-
-
-</style>
