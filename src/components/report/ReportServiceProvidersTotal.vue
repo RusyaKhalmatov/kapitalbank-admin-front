@@ -33,6 +33,7 @@ export default {
   name: "ReportServiceProvidersTolal",
   data() {
     return {
+      apiUrl: '',
       operation: {
         dateEnd: moment().format(DATE_FORMAT),
         dateStart: moment(MONTH_AGO_DATE).format(DATE_FORMAT),
@@ -47,12 +48,15 @@ export default {
     }
   },
   methods: {
+    showEnvVariable() {
+      console.log('env = ', process.env.TZ)
+    },
     showErrorInfo(item) {
       this.errorInfo = item;
       this.errorDialog = true;
     },
     loadAmount() {
-      this.$http.get(this.$store.getters.reportApiUrl + '/report/check-service/amount?userId=' + this.$store.getters.userId)
+      this.$http.get(this.apiUrl)
         .then(response => {
           this.operationAmount = response.data.data.totalAmount;
           console.log('amount', response.data.data);
@@ -66,6 +70,13 @@ export default {
       this.show = false;
       this.operationAmount = {}
       console.log('this.date = ', this.date);
+    }
+  },
+  mounted: function() {
+    if(process.env.NODE_ENV !== 'development'){
+      this.apiUrl = this.$store.getters.reportApiUrl + '/report/check-service/amount?userId=' + this.$store.getters.userId;
+    } else {
+      this.apiUrl = './reportDemoData/reportServiceProvider.json';
     }
   }
 };
