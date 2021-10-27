@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-xs-center mb-3 mt-3">Информация по провайдерам</h1>
+    <h1 class="text-xs-center mb-3 mt-3">Общее колличество проверок провайдеров</h1>
     <date-component @date="getDate"></date-component>
   </div>
 </template>
@@ -13,7 +13,7 @@ import DateComponent from '../date/DateComponent.vue';
 
 export default {
   components: { ReportDateTimePicker, DateComponent },
-  name: "ReportServiceProviders",
+  name: "ReportServiceProvidersTolal",
   data() {
     return {
       operation: {

@@ -185,13 +185,7 @@ export default {
       },
       status: [],
       show: false,
-      maskedFilters: [
-        'UZCARD',
-        'HUMO',
-        'VISA',
-        'Кошелек',
-        'Вклад'
-      ],
+      maskedFilters: [ 'UZCARD', 'HUMO', 'VISA', 'Кошелек', 'Вклад' ],
       dialogHeaders: [
         {text: "Ответ", value: "response"},
         {text: "Статус транзакции", value: "transactionStatus"},
@@ -230,15 +224,12 @@ export default {
         {text: "Верхняя комиссия", value: "feeAmount"},
         {text: "Общая комиссия", value: "allFee"},
         {text: "Чистая комиссия", value: "fee"},
-
         {text: "Статус", value: "status"},
         {text: "Детали", value: "details"},
         {text: "Платформа", value: "platform"},
         {text: "Версия", value: "appVersion"},
         {text: "Дата и время оплаты", value: "endTime"},
         {text: "Ошибки", value: "errorInfo"},
-
-
       ],
       excelHeaders: [
         {text: "ID  сервиса", value: "serviceId"},
@@ -320,10 +311,8 @@ export default {
       self.$http.get(self.$store.getters.newApiUrl2 + '/report/paynet/operation_type')
         .then(response => {
           self.operationTypes = response.data.data;
-          this.operationType = self.operationTypes
-          this.selectFilters('all')
-
-
+          this.operationType = self.operationTypes;
+          this.selectFilters('all');
         }, self.handleError);
     },
     selectFilters(template) {
@@ -531,12 +520,10 @@ export default {
       }
     },
     status(val) {
-
       this.transactions = [];
       this.totalPages = '';
       this.show = false;
       this.operationAmount = {}
-
     },
     search() {
       if (!val) {
@@ -548,9 +535,7 @@ export default {
       this.totalPages = '';
       this.show = false;
       this.operationAmount = {}
-
     }
-
   },
   mounted() {
     this.getTypeOperations();

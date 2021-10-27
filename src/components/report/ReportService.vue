@@ -13,7 +13,7 @@
 
             <v-tab> Операции </v-tab>
 
-            <v-tab-item>
+            <v-tab-item :transition="false" :reverseTransition="false">
               <v-card flat>
                 <v-card-text>
                   <ReportServiceProviders />
@@ -21,17 +21,15 @@
               </v-card>
             </v-tab-item>
 
-            <v-tab-item >
+            <v-tab-item :transition="false" :reverseTransition="false">
               <v-card flat>
                 <v-card-text>
-                  <p>
-                    Общее колличество проверок
-                  </p>
+                  <report-service-providers-total />
                 </v-card-text>
               </v-card>
             </v-tab-item>
 
-            <v-tab-item>
+            <v-tab-item :transition="false" :reverseTransition="false">
               <v-card flat>
                 <v-card-text>
                   <p>
@@ -41,7 +39,7 @@
               </v-card>
             </v-tab-item>
 
-            <v-tab-item>
+            <v-tab-item :transition="false" :reverseTransition="false">
               <v-card flat>
                 <v-card-text>
                   Общая сумма оплат
@@ -49,7 +47,7 @@
               </v-card>
             </v-tab-item>
 
-            <v-tab-item>
+            <v-tab-item :transition="false" :reverseTransition="false">
               <v-card flat>
                 <v-card-text>
                   <ReportServicePay />
@@ -92,10 +90,11 @@ import TransactionChart from "../chart/TransactionChart";
 import DateComponent from '@/components/date/DateComponent'
 import ReportServicePay from "@/components/report/ReportServicePay";
 import ReportServiceProviders from './ReportServiceProviders.vue';
+import ReportServiceProvidersTotal from './ReportServiceProvidersTotal.vue';
 
 export default {
   name: "ReportService",
-  components: {ReportDateTimePicker, ShowChart, TransactionChart, DateComponent, ReportServicePay,  ReportServiceProviders},
+  components: {ReportDateTimePicker, ShowChart, TransactionChart, DateComponent, ReportServicePay,  ReportServiceProviders, ReportServiceProvidersTotal},
   data() {
     return {
       search: '',
@@ -671,5 +670,8 @@ a{
   color: #000 !important;
 }
 
-
+.v-pagination{
+  width: 100%;
+  padding-top: 20px !important;
+}
 </style>
