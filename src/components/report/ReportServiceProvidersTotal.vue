@@ -5,7 +5,18 @@
     <div class="button-box">
       <v-btn dark color="primary" class="get-btn" @click="loadAmount" :loading="loader">Получить</v-btn>
     </div>
-     <report-total v-if="operationAmount" :amount="operationAmount" label="Количество"/>
+
+    <v-data-table
+      :headers="headers"
+      :items="desserts"
+      class="elevation-1"
+    >
+      <template v-slot:items="props">
+        <td>{{ props.item.providerName }}</td>
+        <td>{{ props.item.numberOfChecks }}</td>
+      </template>
+    </v-data-table>
+
   </div>
 </template>
 
@@ -16,17 +27,29 @@ import ReportTotal from '../../views/ReportTotal.vue';
 import json from './reportMockData/reportServiceProvider.json';
 import store from '../../store';
 
-
 export default {
   components: { ReportDateTimePicker, DateComponent, ReportTotal },
   name: "ReportServiceProvidersTolal",
   data() {
     return {
-      operationAmount: "",
       data: {
         dateFrom: null,
         dateTo: null,
       },
+       headers: [
+          {text: "Имя провайдера", value: "providerName"},
+          {text: "Колличество проверок", value: "numberOfChecks"}
+        ],
+        desserts: [
+          {
+            providerName: 'Frozen Yogurt',
+            numberOfChecks: 159
+          },
+          {
+            providerName: 'Ice cream sandwich',
+            numberOfChecks: 237
+          }
+        ]
     }
   },
   methods: {
@@ -37,13 +60,14 @@ export default {
         //   'Content-Type': 'application/json',
         //   'token': '______' + this.$store.getters.token
         // };
+        const baseUrl = '/psb'
         this.$http.post(
-          this.$store.getters.reportApiUrl + '/report/check-service/amount?userId=' + this.$store.getters.userId,
+          baseUrl + '/api/report/check-service/amount?userId=4'/*  + this.$store.getters.userId */,
           this.data/* ,  {headers} */
         )
           .then(response => {
-            this.operationAmount = response.data.data.totalAmount;
-            console.log('amount', response.data.data.totalAmount);
+            this.desserts = response.data.data;
+            console.log('amount', response.data.data);
           }, this.handleError);
       // }
     },

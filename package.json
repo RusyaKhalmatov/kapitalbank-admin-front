@@ -15,6 +15,7 @@
     "cookies": "^0.7.3",
     "core-js": "^2.6.10",
     "fingerprintjs2": "^2.1.0",
+    "http-proxy-middleware": "^2.0.1",
     "js-base64": "^2.5.2",
     "luxon": "^1.25.0",
     "material-design-icons-iconfont": "^5.0.1",
