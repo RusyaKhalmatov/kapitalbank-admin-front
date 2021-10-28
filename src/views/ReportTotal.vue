@@ -1,8 +1,8 @@
 <template>
   <div class="reportTotal__wrap">
     <div class="reportTotal">
-      <div class="reportTotal__label"> {{label}} :</div>
-      <div class="reportTotal__total"> {{amount}} </div>
+      <span class="reportTotal__label"> {{label}} :</span>
+      <span class="reportTotal__total"> {{amount}} </span>
     </div>
   </div>
 </template>
@@ -10,16 +10,7 @@
 <script>
 export default {
   name: 'ReportTotal',
-  props: {
-    label: {
-      type: String,
-      required: true
-    },
-    amount: {
-      type: String,
-      required: true
-    },
-  }
+  props: ['label', 'amount']
 }
 </script>
 

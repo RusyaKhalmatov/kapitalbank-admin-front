@@ -82,9 +82,19 @@ Vue.config.productionTip = false;
 
 Vue.http.headers.common['Content-Type'] = 'application/json'
 Vue.http.headers.common['token'] = store.getters.token;
-Vue.http.headers.common['device-id'] = store.getters.deviceId;
-Vue.http.headers.common['app-version'] = store.getters.appVersion;
-Vue.http.headers.common['lang'] = 'ru'
+// Vue.http.headers.common['device-id'] = store.getters.deviceId;
+// Vue.http.headers.common['app-version'] = store.getters.appVersion;
+// Vue.http.headers.common['lang'] = 'ru'
+
+Vue.http.interceptors.push(function(request, next) {
+  const isАpi5Url = request.url.includes("192.168.132.5");
+  if (!isАpi5Url){
+    request.headers.set('device-id', store.getters.deviceId);
+    request.headers.set('app-version', store.getters.appVersion);
+    request.headers.set('lang', 'ru');
+  }
+  next();
+});
 
 // var uname = 'AVtO_L0aN_8f234_Ssmeiq';
 // var pass = '&*sk92jf8.1521aydd3810bx742n54kiygh2';

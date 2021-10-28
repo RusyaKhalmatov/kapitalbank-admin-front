@@ -80,6 +80,7 @@
                 </span>
                 <p class="success-text" v-if="operationAmount.paynetTotal">*Сумма успешных платежей</p>
             </div>
+
             <template v-if="transactions.length !== 0">
                 <div class="dflex">
                 <v-text-field
@@ -91,15 +92,19 @@
                 <v-btn @click="load">Поиск</v-btn>
                 </div>
             </template>
+
             <v-flex xs12 v-if="show">
                 <v-data-table
-                :headers="operationsHeaders"
-            :items="transactions"
-            :loading="loader"
-            :pagination.sync="pagination"
-            item-key="id"
-            hide-actions
-            >
+                  :headers="operationsHeaders"
+                  :items="transactions"
+                  :loading="loader"
+                  :pagination.sync="pagination"
+                  item-key="id"
+                  hide-actions
+                >
+
+
+
             <template slot="items" slot-scope="props">
                 <tr @click="props.expanded = !props.expanded">
                 <td>{{ props.item.serviceId }}</td>

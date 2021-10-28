@@ -41,7 +41,6 @@ export default {
       this.amountData = [];
       this.show = false;
       this.operationAmount = {}
-      console.log('this.date = ', this.date);
     }
   }
 };

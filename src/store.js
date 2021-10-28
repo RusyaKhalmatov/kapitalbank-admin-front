@@ -201,7 +201,7 @@ export default new Vuex.Store({
     },
     deviceId(state, deviceId) {
       state.deviceId = deviceId;
-      Vue.http.headers.common['device-id'] = deviceId;
+      // Vue.http.headers.common['device-id'] = deviceId;
       if (deviceId) {
         window.localStorage.setItem('deviceId', deviceId);
       } else {
