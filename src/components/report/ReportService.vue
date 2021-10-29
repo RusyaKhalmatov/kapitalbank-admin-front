@@ -32,9 +32,7 @@
             <v-tab-item :transition="false" :reverseTransition="false">
               <v-card flat>
                 <v-card-text>
-                  <p>
-                    Оплата провайдера
-                  </p>
+                  <report-service-provider-payment />
                 </v-card-text>
               </v-card>
             </v-tab-item>
@@ -42,7 +40,7 @@
             <v-tab-item :transition="false" :reverseTransition="false">
               <v-card flat>
                 <v-card-text>
-                  Общая сумма оплат
+                  <report-service-providers-total />
                 </v-card-text>
               </v-card>
             </v-tab-item>
@@ -91,10 +89,11 @@ import DateComponent from '@/components/date/DateComponent'
 import ReportServicePay from "@/components/report/ReportServicePay";
 import ReportServiceProviders from './ReportServiceProviders.vue';
 import ReportServiceProvidersTotal from './ReportServiceProvidersTotal.vue';
+import ReportServiceProviderPayment from './ReportServiceProviderPayment.vue';
 
 export default {
   name: "ReportService",
-  components: {ReportDateTimePicker, ShowChart, TransactionChart, DateComponent, ReportServicePay,  ReportServiceProviders, ReportServiceProvidersTotal},
+  components: {ReportDateTimePicker, ShowChart, TransactionChart, DateComponent, ReportServicePay,  ReportServiceProviders, ReportServiceProvidersTotal, ReportServiceProviderPayment},
   data() {
     return {
       search: '',

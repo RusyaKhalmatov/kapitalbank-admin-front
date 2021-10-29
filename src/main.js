@@ -88,13 +88,16 @@ Vue.http.headers.common['token'] = store.getters.token;
 
 Vue.http.interceptors.push(function(request, next) {
   // console.log('request_URL = ', request.url);
-  const isАpi5Url = request.url.includes("report/check-service");
-  if (!isАpi5Url){
+  const isАpi5CheckServiceUrl = request.url.includes("report/check-service");
+  const isАpi5CheckPaymentsUrl = request.url.includes("report/amount");
+  const isАpi5CheckPaymentsTotalUrl = request.url.includes("report/total-sum");
+
+  if (isАpi5CheckServiceUrl || isАpi5CheckPaymentsUrl || isАpi5CheckPaymentsTotalUrl){
+    request.headers.set('token', '44561b2c-ceac-46d8-a8b5-9123ddb6856d');
+  } else {
     request.headers.set('device-id', store.getters.deviceId);
     request.headers.set('app-version', store.getters.appVersion);
     request.headers.set('lang', 'ru');
-  } else {
-    request.headers.set('token', '44561b2c-ceac-46d8-a8b5-9123ddb6856d');
   }
   next();
 });

@@ -16,7 +16,8 @@
     >
       <template v-slot:items="props">
         <td>{{ props.item.providerName }}</td>
-        <td>{{ props.item.numberOfChecks }}</td>
+        <td>{{ props.item.numberOfPayments }}</td>
+        <td>{{ props.item.commonSum }}</td>
       </template>
     </v-data-table>
 
@@ -26,29 +27,29 @@
 <script>
 import ReportDateTimePicker from './ReportDateTimePicker.vue';
 import DateComponent from '../date/DateComponent.vue';
-import ReportTotal from '../../views/ReportTotal.vue';
 
 export default {
-  components: { ReportDateTimePicker, DateComponent, ReportTotal },
-  name: "ReportServiceProviders",
+  components: { ReportDateTimePicker, DateComponent },
+  name: "ReportServiceProviderPayment",
   data() {
     return {
       data: {
         dateFrom: null,
         dateTo: null,
       },
-       headers: [
-          {text: "Имя провайдера", value: "providerName"},
-          {text: "Колличество проверок", value: "numberOfChecks"}
-        ],
-        desserts: []
+      headers: [
+        {text: "Имя провайдера", value: "providerName"},
+        {text: "Колличество платежей", value: "numberOfPayments"},
+        {text: "Общая сумма", value: "commonSum"}
+      ],
+      desserts: []
     }
   },
   methods: {
     loadAmount() {
       const baseUrl = '/psb'
         this.$http.post(
-          baseUrl + '/api/report/check-service/amount?userId=4'/*  + this.$store.getters.userId */,
+          baseUrl + '/api/report/amount?userId=4'/*  + this.$store.getters.userId */,
           this.data
         )
         .then(response => {
