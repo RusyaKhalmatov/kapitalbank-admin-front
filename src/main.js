@@ -87,7 +87,7 @@ Vue.http.headers.common['token'] = store.getters.token;
 // Vue.http.headers.common['lang'] = 'ru'
 
 Vue.http.interceptors.push(function(request, next) {
-  console.log('request_URL = ', request.url);
+  // console.log('request_URL = ', request.url);
   const isАpi5Url = request.url.includes("report/check-service");
   if (!isАpi5Url){
     request.headers.set('device-id', store.getters.deviceId);

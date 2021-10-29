@@ -45,8 +45,8 @@
             >Настройка</v-btn>
         </div>
         <div class="date-box" v-if="isDate">
-            <p class="date-text">С {{ fromDate | timestamp-to-date}}</p>
-            <p class="date-text">До {{ toDate | timestamp-to-date}}</p>
+          <p class="date-text">С {{ fromDate | timestamp-to-date}}</p>
+          <p class="date-text">До {{ toDate | timestamp-to-date}}</p>
         </div>
         <div class="select-date-box" v-if="isSelect">
             <span class="select-date-box-child">
@@ -187,13 +187,11 @@ export default {
             this.isDate = true;
             this.isSelect = false;
             var date = new Date();
-            var firstDay = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+            var firstDay = new Date(date.getFullYear(), date.getMonth() - 1, 1, 0, 0);
             this.fromDate = firstDay.getTime();
             var endDay = new Date(date.getFullYear(), date.getMonth(), 0, 23, 59, 59);
             this.toDate = endDay.getTime();
-            this.getData()
-
-            // this.getData();
+            this.getData();
         },
         Month(){
             this.active = 'btn4';
@@ -205,17 +203,18 @@ export default {
 
             this.fromDate = firstDay.getTime();
             this.toDate = endDay.getTime();
-            this.getData()
-
-            // this.getData();
-
+            this.getData();
         },
         All(){
             this.active = 'btn5';
-            this.isDate = false;
+            this.isDate = true;
             this.isSelect = false;
-            this.fromDate = '';
-            this.toDate = '';
+            var firstDay = new Date('2020', '00', '01')
+            var date = new Date();
+            const firstDate = new Date(firstDay.getFullYear(), firstDay.getMonth(),firstDay.getDate());
+            const secondDate = new Date(date.getFullYear(), date.getMonth(),date.getDate());
+            this.fromDate = firstDate.getTime();
+            this.toDate = secondDate.getTime();
             this.getData();
         },
         getSettings(){

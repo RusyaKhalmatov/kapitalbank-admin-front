@@ -4,12 +4,9 @@ module.exports = {
   devServer: {
    proxy: {
       '/api': {
-        target: 'http://192.168.132.5:7072', // http://191.168.6.78:19191/courses/php/get_courses.php
-        // ws: true,
+        target: 'http://192.168.132.5:7072',
         changeOrigin: true,
-        logLevel: 'debug',
-        // cookieDomainRewrite: "localhost",
-        // secure: false
+        // logLevel: 'debug',
         pathRewrite: { '^/psb': ''  },
       }
     },

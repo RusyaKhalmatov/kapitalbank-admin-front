@@ -1,46 +1,64 @@
 <template>
   <div>
     <h1 class="text-xs-center mb-3 mt-3">Информация по провайдерам</h1>
+
     <date-component @date="getDate"></date-component>
+
+    <div class="button-box">
+      <v-btn dark color="primary" class="get-btn" @click="loadAmount" :loading="loader">Получить</v-btn>
+    </div>
+
+    <v-data-table
+      :headers="headers"
+      :items="desserts"
+      class="elevation-1"
+    >
+      <template v-slot:items="props">
+        <td>{{ props.item.providerName }}</td>
+        <td>{{ props.item.numberOfChecks }}</td>
+      </template>
+    </v-data-table>
+
   </div>
 </template>
 
 <script>
-import moment from 'moment';
 import ReportDateTimePicker from './ReportDateTimePicker.vue';
-import { DATE_FORMAT, MONTH_AGO_DATE } from './ReportAllBanks.vue';
 import DateComponent from '../date/DateComponent.vue';
+import ReportTotal from '../../views/ReportTotal.vue';
 
 export default {
-  components: { ReportDateTimePicker, DateComponent },
-  name: "ReportServiceProviders",
+  components: { ReportDateTimePicker, DateComponent, ReportTotal },
+  name: "ReportServiceProvidersTolal",
   data() {
     return {
-      operation: {
-        dateEnd: moment().format(DATE_FORMAT),
-        dateStart: moment(MONTH_AGO_DATE).format(DATE_FORMAT),
-        operationType: 'uzcard2uzcard'
-      },
       data: {
-        status: [],
-        operationType: [],
-        dateFrom: '',
-        dateTo: '',
+        dateFrom: null,
+        dateTo: null,
       },
+       headers: [
+          {text: "Имя провайдера", value: "providerName"},
+          {text: "Колличество проверок", value: "numberOfChecks"}
+        ],
+        desserts: []
     }
   },
   methods: {
-    showErrorInfo(item) {
-      this.errorInfo = item;
-      this.errorDialog = true;
+    loadAmount() {
+      const baseUrl = '/psb'
+        this.$http.post(
+          baseUrl + '/api/report/check-service/amount?userId=4'/*  + this.$store.getters.userId */,
+          this.data
+        )
+        .then(response => {
+          this.desserts = response.data.data;
+        }, this.handleError);
     },
     getDate(val) {
-      this.date = val;
-      this.transactions = [];
-      this.totalPages = '';
-      this.amountData = [];
-      this.show = false;
-      this.operationAmount = {}
+      this.data = {
+        dateFrom: val.fromDate,
+        dateTo: val.toDate
+      }
     }
   }
 };
