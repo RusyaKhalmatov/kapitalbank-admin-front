@@ -24,6 +24,22 @@
             <v-tab-item :transition="false" :reverseTransition="false">
               <v-card flat>
                 <v-card-text>
+                  <!-- <report-service-providers-total /> -->
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item :transition="false" :reverseTransition="false">
+              <v-card flat>
+                <v-card-text>
+                  <!-- <report-service-provider-payment /> -->
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item :transition="false" :reverseTransition="false">
+              <v-card flat>
+                <v-card-text>
                   <report-service-providers-total />
                 </v-card-text>
               </v-card>
@@ -32,23 +48,7 @@
             <v-tab-item :transition="false" :reverseTransition="false">
               <v-card flat>
                 <v-card-text>
-                  <report-service-provider-payment />
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-
-            <v-tab-item :transition="false" :reverseTransition="false">
-              <v-card flat>
-                <v-card-text>
-                  <report-service-providers-total />
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-
-            <v-tab-item :transition="false" :reverseTransition="false">
-              <v-card flat>
-                <v-card-text>
-                  <report-service-pay />
+                  <!-- <report-service-pay /> -->
                 </v-card-text>
               </v-card>
             </v-tab-item>

@@ -30,7 +30,7 @@ import 'codemirror/theme/material.css';
 import VueTheMask from 'vue-the-mask'
 import VueChatScroll from 'vue-chat-scroll'
 import VueClipboard from 'vue-clipboard2'
-import VueScrollTo from 'vue-scrollto'
+import VueScrollTo from 'vue-scrollto';
 
 import { Form } from 'ant-design-vue'
 import '@/assets/css/update.css';
@@ -87,8 +87,8 @@ Vue.http.headers.common['token'] = store.getters.token;
 // Vue.http.headers.common['lang'] = 'ru'
 
 Vue.http.interceptors.push(function(request, next) {
-  // console.log('request_URL = ', request.url);
-  const isАpi5CheckServiceUrl = request.url.includes("/psb/api");
+  console.log('request_URL = ', request.url);
+  const isАpi5CheckServiceUrl = request.url.includes("psb/api/report");
 
   if (!isАpi5CheckServiceUrl){
     request.headers.set('device-id', store.getters.deviceId);
@@ -97,6 +97,7 @@ Vue.http.interceptors.push(function(request, next) {
   } else {
     request.headers.set('token', '44561b2c-ceac-46d8-a8b5-9123ddb6856d');
   }
+
   next();
 });
 

@@ -27,6 +27,7 @@
 <script>
 import ReportDateTimePicker from './ReportDateTimePicker.vue';
 import DateComponent from '../date/DateComponent.vue';
+import axios from 'axios';
 
 export default {
   components: { ReportDateTimePicker, DateComponent },
@@ -47,14 +48,22 @@ export default {
   },
   methods: {
     loadAmount() {
-      const baseUrl = '/psb'
-        this.$http.post(
-          baseUrl + '/api/report/amount?userId=4'/*  + this.$store.getters.userId */,
-          this.data
-        )
-        .then(response => {
-          this.desserts = response.data.data;
-        }, this.handleError);
+      console.log('amount = ');
+
+      const baseUrl = process.env.VUE_APP_API_URL;
+
+      console.log('baseUrl = ', baseUrl);
+
+      // axios.post(
+      //   baseUrl + '/api/report/amount?userId=4'/*  + this.$store.getters.userId */,
+      //   this.data,
+      // //   {
+      // //   proxy: agent
+      // // }
+      //   )
+      //   .then(response => {
+      //     this.desserts = response.data.data;
+      //   }, this.handleError);
     },
     getDate(val) {
       this.data = {

@@ -46,11 +46,11 @@ export default {
   },
   methods: {
     loadAmount() {
-      const baseUrl = '/psb'
-        this.$http.post(
-          baseUrl + '/api/report/check-service/amount?userId=4'/*  + this.$store.getters.userId */,
-          this.data
-        )
+      // const baseUrl = 'http://192.168.132.5:7072'
+      const baseUrl = process.env.VUE_APP_API_URL;
+      console.log('baseUrl =', baseUrl);
+
+      this.$http.post( baseUrl + '/psb/api/report/check-service/amount?userId=4', this.data )
         .then(response => {
           this.desserts = response.data.data;
         }, this.handleError);

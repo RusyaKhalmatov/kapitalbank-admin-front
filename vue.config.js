@@ -6,10 +6,13 @@ module.exports = {
       '/api': {
         target: 'http://192.168.132.5:7072',
         changeOrigin: true,
-        // logLevel: 'debug',
+        logLevel: 'debug',
         pathRewrite: { '^/psb': ''  },
       }
     },
-    historyApiFallback: true
+    // historyApiFallback: true
   }
+  // devServer: {
+  //  proxy: 'http://192.168.132.5:7072'
+  // }
 }
