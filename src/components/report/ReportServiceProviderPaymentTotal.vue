@@ -7,7 +7,7 @@
     <div class="button-box">
       <v-btn dark color="primary" class="get-btn" @click="loadAmount" :loading="loader">Получить</v-btn>
     </div>
-    amount
+
     <report-total v-if="amount" :amount="amount" label="Общая сумма оплат" />
   </div>
 </template>
@@ -16,11 +16,10 @@
 import ReportDateTimePicker from './ReportDateTimePicker.vue';
 import DateComponent from '../date/DateComponent.vue';
 import ReportTotal from '../../views/ReportTotal.vue';
-import axios from 'axios';
 
 export default {
   components: { ReportDateTimePicker, DateComponent, ReportTotal },
-  name: "ReportServiceProvidersTotal",
+  name: "ReportServiceProviderPaymentTotal",
   data() {
     return {
       data: {
@@ -32,16 +31,7 @@ export default {
   },
   methods: {
     loadAmount() {
-        axios.post(
-          'http://localhost:8080/api/report/total-sum?userId=4'/*  + this.$store.getters.userId */,
-          this.data /* ,  {headers} */{
-   headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
-        }
-      }
-        )
+      this.$http.post( '/psb/api/report/check-service/total?userId=4', this.data )
         .then(response => {
           this.amount = response.data.data.totalAmount;
         }, this.handleError);

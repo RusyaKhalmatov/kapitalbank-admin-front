@@ -10,9 +10,5 @@ module.exports = {
         pathRewrite: { '^/psb': ''  },
       }
     },
-    // historyApiFallback: true
   }
-  // devServer: {
-  //  proxy: 'http://192.168.132.5:7072'
-  // }
 }

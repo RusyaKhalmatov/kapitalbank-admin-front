@@ -52,7 +52,7 @@
             </v-flex>
             <div class="button-box">
                 <v-btn dark color="primary" class="get-btn" @click="load" :loading="loader">Получить</v-btn>
-                <v-btn class="mt-3 excel-btn" :loading="loader" @click="getExcel">Скачать Excel</v-btn>
+                <!-- <v-btn class="mt-3 excel-btn" :loading="loader" @click="getExcel">Скачать Excel</v-btn>
                 <download-excel
                 v-show="false"
                 id="excel"
@@ -63,7 +63,7 @@
                 <v-btn icon dark color="secondary">
                     <v-icon>mdi-file-excel</v-icon>
                 </v-btn>
-                </download-excel>
+                </download-excel> -->
             </div>
 
             <div v-if="operationAmount.length" class="amount-box">

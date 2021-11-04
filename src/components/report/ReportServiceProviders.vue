@@ -37,19 +37,15 @@ export default {
         dateFrom: null,
         dateTo: null,
       },
-       headers: [
-          {text: "Имя провайдера", value: "providerName"},
-          {text: "Колличество проверок", value: "numberOfChecks"}
-        ],
-        desserts: []
+      headers: [
+        {text: "Имя провайдера", value: "providerName"},
+        {text: "Колличество проверок", value: "numberOfChecks"}
+      ],
+      desserts: []
     }
   },
   methods: {
     loadAmount() {
-      // const baseUrl = 'http://192.168.132.5:7072'
-      const baseUrl = process.env.VUE_APP_API_URL;
-      console.log('baseUrl =', baseUrl);
-
       this.$http.post( '/psb/api/report/check-service/amount?userId=4', this.data )
         .then(response => {
           this.desserts = response.data.data;

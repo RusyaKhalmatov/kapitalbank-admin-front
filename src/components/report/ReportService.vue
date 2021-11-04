@@ -24,22 +24,6 @@
             <v-tab-item :transition="false" :reverseTransition="false">
               <v-card flat>
                 <v-card-text>
-                  <!-- <report-service-providers-total /> -->
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-
-            <v-tab-item :transition="false" :reverseTransition="false">
-              <v-card flat>
-                <v-card-text>
-                  <!-- <report-service-provider-payment /> -->
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-
-            <v-tab-item :transition="false" :reverseTransition="false">
-              <v-card flat>
-                <v-card-text>
                   <report-service-providers-total />
                 </v-card-text>
               </v-card>
@@ -48,7 +32,23 @@
             <v-tab-item :transition="false" :reverseTransition="false">
               <v-card flat>
                 <v-card-text>
-                  <!-- <report-service-pay /> -->
+                  <report-service-provider-payment />
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item :transition="false" :reverseTransition="false">
+              <v-card flat>
+                <v-card-text>
+                  <report-service-provider-payment-total />
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item :transition="false" :reverseTransition="false">
+              <v-card flat>
+                <v-card-text>
+                  <report-service-pay />
                 </v-card-text>
               </v-card>
             </v-tab-item>
@@ -90,10 +90,11 @@ import ReportServicePay from "@/components/report/ReportServicePay";
 import ReportServiceProviders from './ReportServiceProviders.vue';
 import ReportServiceProvidersTotal from './ReportServiceProvidersTotal.vue';
 import ReportServiceProviderPayment from './ReportServiceProviderPayment.vue';
+import ReportServiceProviderPaymentTotal from './ReportServiceProviderPaymentTotal.vue';
 
 export default {
   name: "ReportService",
-  components: {ReportDateTimePicker, ShowChart, TransactionChart, DateComponent, ReportServicePay,  ReportServiceProviders, ReportServiceProvidersTotal, ReportServiceProviderPayment},
+  components: {ReportDateTimePicker, ShowChart, TransactionChart, DateComponent, ReportServicePay,  ReportServiceProviders, ReportServiceProvidersTotal, ReportServiceProviderPayment, ReportServiceProviderPaymentTotal},
   data() {
     return {
       search: '',

@@ -16,7 +16,6 @@
 import ReportDateTimePicker from './ReportDateTimePicker.vue';
 import DateComponent from '../date/DateComponent.vue';
 import ReportTotal from '../../views/ReportTotal.vue';
-import axios from 'axios';
 
 export default {
   components: { ReportDateTimePicker, DateComponent, ReportTotal },
@@ -32,11 +31,7 @@ export default {
   },
   methods: {
     loadAmount() {
-      const baseUrl = 'http://192.168.132.5:7072'
-        axios.post(
-          baseUrl + '/api/report/check-service/total?userId=4'/*  + this.$store.getters.userId */,
-          this.data /* ,  {headers} */
-        )
+      this.$http.post( '/psb/api/report/check-service/total?userId=4', this.data )
         .then(response => {
           this.amount = response.data.data.totalAmount;
         }, this.handleError);
