@@ -50,7 +50,7 @@ export default {
       const baseUrl = process.env.VUE_APP_API_URL;
       console.log('baseUrl =', baseUrl);
 
-      this.$http.post( baseUrl + '/psb/api/report/check-service/amount?userId=4', this.data )
+      this.$http.post( '/psb/api/report/check-service/amount?userId=4', this.data )
         .then(response => {
           this.desserts = response.data.data;
         }, this.handleError);
