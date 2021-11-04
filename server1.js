@@ -1,24 +1,21 @@
 const express = require('express')
 const serveStatic = require('serve-static')
 const path = require('path')
-const { createProxyMiddleware } = require('http-proxy-middleware');
-
+const { createProxyMiddleware } = require('http-proxy-middleware')
+const cors = require('cors')
 
 const app = express()
 
+app.use(cors())
+
 app.use('/', serveStatic(path.join(__dirname, '/dist')))
-app.use('/api', createProxyMiddleware('/api', {
-   target: 'http://192.168.132.5:7072', // target host
-   changeOrigin: true, // needed for virtual hosted sites
+
+app.use('^/psb/api', createProxyMiddleware({
+   target: 'http://192.168.132.5:7072', 
+   changeOrigin: true, 
    logLevel: 'debug',
-   // secure: false,
-   onProxyRes: proxyRes => {
-      console.log("onProxyRes event", proxyRes);
-      // var key = 'www-authenticate';
-      // proxyRes.headers[key] = proxyRes.headers[key] && proxyRes.headers[key].split(',');
-   },
    pathRewrite: {
-    '^/psb': '', // rewrite path
+    '^/psb': ''
    }
 }) )
 
