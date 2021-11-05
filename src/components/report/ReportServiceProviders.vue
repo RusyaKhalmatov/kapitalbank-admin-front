@@ -4,15 +4,15 @@
 
     <date-component @date="getDate"></date-component>
 
-    <div class="button-box">
-      <v-btn dark color="primary" class="get-btn" @click="loadAmount" :loading="loader">Получить</v-btn>
+    <div class="flex text-xs-center xs12 mb-3">
+      <v-btn dark round large color="primary" class="get-btn" @click="loadAmount" :loading="loader">Получить</v-btn>
     </div>
 
     <v-data-table
       v-if="desserts.length"
       :headers="headers"
       :items="desserts"
-      class="elevation-1"
+      class="elevation-1 mb-1"
     >
       <template v-slot:items="props">
         <td>{{ props.item.providerName }}</td>

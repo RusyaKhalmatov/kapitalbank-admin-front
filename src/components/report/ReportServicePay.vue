@@ -1,8 +1,11 @@
 <template>
     <v-layout row wrap>
+        <v-flex xs12>
+          <h1 class="text-xs-center mb-3 mt-3 xs12">Информация по провайдерам</h1>
+        </v-flex>
         <date-component @date="getDate"></date-component>
             <v-flex xs12>
-                <v-select
+              <v-select
                 label="Операции"
                 :items="operationTypes"
                 v-model="operationType"
@@ -10,20 +13,20 @@
                 attach
                 chips
                 multiple>
-                <template v-slot:prepend-item>
-                    <v-list-tile ripple @click="toggle">
-                    <v-list-tile-action>
-                        <v-icon :color="operationType.length > 0 ? 'primary' : ''">{{ icon }}</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                        <v-list-tile-title>Выбрать все</v-list-tile-title>
-                    </v-list-tile-content>
-                    </v-list-tile>
-                    <v-divider class="mt-2"></v-divider>
-                </template>
+              <template v-slot:prepend-item>
+                  <v-list-tile ripple @click="toggle">
+                  <v-list-tile-action>
+                      <v-icon :color="operationType.length > 0 ? 'primary' : ''">{{ icon }}</v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-content>
+                      <v-list-tile-title>Выбрать все</v-list-tile-title>
+                  </v-list-tile-content>
+                  </v-list-tile>
+                  <v-divider class="mt-2"></v-divider>
+              </template>
 
-                </v-select>
-            </v-flex>
+            </v-select>
+          </v-flex>
             <!-- <v-flex xs12>
                 <v-btn-toggle multiple v-model="filterToggle" key="all" class="selectedFilter">
                     <v-btn dark color="primary" @click="selectFilters('all')">Все</v-btn>
@@ -50,8 +53,13 @@
                             :value="item.key"></v-checkbox>
                 </div>
             </v-flex>
+
+            <div class="flex text-xs-center xs12">
+              <v-btn dark round large color="primary" class="get-btn" @click="load" :loading="loader">Получить</v-btn>
+            </div>
+
             <div class="button-box">
-                <v-btn dark color="primary" class="get-btn" @click="load" :loading="loader">Получить</v-btn>
+                <!-- <v-btn dark round large color="primary" class="get-btn" @click="load" :loading="loader">Получить</v-btn> -->
                 <!-- <v-btn class="mt-3 excel-btn" :loading="loader" @click="getExcel">Скачать Excel</v-btn>
                 <download-excel
                 v-show="false"
@@ -82,15 +90,17 @@
             </div>
 
             <template v-if="transactions.length !== 0">
+              <div class="flex xs12">
                 <div class="dflex">
-                <v-text-field
-                    style="width:500px"
-                    v-model="search"
-                    prepend-icon="mdi-magnify"
-                    label="Поиск">
-                </v-text-field>
-                <v-btn @click="load">Поиск</v-btn>
+                  <v-text-field
+                      style="width:500px"
+                      v-model="search"
+                      prepend-icon="mdi-magnify"
+                      label="Поиск">
+                  </v-text-field>
+                  <v-btn @click="load">Поиск</v-btn>
                 </div>
+              </div>
             </template>
 
             <v-flex xs12 v-if="show">

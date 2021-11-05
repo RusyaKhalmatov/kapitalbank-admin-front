@@ -10,9 +10,9 @@
             </v-card-title>
             <v-card-text>
                 <v-layout column wrap>
-                    
+
                     <v-flex xs12>
-                    <v-progress-circular style="height:30px; width: 30px;"            
+                    <v-progress-circular style="height:30px; width: 30px;"
                         v-if="excelLoader"
                         indeterminate
                         color="amber"
@@ -39,14 +39,14 @@
                                     <td>{{props.item.details}}</td>
                                     <td>{{props.item.dateTime | timestamp-to-date}}</td>
                                     <td><v-btn @click="getUserInfo(props.item.userInfo)">Подробнее</v-btn></td>
-                                    
+
                                 </tr>
                             </template>
                         </v-data-table>
                         <v-pagination
                         class="center"
                         v-model="page"
-                        :length="totalPages"                        
+                        :length="totalPages"
                         :total-visible="10"
                         ></v-pagination>
                     </v-flex>
@@ -76,11 +76,11 @@
                 <span class="user-info-box">
                     <p class="user-info-child">email</p>
                     <p class="user-info-child">{{userData.email}}</p>
-                </span>         
+                </span>
                 <span class="user-info-box">
                     <p class="user-info-child">Секретное слово</p>
                     <p class="user-info-child">{{userData.secretWord}}</p>
-                </span>     
+                </span>
             </span>
             <p v-if="!userData" style="text-align:center;">Пусто</p>
         </div>
@@ -134,10 +134,10 @@
             },
             getFailedRegistration(page) {
                 let self = this;
-                self.$http.get(self.$store.getters.newApiUrl + `/failedRegistration?page=${page-1}&size=10`, {})
+                self.$http.get(self.$store.getters.newApiUrl + `/failedRegistration/v2?page=${page-1}&size=10`, {})
                     .then(response => {
                         self.loader = false;
-                        self.failedData = response.data.data;
+                        self.failedData = response.data.data.content;
                         // self.failedData = response.data.data.content;
                         self.totalPages = response.data.data.totalPages;
                     }, self.handleError);
@@ -161,14 +161,14 @@
                     //     self.excelData.push(item);
                     // });
                     // self.excelData.sort(self.compare);
-                
+
                     self.excelLoader = false;
-                    
 
 
 
-                }, self.handleError); 
-            },            
+
+                }, self.handleError);
+            },
             compare(a, b) {
                 if (a.dateTime > b.dateTime) {
                     return -1;
@@ -178,15 +178,15 @@
                 }
                 return 0;
             },
-            getUserInfo(userInfo){   
+            getUserInfo(userInfo){
                 this.isShow = true;
                 if(userInfo===null){
                     this.userData = null;
                 }
                 else{
-                    this.userData = JSON.parse(userInfo);             
+                    this.userData = JSON.parse(userInfo);
                 }
-                
+
             }
         },
         mounted() {

@@ -4,8 +4,8 @@
 
     <date-component @date="getDate"></date-component>
 
-    <div class="button-box">
-      <v-btn dark color="primary" class="get-btn" @click="loadAmount" :loading="loader">Получить</v-btn>
+    <div class="flex text-xs-center xs12">
+      <v-btn dark round large color="primary" class="get-btn" @click="loadAmount" :loading="loader">Получить</v-btn>
     </div>
 
     <report-total v-if="amount" :amount="amount" label="Колличество проверок" />
