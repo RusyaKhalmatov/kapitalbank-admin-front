@@ -7,11 +7,11 @@ const app = express();
 const port = process.env.PORT || 8882;
 
 // Add using static files from local dir
-app.use('/', express.static(path.join(__dirname, './dist/')));
+app.use('/', express.static(path.join(__dirname, '../dist/')));
 
 // Send index.html for GET to any path
 app.get(/.*/, function(request, response){
-  response.sendFile(path.join(__dirname, './dist/index.html'))
+  response.sendFile(path.join(__dirname, '../dist/index.html'))
 });
 
 // Add  proxy options for '/proxyReport/' path
@@ -20,7 +20,7 @@ const reportProxyOptions = {
   target: reportApiUrl,
   changeOrigin: true,
   logLevel: 'debug',
-  pathRewrite: { '^/psb': '/'  },
+  pathRewrite: { '^/psb': ''  },
 };
 app.use('/psb', createProxyMiddleware(reportProxyOptions));
 
