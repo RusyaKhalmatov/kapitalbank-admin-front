@@ -3,9 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "npm run build && node server/app.js",
     "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build && pkg app.js -d -t node16-linux -o build/app",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "prepare-files": "shx mkdir admin_panel_build && shx mv dist admin_panel_build",
+    "server-linux": "pkg server/app.js -d -t node16-linux -o admin_panel_build/server/app",
+    "server-mac": "pkg server/app.js -d -t node16-mac -o admin_panel_build/server/app",
+    "server-win": "pkg server/app.js -d -t node16-win -o admin_panel_build/server/app",
+    "build-linux": "npm run build && npm run prepare-files && npm run server-linux",
+    "build-win": "npm run build && npm run prepare-files && npm run server-linux",
+    "build-mac": "npm run build && npm run prepare-files && npm run server-linux"
   },
   "dependencies": {
     "amqplib": "^0.5.5",
@@ -17,6 +25,7 @@
     "core-js": "^2.6.10",
     "fingerprintjs2": "^2.1.0",
     "http-proxy-agent": "^5.0.0",
+    "shx": "^0.3.4",
     "express": "^4.18.1",
     "pkg": "^5.7.0",
     "http-proxy-middleware": "^2.0.1",

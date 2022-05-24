@@ -88,7 +88,7 @@ Vue.http.headers.common['token'] = store.getters.token;
 
 Vue.http.interceptors.push(function(request, next) {
   console.log('request_URL = ', request.url);
-  const isАpi5CheckServiceUrl = request.url.includes("psb/api/report");
+  const isАpi5CheckServiceUrl = request.url.includes("/proxyReport/api/report");
 
   if (!isАpi5CheckServiceUrl){
     request.headers.set('device-id', store.getters.deviceId);

@@ -3,14 +3,14 @@ const express = require('express');
 const path = require('path');
 
 // Create express server
-const app = express();
+const server = express();
 const port = process.env.PORT || 8882;
 
 // Add using static files from local dir
-app.use('/', express.static(path.join(__dirname, '../dist/')));
+server.use('/', express.static(path.join(__dirname, '../dist/')));
 
 // Send index.html for GET to any path
-app.get(/.*/, function(request, response){
+server.get(/.*/, function(request, response){
   response.sendFile(path.join(__dirname, '../dist/index.html'))
 });
 
@@ -20,11 +20,11 @@ const reportProxyOptions = {
   target: reportApiUrl,
   changeOrigin: true,
   logLevel: 'debug',
-  pathRewrite: { '^/psb': ''  },
+  pathRewrite: { '^/proxyReport': ''  },
 };
-app.use('/psb', createProxyMiddleware(reportProxyOptions));
+server.use('/proxyReport', createProxyMiddleware(reportProxyOptions));
 
-app.listen(port);
+server.listen(port);
 console.log(`app is listening on port: ${port}`);
 
 
