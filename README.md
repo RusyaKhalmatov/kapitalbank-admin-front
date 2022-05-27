@@ -31,6 +31,16 @@ $ npm run dev
 - build project for deploy
 ```bash
 # run command
-$ pkg app.js -o build/adminPanel
+$ npm run deploy
+```
+
+## Deploy
+
+- copy `admin_panel_build` directory to server `PATH`
+- run server
+
+```bash
+# run server
+$ node admin_panel_build/server/app.js
 ```
 
