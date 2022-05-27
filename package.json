@@ -1,14 +1,18 @@
 {
   "name": "asgardia-admin",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
+    "start": "npm-recursive-install && npm run build && node server/app.js dist",
     "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build ",
+    "lint": "vue-cli-service lint",
+    "copy-dist": "shx cp -r dist admin_panel_build",
+    "copy-server": "shx cp -r server admin_panel_build/server && rm admin_panel_build/server/package*",
+    "deploy": "shx mkdir admin_panel_build && npm-recursive-install && npm run build && npm run copy-dist && npm run copy-server"
   },
   "dependencies": {
-    "amqplib": "^0.5.5",
+    "amqplib": "^0.9.1",
     "ant-design-vue": "^1.5.0",
     "apexcharts": "^3.10.0",
     "axios": "^0.24.0",
@@ -17,7 +21,6 @@
     "core-js": "^2.6.10",
     "fingerprintjs2": "^2.1.0",
     "http-proxy-agent": "^5.0.0",
-    "http-proxy-middleware": "^2.0.1",
     "js-base64": "^2.5.2",
     "luxon": "^1.25.0",
     "material-design-icons-iconfont": "^5.0.1",
@@ -69,7 +72,10 @@
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
     "vue-live-preview": "^0.4.1",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "shx": "^0.3.4",
+    "recursive-install": "^1.4.0",
+    "http-proxy-middleware": "^2.0.6"
   },
   "eslintConfig": {
     "root": true,

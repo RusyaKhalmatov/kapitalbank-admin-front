@@ -7,7 +7,7 @@ module.exports = {
         target: 'http://192.168.132.5:7072',
         changeOrigin: true,
         logLevel: 'debug',
-        pathRewrite: { '^/psb': ''  },
+        pathRewrite: { '^/proxyReport': ''  },
       }
     },
   }

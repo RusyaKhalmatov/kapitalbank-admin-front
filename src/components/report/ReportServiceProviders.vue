@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     loadAmount() {
-      this.$http.post( '/psb/api/report/check-service/amount?userId=4', this.data )
+      this.$http.post( '/proxyReport/api/report/check-service/amount?userId=4', this.data )
         .then(response => {
           this.desserts = response.data.data;
         }, this.handleError);

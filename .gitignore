@@ -1,5 +1,5 @@
-/config
-package-lock.json
+# Project build
+admin_panel_build
 
 # Logs
 /logs
@@ -89,5 +89,3 @@ sw.*
 
 # Vim swap files
 *.swp
-package-lock.json
-/dist.zip
