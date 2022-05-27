@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     loadAmount() {
-      this.$http.post( '/proxyReport/api/report/check-service/total?userId=4', this.data )
+      this.$http.post( '/proxyReport/api/report/total-sum?userId=4', this.data )
         .then(response => {
           this.amount = response.data.data.totalAmount;
         }, this.handleError);
