@@ -81,7 +81,7 @@
                        class="operation-child">{{ item.amount  | number-format }} {{ item.currency }}</p>
                     <p @click="getTransactions(item.operationId, index)"
                        class="operation-child">{{ item.operationType }}</p>
-                    
+
                     <p @click="getTransactions(item.operationId, index)"
                        class="operation-child">{{ item.senderPan }}</p>
                     <p @click="getTransactions(item.operationId, index)"
@@ -107,7 +107,7 @@
                         <v-btn small depressed v-clipboard:copy="item.operationId" v-clipboard:success="textOnCopy"
                                v-clipboard:error="textOnError">Скопировать </v-btn>
                     </span>
-                    
+
                 </span>
         <span v-if="active===index">
                     <span class="transaction-row" v-for="(item, index) in transactionData" :key="index">
@@ -190,11 +190,11 @@ export default {
         "dateFrom": this.fromDate,
         "dateTo": this.toDate,
       }
-      self.$http.post(self.$store.getters.newApiUrl + '/user/operations/' + this.id + '?sort=endTime,desc&page=' + page, postData)
+      self.$http.post(self.$store.getters.apiUrl + '/user/operations/' + this.id + '?sort=endTime,desc&page=' + page, postData)
         .then((response) => {
           console.log(response.data);
           this.loader = false;
-          response.data.data.monitorings.forEach((x) => {
+          response.data.data.content.forEach((x) => {
             Object.assign(x, {fullName: self.fullName});
             Object.assign(x, {phone: self.phone});
             x.amount = x.amount / 100;

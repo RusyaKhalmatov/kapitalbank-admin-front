@@ -103,6 +103,7 @@
             </v-btn>
             <v-btn v-if="userInfo.id" @click="preAdd" color="primary">Добавить в список сотрудников</v-btn>
             <v-btn v-if="userInfo.id" @click="openWhiteListBox" color="primary">Добавить в белый список</v-btn>
+            <v-btn dark color="danger" @click="openPasswordResetDialog">Разрешить устройство</v-btn>
             <!-- <v-btn v-if="userInfo.id&&isAdmin" @click="externalHistoryDialog = true" color="primary">Количество запросов по скорингу</v-btn> -->
             <div class="sms-box" v-if="userInfo.id">
               <v-btn @click="sendSMS" color="primary">Отправить СМС</v-btn>
@@ -156,6 +157,23 @@
                   <v-spacer/>
                   <v-btn @click.stop="dialog = false" color="primary">Нет</v-btn>
                   <v-btn @click.stop="deleteAccount(userInfo.id)" color="primary">Да</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+            <v-dialog
+              v-model="passwordResetDialog"
+              width="400">
+              <v-card>
+                <v-card-title>
+                  <h3 style="margin-bottom: -10px">Разрешить устройство</h3>
+                </v-card-title>
+                <v-card-text>
+                  Вы действительно хотите разрешить устройство?
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer/>
+                  <v-btn @click.stop="passwordResetDialog = false" color="primary">Нет</v-btn>
+                  <v-btn @click.stop="resetPassword(userInfo.id)" dark color="danger">Да</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -268,6 +286,7 @@ export default {
       cardsByPhone: [],
       byPhoneVisib: false,
       whiteListDialog: false,
+      passwordResetDialog: false,
       whiteListAllowed: false,
       externalHistoryDialog: false,
       whiteListData: [],
@@ -296,6 +315,9 @@ export default {
     },
     openWhiteListBox() {
       this.whiteListDialog = true;
+    },
+    openPasswordResetDialog() {
+      this.passwordResetDialog = true;
     },
     sendSMS() {
       let self = this;
@@ -372,6 +394,21 @@ export default {
         .then(() => {
           self.redirect('clients');
         }, self.handleError);
+    },
+    async resetPassword(userId) {
+      let self = this;
+
+      try{
+        const resp = await self.$http.get( `http://192.168.132.12:8091/api/reset-password/allow?userId=${userId}`);
+        if (resp && resp.data) {
+          this.passwordResetDialog = false;
+          this.$store.commit('successMessage', 'Устройство успешно зарегистрировано ');
+        }
+      } catch(err) {
+        if(err && err.status === 400){
+          this.$store.commit('errorMessage', 'У пользователя нет устройств для регистрации ');
+        }
+      }
     },
     getCardHistory(id) {
       let self = this;
