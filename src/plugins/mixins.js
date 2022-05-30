@@ -55,7 +55,11 @@ const globalHandler = {
             this.registerDevice();
           }
           this.loader = false;
-          this.$store.commit('errorMessage', response.data.errorMessage);
+          if(response && response.data && response.data.errorMessage){
+            this.$store.commit('errorMessage', response.data.errorMessage);
+          } else {
+            this.$store.commit('errorMessage', 'Ошибка сервера');
+          }
         },
         redirect(name, params) {
           if (this.$route.name !== name) {

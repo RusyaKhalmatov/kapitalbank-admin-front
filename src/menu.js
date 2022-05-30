@@ -18,7 +18,7 @@ const menuItems = {
                     title: 'Виды Кредитов',
                     icon: 'mdi-cash-multiple',
                     action: 'depositType'
-                },               
+                },
                 // {
                 //     title: 'Кредиты',
                 //     icon: 'mdi-cash-refund',
@@ -111,7 +111,7 @@ const menuItems = {
                             action: "serviceLimits"
                         }
                     ]
-                    
+
                 },
                 {
                     title: "Версия приложения",
@@ -219,7 +219,7 @@ const menuItems = {
                 //     icon: 'list_alt',
                 //     action: 'ExternalHistoryStatistic'
                 // }
-                
+
 
             ]
         },
@@ -242,7 +242,7 @@ const menuItems = {
                             action: 'notificationStatistics'
                         }
                     ]
-                },        
+                },
                 /*{
                     title: 'Stories',
                     icon: 'mdi-dns-outline',
@@ -358,7 +358,7 @@ const menuItems = {
                     icon: "mdi-mail",
                     action: "EposHistory"
                 },*/
-                
+
                 // {
                 //     title: "Виртуальная карта",
                 //     icon: "cloud",
@@ -375,11 +375,11 @@ const menuItems = {
                 //         }
                 //     ]
                 // },
-                
+
                 {
                     title: "Информация об оплате сервиса",
                     icon: "mdi-alpha-p-circle-outline",
-                    action: "CheckService"                    
+                    action: "CheckService"
                 }
             ]
         },
@@ -454,7 +454,7 @@ const menuItems = {
                             action: "serviceLimits"
                         }
                     ]
-                    
+
                 },
                 {
                     title: "Версия приложения",
@@ -481,7 +481,7 @@ const menuItems = {
                     icon: "mdi-mail",
                     action: "EposHistory"
                 },*/
-                
+
                 // {
                 //     title: "Виртуальная карта",
                 //     icon: "cloud",
@@ -780,16 +780,16 @@ const menuItems = {
                             title: "История по картам",
                             icon: "mdi-mail",
                             action: "cardHistory"
-                        },                       
+                        },
                         {
                             title: "Информация об оплате сервиса",
                             icon: "mdi-alpha-p-circle-outline",
-                            action: "CheckService"                    
+                            action: "CheckService"
                         },
                         {
                             title: "FAQ",
                             icon: "help",
-                            action: "Faq"                    
+                            action: "Faq"
                         }
                     ]
                 },
@@ -830,7 +830,7 @@ const menuItems = {
                             action: 'notificationStatistics'
                         }
                     ]
-                },        
+                },
                 /*{
                     title: 'Stories',
                     icon: 'mdi-dns-outline',
@@ -890,6 +890,22 @@ const menuItems = {
             title: 'Заказ карт',
             icon: 'credit_card',
             action: 'CardProductOrder',
+        },
+        {
+          title: "Блокировки",
+          icon: "mdi-cellphone-lock",
+          child: [
+              {
+                  title: "Заблокированный Аккаунт",
+                  icon: "mdi-account-badge-outline",
+                  action: "blockedAccount"
+              },
+              {
+                  title: "Заблокированные Устройства",
+                  icon: 'mdi-cellphone-erase',
+                  action: 'blockedDevices'
+              }
+          ]
         },
         /*{
             title: 'Запрещенные слова Visa Direct',
@@ -961,7 +977,7 @@ const menuItems = {
         {
             title: "Информация об оплате сервиса",
             icon: "mdi-alpha-p-circle-outline",
-            action: "CheckService"                    
+            action: "CheckService"
         },
         {
             title: "Отмена транзакций",
@@ -1033,7 +1049,7 @@ const menuItems = {
         {
             title: "Информация об оплате сервиса",
             icon: "mdi-alpha-p-circle-outline",
-            action: "CheckService"                    
+            action: "CheckService"
         },
         /*{
             title: 'Запрещенные слова Visa Direct',
@@ -1048,7 +1064,7 @@ const menuItems = {
         {
             title: "FAQ",
             icon: "help",
-            action: "Faq"                    
+            action: "Faq"
         }
     ],
     'MARKETING': [
@@ -1061,12 +1077,12 @@ const menuItems = {
             title: 'Статистика по PUSH уведомлениям',
             icon: 'send',
             action: 'notificationStatistics'
-        },     
+        },
         {
             title: 'Мини объявления',
             icon: 'publish',
             action: 'Publication'
-        },   
+        },
         {
             title: 'Stories',
             icon: 'mdi-dns-outline',
@@ -1093,7 +1109,7 @@ const menuItems = {
                 }
             ]
         },
-        
+
     ],
     'PLASTIC_CALL_CENTER' : [
         {
@@ -1121,32 +1137,32 @@ const menuItems = {
             action: 'avtoloan'
         },
     ],
-    'MANAGER_REPORT':[       
+    'MANAGER_REPORT':[
         {
-            title: "Отчет по транзакциям", 
-            icon: "mdi-file-chart",            
+            title: "Отчет по транзакциям",
+            icon: "mdi-file-chart",
             action: "reportTransactions"
         },
         {
-            title: "Отчет по вкладам", 
-            icon: "mdi-file-chart",            
+            title: "Отчет по вкладам",
+            icon: "mdi-file-chart",
             action: "reportDeposit"
         },
         {
-            title: "Отчет по конвертации валют", 
-            icon: "mdi-file-chart",            
+            title: "Отчет по конвертации валют",
+            icon: "mdi-file-chart",
             action: "reportConversion"
         },
         /*{
-            title: "Отчет по кросс-конвертации валют", 
-            icon: "mdi-file-chart",            
+            title: "Отчет по кросс-конвертации валют",
+            icon: "mdi-file-chart",
             action: "reportCrossConversion"
         },*/
         {
-            title: "Отчеты Paynet", 
-            icon: "mdi-file-chart",            
+            title: "Отчеты Paynet",
+            icon: "mdi-file-chart",
             action: "reportService"
-        }        
+        }
     ]
 };
 export default menuItems;
