@@ -9,7 +9,8 @@
     "lint": "vue-cli-service lint",
     "copy-dist": "shx cp -r dist admin_panel_build",
     "copy-server": "shx cp -r server admin_panel_build/server && rm admin_panel_build/server/package*",
-    "deploy": "shx mkdir admin_panel_build && npm-recursive-install && npm run build && npm run copy-dist && npm run copy-server"
+    "deploy": "shx mkdir admin_panel_build && npm-recursive-install && npm run build && npm run copy-dist && npm run copy-server",
+    "clear": "shx rm -r dist && shx rm -r admin_panel_build"
   },
   "dependencies": {
     "amqplib": "^0.9.1",
