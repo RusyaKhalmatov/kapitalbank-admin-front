@@ -58,6 +58,7 @@ export default new Vuex.Store({
     employeeAutoloan: '',
     userId: '',
     socketUrl: {},
+    assignments: [],
   },
   getters: {
     socketUrl: (state) => {
@@ -118,7 +119,8 @@ export default new Vuex.Store({
     userId: (state) => {
       state.userId = window.localStorage.getItem('userId');
       return state.userId;
-    }
+    },
+    getAssignments: (state) => state.assignments,
   },
   mutations: {
     setField(state, data) {
@@ -212,7 +214,10 @@ export default new Vuex.Store({
     },
     employeeAutoloan(state, employeeAutoloan) {
       state.employeeAutoloan = employeeAutoloan;
-    }
+    },
+    setAssignments(state, assignments) {
+      state.assignments = assignments;
+    },
   },
   actions: {
     getLanguageList({state, commit}) {
@@ -225,6 +230,20 @@ export default new Vuex.Store({
           })
           .catch((err) => reject(err));
       });
-    }
+    },
+    getAssignments({ commit }) {
+      return Vue.http.get(this.getters.apiUrl + "/assignment/all")
+        .then(response => {
+          const assignments = response.data.data;
+          commit("setAssignments", assignments);
+        }, this.handleError);
+    },
+    getAssignment({ commit }, {id}) {
+      return Vue.http.get(this.getters.apiUrl + "/assignment/byAssignmentId?assignmentId=" + id)
+        .then(response => {
+          const assignments = [response.data.data];
+          commit("setAssignments", assignments);
+        }, this.handleError);
+    },
   }
 });

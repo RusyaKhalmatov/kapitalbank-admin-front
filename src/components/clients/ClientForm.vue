@@ -63,16 +63,7 @@
         data() {
             return {
                 userItem: {},
-                types: [
-                    {text: "Admin", value: "ADMIN"},
-                    {text: "Manager", value: "MANAGER"},
-                    {text: "Head Of Call Center", value: "HEAD_CALL_CENTER"},
-                    {text: "Call Center", value: "CALL_CENTER"},
-                    {text: "Plastic call center", value: "PLASTIC_CALL_CENTER"},
-                    {text: "Front office", value: "FRONT_OFFICE"}
-                    
-
-                ]
+                types: [ ]
             }
         },
         methods: {
@@ -88,7 +79,7 @@
                 let self = this;
                 self.$http.get(self.$store.getters.newApiUrl + '/user/role', self.userItem)
                     .then((response) => {
-                        self.types = response.data.data; 
+                        self.types = response.data.data;
                     }, self.handleError);
             }
         },

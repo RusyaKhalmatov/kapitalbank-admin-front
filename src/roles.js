@@ -1,4 +1,4 @@
-const roles = {
+export default {
   SUPER_ADMIN: 'SUPER_ADMIN',
   ADMIN: 'ADMIN',
   MANAGER: 'MANAGER',
@@ -11,5 +11,3 @@ const roles = {
   MANAGER_REPORT: 'MANAGER_REPORT',
   MANAGER_ASSIGNMENT: 'MANAGER_ASSIGNMENT'
 };
-
-export default roles;

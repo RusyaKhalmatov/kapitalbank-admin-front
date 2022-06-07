@@ -4,9 +4,6 @@
       <v-card-title>
         <h1>Поручения</h1>
         <v-spacer></v-spacer>
-        <v-btn icon small @click="redirect('DepositProductForm')">
-          <v-icon small>mdi-plus</v-icon>
-        </v-btn>
       </v-card-title>
       <v-card-text>
         <v-layout row wrap>
@@ -20,74 +17,30 @@
           <v-flex xs12>
             <v-data-table
               :headers="headers"
-              :items="depositProducts"
+              :items="assignments"
               :search="search"
               :pagination.sync="pagination"
               :loading="loader"
-              item-key="product_code">
-              <template slot="items" slot-scope="props">
-                <tr @click="props.expanded = !props.expanded">
-                  <td>{{ props.item.productCode }}</td>
-                  <td>{{ props.item.productName }}</td>
-                  <td>{{ props.item.currency}}</td>
-                  <td>{{ props.item.term }}</td>
-                  <td>{{ props.item.minAmount / 100 | number-format }}</td>
-                  <td>{{ props.item.status }}</td>
+              item-key="id">
+              <template v-slot:items="props">
+                <tr >
+                  <td>{{ props.item.user.id }}</td>
+                  <td>{{ props.item.user.customerId }}</td>
+                  <td>{{ props.item.user.fullName}}</td>
+                  <td>{{ props.item.user.phone}}</td>
+                  <td>{{ props.item.assignmentId }}</td>
+                  <td>{{ convertDate(props.item.created) }}</td>
                   <td>
-                    <v-checkbox disabled v-model="props.item.depositRegisterType"/>
-                  </td>
+                    <v-chip :color="getStatusColor(props.item.assignmentStatus)" >
+                      {{ getStatusText(props.item.assignmentStatus) }}
+                    </v-chip>
+                    </td>
                   <td>
-                    <v-checkbox disabled v-model="props.item.incAllowed"/>
-                  </td>
-                  <td>
-                    <v-checkbox disabled v-model="props.item.earlyClosure"/>
-                  </td>
-                  <td>
-                    <v-checkbox disabled v-model="props.item.partialEnabled"/>
-                  </td>
-                  <td>{{ props.item.lang }}</td>
-                  <td>
-                    <v-btn :to="{name: 'DepositProductForm', params: {depositProduct: props.item}}"
-                           icon small>
+                    <v-btn :to="{name: 'assignmentUpdate', params: {id: props.item.assignmentId}}" icon>
                       <v-icon small>mdi-pencil</v-icon>
-                    </v-btn>
-
-                    <v-btn @click.stop="deleteDepositProduct(props.item.id)" icon small>
-                      <v-icon small>mdi-delete</v-icon>
                     </v-btn>
                   </td>
                 </tr>
-              </template>
-              <template slot="expand" slot-scope="props">
-                <v-card flat>
-                  <v-card-text>
-                    <h4>{{ props.item.comment }}</h4>
-                    <v-img :src="props.item.imageUrl" v-if="props.item.imageUrl"></v-img>
-                    <v-list>
-                      <v-list-tile>
-                        <v-list-tile-content>
-                          Процентная ставка (%): {{ props.item.interest }}
-                          ({{props.item.interestCurrency }})
-                        </v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>
-                          Период: {{ props.item.term }} ({{ props.item.termUnit }})
-                        </v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>
-                          Максимальная сумма: {{ props.item.maxAmount / 100 | number-format }}
-                        </v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>
-                          Доступные транзацкии: {{ props.item.allowedTransactionList }}
-                        </v-list-tile-content>
-                      </v-list-tile>
-                    </v-list>
-                  </v-card-text>
-                </v-card>
               </template>
             </v-data-table>
           </v-flex>
@@ -98,54 +51,53 @@
 </template>
 
 <script>
+import statuses, { statusesText } from "@/views/assignment/statuses"
+import moment from "moment";
 export default {
   name: "assignment",
   data() {
     return {
       headers: [
-        {text: "Код депозита", value: "productCode"},
-        {text: "Название", value: "productName"},
-        {text: "Валюта", value: "currency"},
-        {text: "Период", value: "term"},
-        {text: "Минимальная сумма", value: "minAmount"},
-        {text: "Статус", value: "status"},
-        {text: "Оформление вклада", value: "depositRegisterType"},
-        {text: "Пополнять", value: "incAllowed"},
-        {text: "Досрочного закрытия", value: "earlyClosure"},
-        {text: "Частичного списания", value: "partialEnabled"},
-        {text: "Язык", value: "lang"},
-        {text: "Действия", sortable: false}
+        {text: "ID", value: "id"},
+        {text: "Уникальный код", value: "customerId"},
+        {text: "ФИО", value: "fullName"},
+        {text: "ID заявки", value: "assignmentId"},
+        {text: "Телефонб", value: "phone"},
+        {text: "Дата создания", value: "created"},
+        {text: "Статус заявки", value: "assignmentStatus"},
       ],
-      depositProducts: [],
+      assignments: [],
       pagination: {},
       search: ""
     }
   },
   methods: {
-    getDepositProduct() {
-      let self = this;
-      self.$http.get(self.$store.getters.apiUrl + "/deposit-product")
-        .then(response => {
-          self.loader = false;
-          self.depositProducts = response.data.data;
-        }, self.handleError);
+    getAssignments() {
+      this.loader = true;
+      this.$store.dispatch("getAssignments")
+        .then(() => this.assignments = this.$store.getters.getAssignments)
+        .finally(() => this.loader = false);
+
     },
-    deleteDepositProduct(id) {
-      let self = this;
-      self.$http.delete(self.$store.getters.apiUrl + "/deposit-product/"+id)
-        .then(() => {
-          // location.reload();
-          self.getDepositProduct();
-          self.redirect("deposit");
-        }, self.handleError);
+    getStatusColor(status) {
+      return statuses.find(e => e.value === status).color;
+    },
+    getStatusText(status) {
+      return statusesText[status];
+    },
+    convertDate(timeStamp) {
+      return moment(timeStamp).format('DD.MM.YYYY - HH:MM');
     }
   },
   mounted() {
-    this.getDepositProduct();
+    this.getAssignments();
   }
 }
 </script>
 
 <style scoped>
-
+  .v-chip {
+    width: 140px;
+    justify-content: center;
+  }
 </style>

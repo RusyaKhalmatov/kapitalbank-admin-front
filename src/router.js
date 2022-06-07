@@ -182,6 +182,7 @@ export default new Router({
       component: () => import('@/views/assignment/layout'),
       children: [
         { path: '', name: "assignment", component: () => import('@/views/assignment/index')},
+        { path: 'update/:id', name: "assignmentUpdate", component: () => import('@/views/assignment/update')}
       ]
     },
     {
