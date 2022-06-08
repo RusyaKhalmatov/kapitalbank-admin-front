@@ -238,12 +238,5 @@ export default new Vuex.Store({
           commit("setAssignments", assignments);
         }, this.handleError);
     },
-    getAssignment({ commit }, {id}) {
-      return Vue.http.get(this.getters.apiUrl + "/assignment/byAssignmentId?assignmentId=" + id)
-        .then(response => {
-          const assignments = [response.data.data];
-          commit("setAssignments", assignments);
-        }, this.handleError);
-    },
   }
 });
