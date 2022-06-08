@@ -218,6 +218,10 @@ export default new Vuex.Store({
     setAssignments(state, assignments) {
       state.assignments = assignments;
     },
+    setAssignment(state, assignment) {
+      const assignmentsWithoutOldAssignment = state.assignments.filter(e => e.assignmentId !== assignment.assignmentId)
+      state.assignments = assignmentsWithoutOldAssignment.concat(assignment);
+    },
   },
   actions: {
     getLanguageList({state, commit}) {
@@ -236,6 +240,13 @@ export default new Vuex.Store({
         .then(response => {
           const assignments = response.data.data;
           commit("setAssignments", assignments);
+        }, this.handleError);
+    },
+    getAssignment({ commit }, { id }) {
+      return Vue.http.get(this.getters.apiUrl + "/assignment/byAssignmentId?assignmentId=" + id)
+        .then(response => {
+          const assignment = response.data.data;
+          commit("setAssignment", assignment);
         }, this.handleError);
     },
   }
