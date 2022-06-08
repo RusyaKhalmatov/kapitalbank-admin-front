@@ -36,11 +36,18 @@ $ npm run deploy
 
 ## Deploy
 
-- copy `admin_panel_build` directory to server `PATH`
+- Connect to the server
+- kill process
+```bash
+# list processes
+$ ps aux | grep js
+$ kill [process number]
+```
+- copy local `admin_panel_build` dir to server `admin_panel_build` dir
 - run server
-
 ```bash
 # run server
-$ node admin_panel_build/server/app.js
+$ node admin/admin_panel_build/server/app.js &
+$ exit
 ```
 
