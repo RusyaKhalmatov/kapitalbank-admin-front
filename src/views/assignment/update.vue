@@ -146,16 +146,7 @@ export default {
   methods: {
     setAssignmentData() {
       const { id } = this.$route.params;
-      this.assignment = this.findAssignmentById(id);
-      if (!this.assignment) {
-        this.uploadAssignmentData(id);
-      } else {
-        this.status = this.assignment && this.assignment.assignmentStatus;
-        this.finalDetail = this.assignment && this.assignment.finalDetail;
-      }
-    },
-    uploadAssignmentData(id) {
-      this.$store.dispatch("getAssignments")
+      this.$store.dispatch("getAssignment", {id})
         .then(() => {
           this.assignment = this.findAssignmentById(id);
           this.status = this.assignment.assignmentStatus;
@@ -206,7 +197,8 @@ export default {
         .then(() => this.redirect('assignment'));
     },
     disableButton(status) {
-      return [statusesValue.FAILED, statusesValue.SUCCESS].includes(status)
+      return ([statusesValue.FAILED, statusesValue.SUCCESS, statusesValue.ACCEPTED].includes(status)
+        && (this.status === statusesValue.ACCEPTED && status === statusesValue.ACCEPTED))
         || (this.status === statusesValue.FAILED && !this.failedMessage.length);
     },
     disableDetails(status) {
