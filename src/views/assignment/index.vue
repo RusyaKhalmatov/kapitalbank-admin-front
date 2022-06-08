@@ -10,6 +10,7 @@
           <v-flex xs12 sm12 md12 lg12 xl12>
             <v-text-field
               v-model="search"
+              v-on:input="filterAssignments"
               prepend-icon="mdi-magnify"
               label="Поиск">
             </v-text-field>
@@ -18,7 +19,6 @@
             <v-data-table
               :headers="headers"
               :items="assignments"
-              :search="search"
               :pagination.sync="pagination"
               :loading="loader"
               item-key="id">
@@ -72,13 +72,31 @@ export default {
     }
   },
   methods: {
-    getAssignments() {
+    setAssignments() {
       this.loader = true;
       this.$store.dispatch("getAssignments")
         .then(() => this.assignments = this.$store.getters.getAssignments)
         .finally(() => this.loader = false);
 
     },
+    filterAssignments(search) {
+      const query = search.toLowerCase();
+      const minLength = 3;
+      if (query.length >= minLength) {
+        this.assignments = this.$store.getters.getAssignments.filter(assignment => {
+          const {assignmentId, user} = assignment;
+          const {id, fullName, customerId, phone} = user;
+          return (assignmentId.toLowerCase().includes(query))
+            || (`${id}`.toLowerCase().includes(query))
+            || (fullName.toLowerCase().includes(query))
+            || (customerId.toLowerCase().includes(query))
+            || (phone.toLowerCase().includes(query))
+        });
+      } else {
+        this.assignments = this.$store.getters.getAssignments;
+      }
+    }
+    ,
     getStatusColor(status) {
       return statuses.find(e => e.value === status).color;
     },
@@ -90,7 +108,7 @@ export default {
     }
   },
   mounted() {
-    this.getAssignments();
+    this.setAssignments();
   }
 }
 </script>
