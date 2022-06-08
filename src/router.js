@@ -1,27 +1,55 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
 import Login from "./views/Login";
 import Settings from "./views/Settings";
 import Profile from "./views/Profile";
 import Deposit from "./views/Deposit";
-import DepositProductForm from "./components/deposit/DepositProductForm";
 import CurrencyRates from "./views/CurrencyRates";
 import Bank from "./views/Bank";
-import BankForm from "./components/bank/BankForm";
 // import Loan from "./views/Loan";
 import PaynetCategory from "./views/PaynetCategory";
 import PaynetServices from "./views/PaynetServices";
+import Chat from "./views/Chat";
+import Operations from "./views/Operations";
+import CardProduct from "./views/CardProduct";
+import Branch from "./views/Branch";
+import DepositType from "./views/DepositType";
+import Story from "./views/Story";
+import Stories from './views/Stories';
+import eposRevise from "./views/EposRevise.vue";
+import Reverse from './views/Reverse.vue';
+import Antifraud from './views/Antifraud';
+import avtoloan from './views/avtoloan';
+import Publishings from './views/Publishings';
+import terminalAdd from './views/TerminalAdd';
+import ShowBalance from './views/ShowBalance';
+import UsersByAddedCards from './views/UsersByAddedCards';
+import CheckService from './views/CheckService';
+import WhiteList from './views/WhiteList';
+import ExternalHistoryStatistic from './views/ExternalHistoryStatistic';
+import Cache from './views/Cache';
+import EposHistory from './views/EposHistory'
+import Publication from './views/Publication.vue'
+import Faq from './views/Faq'
+import Countries from './views/Countries.vue'
+import SocialMedia from './views/SocialMedia.vue'
+import LocalPaymentCategory from './views/LocalPaymentCategory.vue'
+import MarketProviders from './views/MarketProviders.vue'
+import Weather from './views/Weather.vue'
+import BannedWords from './views/BannedWords.vue'
+import Autonotifications from './views/Autonotifications.vue'
+
+import DepositProductForm from "./components/deposit/DepositProductForm";
+import BankForm from "./components/bank/BankForm";
 import PaynetCategoryForm from "./components/paynet/PaynetCategoryForm";
 import PaynetServicesForm from "./components/paynet/PaynetServicesForm";
 import ServiceCategory from "./components/paynet/ServiceCategory";
 import Logs from "./components/logs/Logs";
 import Clients from "./components/clients/Clients";
-import Chat from "./views/Chat";
 import Chatting from "./components/chat/Chatting";
 import OperationCodes from "./components/operations/OperationCodes";
 import OperationCodesForm from "./components/operations/OperationCodesForm";
-import Operations from "./views/Operations";
-import CardProduct from "./views/CardProduct";
 import Report from "./components/report/Report";
 import Chatbot from "./components/chat/Chatbot"
 import ReportAllBanks from "./components/report/ReportAllBanks";
@@ -34,8 +62,6 @@ import ReportByClientAndCards from "./components/report/ReportByClientAndCards";
 import ReportRegisteredUsers from "./components/report/ReportRegisteredUsers";
 import ReportConversion from "./components/report/ReportConversion";
 import ReportCrossConversion from "./components/report/ReportCrossConversion";
-
-import Branch from "./views/Branch";
 import BranchForm from "./components/branch/BranchForm";
 import atm from "./components/atm/atm"
 import atmForm from "./components/atm/atmForm";
@@ -53,7 +79,6 @@ import MessagesForm from "./components/messages/MessagesForm";
 import VipClients from "./components/VipClients/VipClients";
 import PartialVipClients from "./components/VipClients/PartialVipClients";
 import PartialVipClientsForm from "./components/VipClients/PartialVipClientsForm";
-
 import VipClientsForm from "./components/VipClients/VipClientsForm";
 import Limits from "./components/limits/Limits";
 import LimitsForm from "./components/limits/LimitsForm";
@@ -62,11 +87,8 @@ import EPOS from "./components/epos/EPOS";
 import EPOSform from "./components/epos/EPOSform";
 import Commission from "./components/commision/Commission";
 import CommissionForm from "./components/commision/CommissionForm";
-import DepositType from "./views/DepositType";
 import DepositTypeForm from "./components/depositType/DepositTypeForm";
-import Story from "./views/Story";
 import StoryForm from "./components/story/StoryForm";
-import Stories from './views/Stories';
 import ExternalServices from "./components/externalServices/ExternalServices";
 import CardHistory from "./components/cardHistory/CardHistory";
 import TelegramButtons from "./components/telegram/TelegramButtons";
@@ -78,13 +100,8 @@ import reportOfDeposit from "./components/report/ReportOfDeposit";
 import reportOfCredit from "./components/report/ReportOfCredit";
 import reportVisaDirect from "./components/report/ReportVisaDirect";
 import reportMoneySend from "./components/report/ReportMoneySend";
-
-import eposRevise from "./views/EposRevise.vue"
-import Reverse from './views/Reverse.vue'
 import FailedRegistration from "./components/report/ReportFailedRegistration";
 import ReportUcellComponent from "./components/report/ReportUcellComponent";
-
-import Antifraud from './views/Antifraud';
 import ArchiveChat from './components/chat/ArchiveChat'
 import ChatStaffMonitoring from './components/chat/ChatStaffMonitoring'
 import ChatDataMonitoring from './components/chat/ChatDataMonitoring'
@@ -103,40 +120,19 @@ import Tariffs from './components/loyalty/Tariffs'
 import LoyaltyRates from './components/loyalty/LoyaltyRates'
 import LoyaltyBankServices from './components/loyalty/LoyaltyBankServices'
 import Bonus from './components/loyalty/Bonus'
-
 import CardProductOrder from './components/cardProduct/CardProductOrder'
 import ReportBySummery from './components/cardProduct/ReportBySummery'
 import employeeList from './components/employeeList/employeeList';
 import employeesList from './components/employeeList/employeesList'
-import avtoloan from './views/avtoloan';
 import detail from './components/avtoloan/detail';
-import Publishings from './views/Publishings';
-import terminalAdd from './views/TerminalAdd';
-import ShowBalance from './views/ShowBalance';
-import UsersByAddedCards from './views/UsersByAddedCards';
-import CheckService from './views/CheckService';
-import WhiteList from './views/WhiteList';
-import ExternalHistoryStatistic from './views/ExternalHistoryStatistic';
-import Cache from './views/Cache';
-import EposHistory from './views/EposHistory'
-import Publication from './views/Publication.vue'
 import virtualCardAccountType from './components/cardHistory/VirtualCardAccountType'
 import AccountWalletHistory from './components/cardHistory/AccountWalletHistory'
-import Faq from './views/Faq'
 import virtualCardHistory from './components/cardHistory/VirtualCardHistory'
 import ReportRequisite from './components/report/ReportRequisite'
 import ReportBeeline from './components/report/ReportBeeline'
 import ReportUcell from './components/report/ReportUcell'
 import ReportP2pUcell from './components/report/ReportP2pUcell'
-
 import CreditAsia from './components/report/CreditAsia'
-import Countries from './views/Countries.vue'
-import SocialMedia from './views/SocialMedia.vue'
-import LocalPaymentCategory from './views/LocalPaymentCategory.vue'
-import MarketProviders from './views/MarketProviders.vue'
-import Weather from './views/Weather.vue'
-import BannedWords from './views/BannedWords.vue'
-import Autonotifications from './views/Autonotifications.vue'
 
 
 Vue.use(Router);
@@ -182,70 +178,53 @@ export default new Router({
       ]
     },
     {
+      path: "/assignment",
+      component: () => import('@/views/assignment/layout'),
+      children: [
+        { path: '', name: "assignment", component: () => import('@/views/assignment/index')},
+        { path: 'update/:id', name: "assignmentUpdate", component: () => import('@/views/assignment/update')}
+      ]
+    },
+    {
       path: '/reportP2pUcell',
       name: 'ReportP2pUcell',
-      component: ReportP2pUcell
+      component: ReportP2pUcell,
     },
-    /*{
-        path:'/marketProviders',
-        name: 'MarketProviders',
-        component: MarketProviders
-    },*/
     {
       path: '/autonotifications',
       name: 'Autonotifications',
-      component: Autonotifications
+      component: Autonotifications,
     },
-    /*{
-        path:'/bannedWords',
-        name: 'BannedWords',
-        component: BannedWords
-    },*/
-    /*{
-        path: '/reportUcellComponent',
-        name: 'ReportUcellComponent',
-        component: ReportUcellComponent
-    },*/
-    /*{
-        path:'/weather',
-        name: 'Weather',
-        component: Weather
-    },*/
     {
       path: '/localPaymentCategory',
       name: 'LocalPaymentCategory',
-      component: LocalPaymentCategory
+      component: LocalPaymentCategory,
     },
     {
       path: '/reportVisaDirect',
       name: 'reportVisaDirect',
-      component: reportVisaDirect
+      component: reportVisaDirect,
     },
     {
       path: '/reportMoneySend',
       name: 'reportMoneySend',
-      component: reportMoneySend
+      component: reportMoneySend,
     },
     {
       path: '/socialMedia',
       name: 'SocialMedia',
-      component: SocialMedia
+      component: SocialMedia,
     },
     {
       path: '/reportOfDeposit',
       name: 'reportOfDeposit',
-      component: reportOfDeposit
+      component: reportOfDeposit,
     },
     {
       path: '/reportOfCredit',
       name: 'reportOfCredit',
-      component: reportOfCredit
+      component: reportOfCredit,
     },
-    /*{
-        path: '/bonus',
-        name: 'Bonus',
-        component: Bonus
-    },*/
     {
       path: '/creditAsia',
       name: 'creditAsia',
@@ -259,28 +238,18 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: () => import('@/views/Login')
     },
     {
       path: '/faq',
       name: 'Faq',
-      component: Faq
+      component: Faq,
     },
-    /*{
-        path: '/publication',
-        name: 'Publication',
-        component: Publication
-    },*/
     {
       path: '/reverse',
       name: 'reverse',
       component: Reverse,
     },
-    /*{
-        path: '/eposHistory',
-        name: 'EposHistory',
-        component: EposHistory
-    },*/
     {
       path: '/cardProductOrder',
       name: 'CardProductOrder',
@@ -297,46 +266,16 @@ export default new Router({
       name: 'ReportRequisite',
       component: ReportRequisite,
     },
-    /*{
-        path: '/whiteList',
-        name: 'WhiteList',
-        component: WhiteList,
-    }, */
     {
       path: '/accountWalletHistory',
       name: 'AccountWalletHistory',
-      component: AccountWalletHistory
+      component: AccountWalletHistory,
     },
-    /*{
-        path: '/reportBeeline',
-        name: 'ReportBeeline',
-        component: ReportBeeline
-    },
-    {
-        path: '/reportUcell',
-        name: 'ReportUcell',
-        component: ReportUcell
-    },*/
-    /*{
-        path: '/categoryList',
-        name: 'CategoryList',
-        component: CategoryList
-    },*/
-    /*{
-        path:'/recommendedStatus',
-        name: 'RecommendedStatus',
-        component: RecommendedStatus
-    },*/
     {
       path: '/virtualCardHistory',
       name: 'virtualCardHistory',
-      component: virtualCardHistory
+      component: virtualCardHistory,
     },
-    /*{
-        path: '/externalHistoryStatistic',
-        name: 'ExternalHistoryStatistic',
-        component: ExternalHistoryStatistic,
-    },  */
     {
       path: '/cache',
       name: 'Cache',
@@ -362,11 +301,6 @@ export default new Router({
       name: 'CheckService',
       component: CheckService,
     },
-    /*{
-        path: '/loyaltyRecommended',
-        name: 'LoyaltyRecommended',
-        component: LoyaltyRecommended
-    },*/
     {
       path: '/сhatStaffMonitoring',
       name: 'ChatStaffMonitoring',
@@ -382,21 +316,6 @@ export default new Router({
       name: 'ShowBalance',
       component: ShowBalance,
     },
-    /*{
-        path: '/publishings',
-        name: 'Publishings',
-        component: Publishings,
-    },*/
-    /*{
-        path: '/serviceproviders',
-        name: 'ServiceProviders',
-        component: ServiceProviders,
-    }, */
-    /*{
-        path: '/specialClients',
-        name: 'specialClients',
-        component: specialClients
-    },*/
     {
       path: '/loyaltyFilterAccount',
       name: 'LoyaltyFilterAccount',
@@ -412,36 +331,6 @@ export default new Router({
       name: 'LoyaltyFilterTariffs',
       component: LoyaltyFilterTariffs,
     },
-    /*{
-        path: '/terminalAdd',
-        name: 'terminalAdd',
-        component: terminalAdd,
-    },*/
-    /*{
-        path: '/levels',
-        name: 'LoyaltyLevels',
-        component: LoyaltyLevels,
-    },*/
-    /*{
-        path: '/measurementUnit',
-        name: 'MeasurementUnit',
-        component: MeasurementUnit
-    },*/
-    /*{
-        path: '/loyaltyBankServices',
-        name: 'LoyaltyBankServices',
-        component: LoyaltyBankServices
-    },*/
-    /*{
-        path: '/tariffs',
-        name: 'Tariffs',
-        component: Tariffs
-    },*/
-    /*{
-        path: '/loyaltyRates',
-        name: 'LoyaltyRates',
-        component: LoyaltyRates
-    },*/
     {
       path: '/cardProduct',
       name: 'CardProduct',
@@ -450,98 +339,67 @@ export default new Router({
     {
       path: '/settings',
       name: 'settings',
-      component: Settings
+      component: Settings,
     },
     {
       path: '/profile',
       name: 'profile',
-      component: Profile
+      component: Profile,
     },
     {
       path: "/currencyRates",
       name: "currencyRates",
-      component: CurrencyRates
+      component: CurrencyRates,
     },
     {
       path: "/deposit",
       name: "deposit",
-      component: Deposit
+      component: Deposit,
     },
     {
       path: "/createDeposit",
       name: "DepositProductForm",
       component: DepositProductForm,
-      params: true
+      params: true,
     },
     {
       path: "/bank",
       name: "bank",
-      component: Bank
+      component: Bank,
     },
     {
       path: "/addBank",
       name: "BankForm",
       component: BankForm,
-      params: true
+      params: true,
     },
-    /*{
-        path: "/loan",
-        name: "loan",
-        component: Loan
-    },*/
     {
       path: "/paynetCategory",
       name: "PaynetCategory",
-      component: PaynetCategory
+      component: PaynetCategory,
     },
     {
       path: "/paynetCategoryForm",
       name: "PaynetCategoryForm",
       component: PaynetCategoryForm,
-      params: true
+      params: true,
     },
     {
       path: "/paynetServices",
       name: "PaynetServices",
-      component: PaynetServices
+      component: PaynetServices,
     },
     {
       path: "/paynetServicesForm",
       name: "PaynetServicesForm",
       component: PaynetServicesForm,
-      params: true
+      params: true,
     },
     {
       path: "/serviceCategory",
       name: "ServiceCategory",
-      component: ServiceCategory
+      component: ServiceCategory,
     },
-    /*{
-        path: "/logs",
-        name: "Logs",
-        component: Logs,
-        params: true
-    },*/
-    /*{
-      path: "/clients",
-      name: "clients",
-      component: Clients
-    },*/
-    /*{
-        path: "/telegrambuttons",
-        name: "TelegramButtons",
-        component: TelegramButtons,
-    },*/
-    /*{
-        path: '/telegramSendMessages',
-        name: 'telegramSendMessages',
-        component: telegramSendMessages
-    },*/
-    /*{
-        path: '/telgramMessages',
-        name: 'telegramMessages',
-        component: telegramMessages,
-    },*/
     {
       path: "/chat",
       name: 'chat',
@@ -551,141 +409,141 @@ export default new Router({
     {
       path: "/archivechat",
       name: 'archiveChat',
-      component: ArchiveChat
+      component: ArchiveChat,
     },
     {
       path: "/chatting",
       name: "chatting",
-      component: Chatting
+      component: Chatting,
     },
     {
       path: "/chatbot",
       name: "chatbot",
-      component: Chatbot
+      component: Chatbot,
     },
     {
       path: "/operationCodes",
       name: "operationCodes",
-      component: OperationCodes
+      component: OperationCodes,
     },
     {
       path: "/operationCodesForm",
       name: "OperationCodesForm",
       component: OperationCodesForm,
-      params: true
+      params: true,
     },
     {
       path: "/operations",
       name: "operations",
-      component: Operations
+      component: Operations,
     },
     {
       path: "/report",
       name: "report",
-      component: Report
+      component: Report,
     },
     {
       path: '/reportByActiveClients',
       name: 'ReportByActiveClients',
-      component: ReportByActiveClients
+      component: ReportByActiveClients,
     },
     {
       path: "/reportAllBanks",
       name: "reportAllBanks",
-      component: ReportAllBanks
+      component: ReportAllBanks,
     },
     {
       path: "/reportTransactions",
       name: "reportTransactions",
-      component: ReportByTransactions
+      component: ReportByTransactions,
     },
     {
       path: "/reportDeposit",
       name: "reportDeposit",
-      component: ReportDeposit
+      component: ReportDeposit,
     },
 
     {
       path: "/reportCredit",
       name: "reportCredit",
-      component: ReportCredit
+      component: ReportCredit,
     },
     {
       path: "/reportService",
       name: "reportService",
-      component: ReportService
+      component: ReportService,
     },
     {
       path: "/reportClientAndCards",
       name: "reportClientAndCards",
-      component: ReportByClientAndCards
+      component: ReportByClientAndCards,
     },
     {
       path: "/reportRegisteredUsers",
       name: "reportRegisteredUsers",
-      component: ReportRegisteredUsers
+      component: ReportRegisteredUsers,
     },
     {
       path: "/reportCrossConversion",
       name: "reportCrossConversion",
-      component: ReportCrossConversion
+      component: ReportCrossConversion,
     },
     {
       path: "/reportConversion",
       name: "reportConversion",
-      component: ReportConversion
+      component: ReportConversion,
     },
     {
       path: "/branch",
       name: "branch",
-      component: Branch
+      component: Branch,
     },
     {
       path: "/branchForm",
       name: "branchForm",
       component: BranchForm,
-      params: true
+      params: true,
     },
     {
       path: "/atm",
       name: "atm",
-      component: atm
+      component: atm,
     },
     {
       path: "/atmForm",
       name: "atmForm",
       component: atmForm,
-      params: true
+      params: true,
     },
     {
       path: "/clientForm",
       name: "clientForm",
-      component: ClientForm
+      component: ClientForm,
     },
     {
       path: "/clientCredential",
       name: "clientCredential",
-      component: ClientCredential
+      component: ClientCredential,
     },
     {
       path: "/appVersion",
       name: "appVersion",
-      component: appVersion
+      component: appVersion,
     },
     {
       path: "/appVersionForm",
       name: "appVersionForm",
-      component: appVersionForm
+      component: appVersionForm,
     },
     {
       path: "/blockedDevices",
       name: "blockedDevices",
-      component: BlockedDevices
+      component: BlockedDevices,
     },
     {
       path: "/blockedAccount",
       name: "blockedAccount",
-      component: BlockedAccount
+      component: BlockedAccount,
     },
     {
       path: '/notificationStatistics',
@@ -695,108 +553,93 @@ export default new Router({
     {
       path: "/notification",
       name: "notification",
-      component: Notification
+      component: Notification,
     },
     {
       path: "/notificationForm",
       name: "notificationForm",
-      component: NotificationForm
+      component: NotificationForm,
     },
     {
       path: "/messages",
       name: "messages",
-      component: Messages
+      component: Messages,
     },
     {
       path: "/messagesForm",
       name: "messagesForm",
-      component: MessagesForm
+      component: MessagesForm,
     },
 
     {
       path: "/partialVipClients",
       name: "PartialVipClients",
-      component: PartialVipClients
+      component: PartialVipClients,
     },
     {
       path: "/vipClients",
       name: "vipClients",
-      component: VipClients
+      component: VipClients,
     },
     {
       path: "/vipClientsForm",
       name: "vipClientsForm",
-      component: VipClientsForm
+      component: VipClientsForm,
     },
     {
       path: "/partialVipClientsForm",
       name: "partialVipClientsForm",
-      component: PartialVipClientsForm
+      component: PartialVipClientsForm,
     },
     {
       path: "/limits",
       name: "limits",
-      component: Limits
+      component: Limits,
     },
     {
       path: "/limitForm",
       name: "limitsForm",
-      component: LimitsForm
+      component: LimitsForm,
     },
     {
       path: "/serviceLimits",
       name: "serviceLimits",
       component: ServiceLimits,
     },
-    /*{
-        path: "/epos",
-        name: "epos",
-        component: EPOS
-    },
-    {
-        path: "/eposForm",
-        name: "eposForm",
-        component: EPOSform
-    },*/
     {
       path: "/commission",
       name: "commission",
-      component: Commission
+      component: Commission,
     },
     {
       path: "/commissionForm",
       name: "commissionForm",
-      component: CommissionForm
+      component: CommissionForm,
     },
     {
       path: "/depositType",
       name: "depositType",
-      component: DepositType
+      component: DepositType,
     },
     {
       path: "/depositTypeForm",
       name: "depositTypeForm",
-      component: DepositTypeForm
+      component: DepositTypeForm,
     },
-    /*{
-        path: '/stories',
-        name: 'Stories',
-        component: Stories
-    },*/
     {
       path: "/story",
       name: "story",
-      component: Story
+      component: Story,
     },
     {
       path: "/storyForm",
       name: "storyForm",
-      component: StoryForm
+      component: StoryForm,
     },
     {
       path: "/externalServices",
       name: "externalServices",
-      component: ExternalServices
+      component: ExternalServices,
     },
     {
       path: "/cardHistory",
@@ -807,7 +650,7 @@ export default new Router({
     {
       path: "/failedRegistration",
       name: "failedRegistration",
-      component: FailedRegistration
+      component: FailedRegistration,
     },
     {
       path: "/antifraud",
@@ -824,11 +667,6 @@ export default new Router({
       name: 'newPivotTable',
       component: newPivotTable,
     },
-    /*{
-        path: '/eposRevise',
-        name: "eposRevise",
-        component: eposRevise,
-    },*/
     {
       path: '/employeeList',
       name: "employeeList",
@@ -837,7 +675,7 @@ export default new Router({
     {
       path: '/employeesList',
       name: "employeesList",
-      component: employeesList
+      component: employeesList,
     },
     {
       path: '/avtoloan',

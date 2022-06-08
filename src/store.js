@@ -17,35 +17,23 @@ export default new Vuex.Store({
     navigation: true,
     userName: '',
     toolbar: true,
-    // apiUrl: 'https://mobile.kapitalbank.uz/api',
+
     prodApiUrl: 'https://online.kapitalbank.uz/api',
     prodApiUrl2: 'http://192.168.132.12:8091/api',
     apiUrl: 'http://192.168.132.12:8091/api',
     api5Url: 'http://192.168.132.5:7072/api',
-    // apiUrl: 'http://192.168.132.1:8091/api',
-
-    //avtoApiUrl: 'https://dev.kapitalbank.uz/api',
     avtoApiUrl: 'https://dev.kapitalbank.uz/api',
-    //avtoApiUrl: 'http://192.168.120.10:8080/api',
-    // newApiUrl: 'http://192.168.118.34:8091/api',
     newApiUrl: 'http://192.168.132.12:8091/api',
-
-    // chatApiUrl: 'https://preprod-mobile.kapitalbank.uz/api',
     chatApiUrl: 'http://192.168.132.12:8091/api',
-
-    // newApiUrl: 'http://192.168.117.51:8091/api',
-    // apiUrl: 'https://mobile.kapitalbank.uz/api',
-    // apiUrl: 'http://192.168.120.51:8082/api',                  //Mirror
-    // apiUrl: 'http://192.168.118.20:8082/api',
-    // apiUrl: 'http://192.168.120.3:8082/api',                    //prod1
-    // apiUrl: 'http://192.168.119.3:8082/api',                    //dev
-    // apiUrl: 'http://localhost:8082/api',
-    // apiStomp: 'http://localhost:8082/ws',
-    // apiStomp: 'http://192.168.120.51:8082/ws',
     apiStomp: 'http://192.168.120.23:8082/ws',
-    // apiStomp: 'http://192.168.120.51:8082/ws',
+    telegramBotUrl: 'http://192.168.120.9:8077/api',
+    ecommerceUrl: 'https://api.kapitalbank.uz/api',
+    ucellUrl: 'https://ek.kapitalbank.uz/api',
+    ucellApiUrl: 'http://192.168.118.34:8079/api',
+    beelineUrl: 'http://192.168.120.22:8078/api',
+    loyaltyUrl: 'http://192.168.132.12:8091/api',
+    newChatApiUrl: 'http://192.168.120.14:8081/api',
 
-    // apiStomp: 'http://mobile.kapitalbank.uz/ws',
     message: '',
     color: '',
     excelMeta: [
@@ -64,27 +52,13 @@ export default new Vuex.Store({
     chatBotType: '',
     chatBotParentId: '',
     listData: [],
-    telegramBotUrl: 'http://192.168.120.9:8077/api',
-    // telegramBotUrl: 'http://192.168.118.55:8077/api',
-    // telegramBotUrl: 'http://192.168.119.5:8077/api',
-
     cardId: '',
-    ecommerceUrl: 'https://api.kapitalbank.uz/api',
-    ucellUrl: 'https://ek.kapitalbank.uz/api',
-    ucellApiUrl: 'http://192.168.118.34:8079/api',
-
-    beelineUrl: 'http://192.168.120.22:8078/api',
-
-    // loyaltyUrl: 'http://192.168.120.51:8083/api',
-    loyaltyUrl: 'http://192.168.132.12:8091/api',
-    // loyaltyUrl: 'http://192.168.117.47:8083/api',
-
     statusAutoloan: '',
     branchAutoloan: '',
     employeeAutoloan: '',
     userId: '',
     socketUrl: {},
-    newChatApiUrl: 'http://192.168.120.14:8081/api'
+    assignments: [],
   },
   getters: {
     socketUrl: (state) => {
@@ -145,7 +119,8 @@ export default new Vuex.Store({
     userId: (state) => {
       state.userId = window.localStorage.getItem('userId');
       return state.userId;
-    }
+    },
+    getAssignments: (state) => state.assignments,
   },
   mutations: {
     setField(state, data) {
@@ -201,7 +176,6 @@ export default new Vuex.Store({
     },
     deviceId(state, deviceId) {
       state.deviceId = deviceId;
-      // Vue.http.headers.common['device-id'] = deviceId;
       if (deviceId) {
         window.localStorage.setItem('deviceId', deviceId);
       } else {
@@ -240,7 +214,10 @@ export default new Vuex.Store({
     },
     employeeAutoloan(state, employeeAutoloan) {
       state.employeeAutoloan = employeeAutoloan;
-    }
+    },
+    setAssignments(state, assignments) {
+      state.assignments = assignments;
+    },
   },
   actions: {
     getLanguageList({state, commit}) {
@@ -253,6 +230,13 @@ export default new Vuex.Store({
           })
           .catch((err) => reject(err));
       });
-    }
+    },
+    getAssignments({ commit }) {
+      return Vue.http.get(this.getters.apiUrl + "/assignment/all")
+        .then(response => {
+          const assignments = response.data.data;
+          commit("setAssignments", assignments);
+        }, this.handleError);
+    },
   }
 });
