@@ -35,7 +35,7 @@
         />
 
         <v-textarea
-          class="errorMessage"
+          class="failedMessage"
           v-if="status === 'FAILED'"
           v-model="failedMessage"
           outlined
@@ -73,16 +73,18 @@
         <v-card v-if="assignment.assignmentDocumentList.length" class="documents">
 
           <h2>Прикрепленные документы:</h2>
+          <v-item-group class="document">
+            <template v-for="(item) in assignment.assignmentDocumentList">
 
-          <template v-for="(item) in assignment.assignmentDocumentList">
+              <v-item :key="item.url">
+                <v-btn @click="download(item.url)" >
+                  <v-icon name="document-icon">mdi-download</v-icon>{{item.url.split('/').pop()}}
+                </v-btn>
+              </v-item>
 
-            <v-list-item :key="item.url" :name="item.url" class="document">
-              <v-btn @click="download(item.url)">
-                <v-icon name="document-icon">mdi-download</v-icon>{{item.url.split('/').pop()}}
-              </v-btn>
-            </v-list-item>
+            </template>
+          </v-item-group>
 
-          </template>
 
         </v-card>
 
@@ -101,7 +103,7 @@
         <v-btn
           color="yellow lighten-2"
           text
-          @click="update()"
+          @click="updateAssignment()"
           :disabled="disableButton(this.assignment.assignmentStatus)"
         >
           Обновить
@@ -183,7 +185,7 @@ export default {
     download(url) {
       window.open(url, '_blank');
     },
-    update() {
+    updateAssignment() {
       const {PENDING, WAITING, SUCCESS, FAILED} = statusesValue;
       const data = {assignmentId: this.assignment.assignmentId};
       if ([PENDING, WAITING].includes(this.status)) {
@@ -193,7 +195,7 @@ export default {
       if([SUCCESS, FAILED].includes(this.status)) {
         data.assignmentStatus = this.status;
         if(this.status === statusesValue.FAILED) {
-          data.errorMessage = this.errorMessage;
+          data.errorMessage = this.failedMessage;
         }
         this.updateData("/assignment/updateStatus", data)
       }
@@ -205,7 +207,7 @@ export default {
     },
     disableButton(status) {
       return [statusesValue.FAILED, statusesValue.SUCCESS].includes(status)
-        || (this.status === statusesValue.FAILED && !this.errorMessage.length);
+        || (this.status === statusesValue.FAILED && !this.failedMessage.length);
     },
     disableDetails(status) {
       return [statusesValue.FAILED, statusesValue.SUCCESS, statusesValue.ACCEPTED].includes(status);
@@ -220,7 +222,7 @@ export default {
 
 <style scoped>
 
-.errorMessage, .finalDetail, .comments, .documents {
+.failedMessage, .finalDetail, .comments, .documents {
   margin-top: 15px;
 }
 
