@@ -104,7 +104,7 @@
           color="yellow lighten-2"
           text
           @click="updateAssignment()"
-          :disabled="disableButton(this.assignment.assignmentStatus)"
+          :disabled="disableButton()"
         >
           Обновить
         </v-btn>
@@ -196,9 +196,9 @@ export default {
         .then(response => this.successMessage(response.data.data.message), this.handleError)
         .then(() => this.redirect('assignment'));
     },
-    disableButton(status) {
-      return ([statusesValue.FAILED, statusesValue.SUCCESS, statusesValue.ACCEPTED].includes(status)
-        && (this.status === statusesValue.ACCEPTED && status === statusesValue.ACCEPTED))
+    disableButton() {
+      return [statusesValue.SUCCESS, statusesValue.FAILED].includes(this.assignment.assignmentStatus)
+        || (this.status === statusesValue.ACCEPTED && this.assignment.assignmentStatus === statusesValue.ACCEPTED)
         || (this.status === statusesValue.FAILED && !this.failedMessage.length);
     },
     disableDetails(status) {
