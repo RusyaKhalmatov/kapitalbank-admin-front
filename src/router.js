@@ -420,7 +420,12 @@ export default new Router({
     {
       path: "/reportTransactions",
       name: "reportTransactions",
-      component: ReportByTransactions,
+      component: () => import('@/components/report/ReportByTransactions'),
+    },
+    {
+      path: "/reportForeignTransactions",
+      name: "reportForeignTransactions",
+      component: () => import('@/components/report/ReportByForeignTransactions'),
     },
     {
       path: "/reportDeposit",
