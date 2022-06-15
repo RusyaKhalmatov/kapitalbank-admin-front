@@ -17,7 +17,7 @@
       <v-card-text >
 
         <v-text-field :value="assignment.assignmentId" label="ID заявки" readonly />
-        <v-text-field :value="convertDate(assignment.created)" label="Дата создания" readonly />
+        <v-text-field :value="assignment.created | timestampToDate" label="Дата создания" readonly />
         <v-text-field :value="assignment.user.id" label="ID Пользователя" readonly />
         <v-text-field :value="assignment.user.customerId" label="Уникальный код пользователя" readonly />
         <v-text-field :value="assignment.user.fullName" label="Ф.И.О" readonly />
@@ -115,8 +115,6 @@
 </template>
 
 <script>
-
-import moment from "moment";
 import statuses, {statusesValue} from "@/views/assignment/statuses";
 
 export default {
