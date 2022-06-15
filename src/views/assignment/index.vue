@@ -29,7 +29,7 @@
                   <td>{{ props.item.user.fullName}}</td>
                   <td>{{ props.item.user.phone}}</td>
                   <td>{{ props.item.assignmentId }}</td>
-                  <td>{{ convertDate(props.item.created) }}</td>
+                  <td>{{ props.item.created | timestampToDate }}</td>
                   <td>
                     <v-chip :color="getStatusColor(props.item.assignmentStatus)" >
                       {{ getStatusText(props.item.assignmentStatus) }}
@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import statuses, { statusesText } from "@/views/assignment/statuses"
-import moment from "moment";
+import statuses, { statusesText } from "@/views/assignment/statuses";
+
 export default {
   name: "assignment",
   data() {
@@ -102,9 +102,6 @@ export default {
     },
     getStatusText(status) {
       return statusesText[status];
-    },
-    convertDate(timeStamp) {
-      return moment(timeStamp).format('DD.MM.YYYY - HH:MM');
     }
   },
   mounted() {
