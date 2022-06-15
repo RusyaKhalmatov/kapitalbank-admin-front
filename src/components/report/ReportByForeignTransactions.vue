@@ -65,11 +65,11 @@
                 <p>{{ key }}:</p>
                 <span class="d-flex align-center column">
                   <p class="amount-text">Общая сумма:</p>
-                  <p class="amount-value">{{ item.amount / 100 | number-format }}</p>
+                  <p class="amount-value">{{ item.amount / 100 | numberFormat }}</p>
                 </span>
                 <span class="d-flex align-center column">
                   <p class="amount-text">Комиссия:</p>
-                  <p class="amount-value">{{ item.fee / 100 | number-format }}</p>
+                  <p class="amount-value">{{ item.fee / 100 | numberFormat }}</p>
                 </span>
               </span>
             </div>
@@ -89,17 +89,17 @@
                     <td>{{ props.item.id }}</td>
                     <td>{{ props.item.login }}</td>
                     <td>{{ props.item.userType }}</td>
-                    <td>{{ props.item.dateTime | timestamp-to-date }}</td>
+                    <td>{{ props.item.dateTime | timestampToDate }}</td>
                     <td>{{ props.item.sender }}</td>
                     <td>{{ props.item.receiver }}</td>
                     <td>{{ props.item.bank }}</td>
                     <td>{{ props.item.operationType }}</td>
                     <td>{{ props.item.senderCurrency }}</td>
-                    <td style="min-width:145px">{{ props.item.senderAmount / 100 | number-format }}</td>
+                    <td style="min-width:145px">{{ props.item.senderAmount / 100 | numberFormat }}</td>
                     <td>{{ props.item.receiverCurrency }}</td>
-                    <td style="min-width:145px">{{ props.item.receiverAmount / 100 | number-format }}</td>
+                    <td style="min-width:145px">{{ props.item.receiverAmount / 100 | numberFormat }}</td>
                     <td>{{ props.item.feeCurrency }}</td>
-                    <td>{{ props.item.feeAmount / 100 | number-format }}</td>
+                    <td>{{ props.item.feeAmount / 100 | numberFormat }}</td>
                     <td>{{ props.item.status }}</td>
                     <td>{{ props.item.platform }}</td>
                     <td>{{ props.item.appVersion }}</td>
@@ -147,8 +147,8 @@ export default {
       operationsHeaders: [
         {text: "ID", value: "id"},
         {text: "Login", value: "login"},
-        {text: "Тип клиента", value: "userType"},
         {text: "Дата и время", value: "dateTime"},
+        {text: "Статус", value: "status"},
         {text: "Отправитель", value: "sender"},
         {text: "Получатель", value: "receiver"},
         {text: "Банк получателя", value: "bank"},
@@ -159,7 +159,7 @@ export default {
         {text: "Сумма получателя", value: "receiverAmount"},
         {text: "Валюта комиссии", value: "feeCurrency"},
         {text: "Сумма комиссии", value: "feeAmount"},
-        {text: "Статус", value: "status"},
+        {text: "Тип клиента", value: "userType"},
         {text: "Платформа", value: "platform"},
         {text: "Версия", value: "appVersion"},
       ],
