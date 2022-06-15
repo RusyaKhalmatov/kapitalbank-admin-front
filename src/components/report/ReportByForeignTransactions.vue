@@ -3,16 +3,18 @@
     <v-flex xs12>
       <div class="main">
         <v-card-text>
+
           <h1 class="headline">По Внешним Транзакциям</h1>
 
           <v-layout row wrap>
-            <date-component @date="getDate"></date-component>
+
+            <date-component @date="getDate"/>
 
             <v-flex xs12>
               <v-select
                 label="Операции"
                 :items="operationTypes"
-                v-model="operationType"
+                v-model="selectedOperationType"
                 placeholder="Выберите опериции"
                 attach
                 chips outline
@@ -21,7 +23,7 @@
                 <template v-slot:prepend-item>
                   <v-list-tile ripple @click="toggle">
                     <v-list-tile-action>
-                      <v-icon :color="operationType.length > 0 ? 'primary' : ''">{{ icon }}</v-icon>
+                      <v-icon :color="selectedOperationType.length > 0 ? 'primary' : ''">{{ icon }}</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
                       <v-list-tile-title>Выбрать все</v-list-tile-title>
@@ -29,7 +31,6 @@
                   </v-list-tile>
                   <v-divider class="mt-2"></v-divider>
                 </template>
-
               </v-select>
             </v-flex>
 
@@ -54,7 +55,7 @@
                 name="p2pForeign.xls"
                 :stringify-long-num="true"
                 :stringifyLongNum="true"
-                :fields="operationExport"
+                :fields="operationExcelFields"
                 :data="excelData"
               />
             </div>
@@ -71,10 +72,10 @@
                   <p class="amount-value">{{ item.fee / 100 | number-format }}</p>
                 </span>
               </span>
-
             </div>
 
             <v-flex xs12 v-if="show">
+
               <v-data-table
                 :headers="operationsHeaders"
                 :items="transactions"
@@ -88,21 +89,24 @@
                     <td>{{ props.item.id }}</td>
                     <td>{{ props.item.login }}</td>
                     <td>{{ props.item.userType }}</td>
+                    <td>{{ props.item.dateTime | timestamp-to-date }}</td>
                     <td>{{ props.item.sender }}</td>
                     <td>{{ props.item.receiver }}</td>
                     <td>{{ props.item.bank }}</td>
                     <td>{{ props.item.operationType }}</td>
-                    <td>{{ props.item.currency }}</td>
-                    <td style="min-width:145px">{{ props.item.amount / 100 | number-format }}</td>
-                    <td>{{ props.item.fee / 100 | number-format }}</td>
+                    <td>{{ props.item.senderCurrency }}</td>
+                    <td style="min-width:145px">{{ props.item.senderAmount / 100 | number-format }}</td>
+                    <td>{{ props.item.receiverCurrency }}</td>
+                    <td style="min-width:145px">{{ props.item.receiverAmount / 100 | number-format }}</td>
+                    <td>{{ props.item.feeCurrency }}</td>
+                    <td>{{ props.item.feeAmount / 100 | number-format }}</td>
                     <td>{{ props.item.status }}</td>
                     <td>{{ props.item.platform }}</td>
                     <td>{{ props.item.appVersion }}</td>
-                    <td>{{ props.item.dateTime | timestamp-to-date }}</td>
                   </tr>
                 </template>
-
               </v-data-table>
+
               <v-pagination
                 v-if="transactions.length"
                 :disabled="loader"
@@ -110,13 +114,15 @@
                 v-model="page"
                 :length="totalPages"
                 :total-visible="10"
-              ></v-pagination>
+              />
+
             </v-flex>
+
           </v-layout>
         </v-card-text>
+
       </div>
     </v-flex>
-
   </v-layout>
 </template>
 
@@ -142,20 +148,23 @@ export default {
         {text: "ID", value: "id"},
         {text: "Login", value: "login"},
         {text: "Тип клиента", value: "userType"},
+        {text: "Дата и время", value: "dateTime"},
         {text: "Отправитель", value: "sender"},
         {text: "Получатель", value: "receiver"},
         {text: "Банк получателя", value: "bank"},
         {text: "Тип", value: "operationType"},
-        {text: "Валюта", value: "currency"},
-        {text: "Сумма", value: "amount"},
-        {text: "Сумма комиссии", value: "fee"},
+        {text: "Валюта отправителя", value: "senderCurrency"},
+        {text: "Сумма отправителя", value: "senderAmount"},
+        {text: "Валюта получателя", value: "receiverCurrency"},
+        {text: "Сумма получателя", value: "receiverAmount"},
+        {text: "Валюта комиссии", value: "feeCurrency"},
+        {text: "Сумма комиссии", value: "feeAmount"},
         {text: "Статус", value: "status"},
         {text: "Платформа", value: "platform"},
         {text: "Версия", value: "appVersion"},
-        {text: "Дата и время", value: "dateTime"}
       ],
       statusData: [],
-      operationType: [],
+      selectedOperationType: [],
       data: {
         status: [],
         operationType: [],
@@ -179,9 +188,9 @@ export default {
     toggle() {
       this.$nextTick(() => {
         if (this.likesAllFruit) {
-          this.operationType = [];
+          this.selectedOperationType = [];
         } else {
-          this.operationType = this.operationTypes;
+          this.selectedOperationType = this.operationTypes;
         }
       })
     },
@@ -196,17 +205,17 @@ export default {
 
     },
     getTypeOperations() {
-      this.$http.get(this.$store.state.prodApiUrl2 + '/report/transaction/operation-type')
+      this.$http.get(this.$store.state.prodApiUrl2 + '/report/transaction/foreign-operation-type')
         .then(response => {
           this.operationTypes = response.data.data;
-          this.operationType = this.operationTypes
+          this.selectedOperationType = this.operationTypes
         }, this.handleError);
     },
     load() {
       this.data.dateFrom = this.date.fromDate;
       this.data.dateTo = this.date.toDate;
       this.data.status = this.status;
-      this.data.operationType = this.operationType;
+      this.data.operationType = this.selectedOperationType;
       if (this.date.fromDate === "")
         delete this.data.dateFrom
       if (this.date.toDate === "")
@@ -243,7 +252,7 @@ export default {
       this.data.dateFrom = this.date.fromDate;
       this.data.dateTo = this.date.toDate;
       this.data.status = this.status;
-      this.data.operationType = this.operationType;
+      this.data.operationType = this.selectedOperationType;
       if (this.date.fromDate === "")
         delete this.data.dateFrom
       if (this.date.toDate === "")
@@ -264,52 +273,25 @@ export default {
   },
   computed: {
     likesAllFruit() {
-      return this.operationType.length === this.operationTypes.length
+      return this.selectedOperationType.length === this.operationTypes.length
     },
     likesSomeFruit() {
-      return this.operationType.length > 0 && !this.likesAllFruit
+      return this.selectedOperationType.length > 0 && !this.likesAllFruit
     },
     icon() {
       if (this.likesAllFruit) return 'mdi-close-box'
       if (this.likesSomeFruit) return 'mdi-minus-box'
       return 'mdi-checkbox-blank-outline'
     },
-    operationExport() {
-      let result = {};
-      for (let i = 0; i < this.operationsHeaders.length; i++) {
-        let currentHeader = this.operationsHeaders[i];
-        result[currentHeader.text] = currentHeader.value;
-      }
-      result['Сумма'] = {
-        field: "amount",
-        callback: value => {
-          return (value / 100).toString().replace('.', ',');
-        }
-      };
-      result['Отправитель'] = {
-        field: "sender",
-        callback: value => {
-          return "'" + value;
-        }
-      };
-      result['Получатель'] = {
-        field: "receiver",
-        callback: value => {
-          return "'" + value;
-        }
-      };
-      result['Сумма комиссии'] = {
-        field: "fee",
-        callback: value => {
-          return (value / 100).toString().replace('.', ',');
-        }
-      };
-      result['Дата и время'] = {
-        field: "dateTime",
-        callback: value => {
-          return new Date(parseInt(value)).toLocaleString();
-        }
-      };
+    operationExcelFields() {
+      const result = this.operationsHeaders.reduce((res, header) => ({...res, [header.text]: header.value}), {});
+      result['Дата и время'] = { field: "dateTime", callback: v => new Date(parseInt(v)).toLocaleString() };
+      result['Сумма отправителя'] = { field: "senderAmount", callback: v => (v / 100).toString().replace('.', ',') };
+      result['Сумма получателя'] = { field: "receiverAmount", callback: v => (v / 100).toString().replace('.', ',') };
+      result['Сумма комиссии'] = { field: "feeAmount", callback: v => (v / 100).toString().replace('.', ',') };
+      result['Отправитель'] = { field: "sender", callback: v => ("'" + v) };
+      result['Получатель'] = { field: "receiver", callback: v => ("'" + v) };
+
       return result;
     }
   },
