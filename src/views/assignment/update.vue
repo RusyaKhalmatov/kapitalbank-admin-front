@@ -59,7 +59,7 @@
 
               <v-toolbar color="grey" dark dense flat>
                 <v-toolbar-title class="text-body-2">
-                  {{ convertDate(item.created) }}
+                  {{ item.created | timestampToDate }}
                 </v-toolbar-title>
               </v-toolbar>
               <v-card-text>{{ item.message }}</v-card-text>
@@ -155,9 +155,6 @@ export default {
     },
     findAssignmentById(id) {
       return this.$store.getters.getAssignments.find((assignment) => assignment.assignmentId === id);
-    },
-    convertDate(timeStamp) {
-      return moment(timeStamp).format('HH:MM - DD.MM.YYYY');
     },
     getStatuses(status) {
       const {ACCEPTED, FAILED, SUCCESS} = statusesValue
