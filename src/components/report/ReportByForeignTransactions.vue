@@ -152,7 +152,7 @@ export default {
         {text: "Отправитель", value: "sender"},
         {text: "Получатель", value: "receiver"},
         {text: "Банк получателя", value: "bank"},
-        {text: "Тип", value: "operationType"},
+        {text: "Тип операции", value: "operationType"},
         {text: "Валюта отправителя", value: "senderCurrency"},
         {text: "Сумма отправителя", value: "senderAmount"},
         {text: "Валюта получателя", value: "receiverCurrency"},
@@ -195,7 +195,7 @@ export default {
       })
     },
     getStatus() {
-      this.$http.get(this.$store.state.prodApiUrl2 + `/report/transaction/status`)
+      this.$http.get(this.$store.state.prodApiUrl2 + `/report/foreign-transaction/status`)
         .then(response => {
           this.statusData = response.data.data;
           response.data.data.forEach(x => {
@@ -205,7 +205,7 @@ export default {
 
     },
     getTypeOperations() {
-      this.$http.get(this.$store.state.prodApiUrl2 + '/report/transaction/foreign-operation-type')
+      this.$http.get(this.$store.state.prodApiUrl2 + '/report/foreign-transaction/operation-type')
         .then(response => {
           this.operationTypes = response.data.data;
           this.selectedOperationType = this.operationTypes
@@ -228,7 +228,7 @@ export default {
       }
     },
     loadAmount() {
-      this.$http.post(this.$store.state.prodApiUrl2 + '/report/transaction/amount', this.data)
+      this.$http.post(this.$store.state.prodApiUrl2 + '/report/foreign-transaction/amount', this.data)
         .then(response => {
           this.operationAmount = response.data.data;
           this.show = true;
@@ -236,7 +236,7 @@ export default {
     },
     loadReports(page) {
       this.loader = true;
-      this.$http.post(this.$store.getters.newApiUrl2 + `/report/transaction?page=${page - 1}&size=10`, this.data)
+      this.$http.post(this.$store.getters.newApiUrl2 + `/report/foreign-transaction?page=${page - 1}&size=10`, this.data)
         .then(response => {
           this.loader = false;
           const operationsList = response.data.data;
@@ -257,7 +257,7 @@ export default {
         delete this.data.dateFrom
       if (this.date.toDate === "")
         delete this.data.dateTo
-      this.$http.post(this.$store.state.prodApiUrl2 + `/report/transaction/excel`, this.data)
+      this.$http.post(this.$store.state.prodApiUrl2 + `/report/foreign-transaction/excel`, this.data)
         .then(response => {
           this.loader = false;
           this.excelData = response.data.data;
