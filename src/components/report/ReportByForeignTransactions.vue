@@ -65,6 +65,7 @@
                 v-for="(item, key, index) in operationsAmount"
                 :key="index"
                 class="amount"
+                elevation="0"
               >
                 <v-card-title style="font-size: x-large">
                   {{key + ": " + item.senderAmount / 100 | numberFormat}}
@@ -132,12 +133,13 @@
               </v-data-table>
 
               <v-pagination
+                class="pagination"
                 v-if="transactions.length"
                 :disabled="loader"
-                class="pagination"
                 v-model="page"
                 :length="totalPages"
                 :total-visible="10"
+                v-on:input="this.loadReports"
               />
 
             </v-flex>
@@ -257,11 +259,7 @@ export default {
       if (this.date.toDate === "")
         delete this.data.dateTo;
       this.loadAmount();
-      if (this.page === 1) {
-        this.loadReports(1);
-      } else {
-        this.page = 1
-      }
+      this.loadReports(this.page);
     },
     loadAmount() {
       this.$http.post(this.$store.state.prodApiUrl2 + '/report/foreign-transaction/amount', this.data)
@@ -272,7 +270,7 @@ export default {
     },
     loadReports(page) {
       this.loader = true;
-      this.$http.post(this.$store.getters.newApiUrl2 + `/report/foreign-transaction?page=${page - 1}&size=10`, this.data)
+      this.$http.post(this.$store.getters.newApiUrl2 + `/report/foreign-transaction?page=${page - 1}&size=${this.pagination.rowsPerPage}`, this.data)
         .then(response => {
           this.loader = false;
           const operationsList = response.data.data;
