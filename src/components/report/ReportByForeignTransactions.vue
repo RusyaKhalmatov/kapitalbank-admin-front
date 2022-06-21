@@ -65,6 +65,7 @@
                 v-for="(item, key, index) in operationsAmount"
                 :key="index"
                 class="amount"
+                elevation="0"
               >
                 <v-card-title style="font-size: x-large">
                   {{key + ": " + item.senderAmount / 100 | numberFormat}}
