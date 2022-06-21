@@ -60,43 +60,43 @@
               />
             </div>
 
-            <v-card
-              v-if="show"
-              v-for="(item, key, index) in operationsAmount"
-              :key="index"
-              class="amount"
-            >
-              <v-card-title style="font-size: x-large">
-                {{key + ": " + item.senderAmount / 100 | numberFormat}}
-              </v-card-title>
+            <div v-if="show">
+              <v-card
+                v-for="(item, key, index) in operationsAmount"
+                :key="index"
+                class="amount"
+              >
+                <v-card-title style="font-size: x-large">
+                  {{key + ": " + item.senderAmount / 100 | numberFormat}}
+                </v-card-title>
 
-              <v-divider/>
+                <v-divider/>
 
-              <v-card-text style="display: flex; flex-direction: column">
+                <v-card-text style="display: flex; flex-direction: column">
 
-                <div  style="font-size: large">{{ "Комиссия: " + item.senderFeeAmount / 100 | numberFormat}}</div>
+                  <div  style="font-size: large">{{ "Комиссия: " + item.senderFeeAmount / 100 | numberFormat}}</div>
 
-                <v-container style="display: flex; flex-direction: column">
-                  <v-chip label outline color="black"
-                          style="font-size: medium"
-                  >
-                    UZS: {{item.receiverUSDAmount / 100 | numberFormat}}
-                  </v-chip>
-                  <v-chip label outline color="black"
-                          style="font-size: medium"
-                  >
-                    USD: {{ item.receiverUZSAmount / 100 | numberFormat }}
-                  </v-chip>
-                  <v-chip label outline color="black"
-                          style="font-size: medium"
-                  >
-                    EUR: {{ item.receiverEURAmount / 100 | numberFormat }}
-                  </v-chip>
-                </v-container>
+                  <v-container style="display: flex; flex-direction: column">
+                    <v-chip label outline color="black"
+                            style="font-size: medium"
+                    >
+                      UZS: {{item.receiverUSDAmount / 100 | numberFormat}}
+                    </v-chip>
+                    <v-chip label outline color="black"
+                            style="font-size: medium"
+                    >
+                      USD: {{ item.receiverUZSAmount / 100 | numberFormat }}
+                    </v-chip>
+                    <v-chip label outline color="black"
+                            style="font-size: medium"
+                    >
+                      EUR: {{ item.receiverEURAmount / 100 | numberFormat }}
+                    </v-chip>
+                  </v-container>
 
-              </v-card-text>
-            </v-card>
-
+                </v-card-text>
+              </v-card>
+            </div>
 
             <v-flex xs12 v-if="show">
 
