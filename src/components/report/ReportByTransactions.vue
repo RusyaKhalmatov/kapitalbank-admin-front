@@ -400,7 +400,7 @@ export default {
         {text: "Отправитель", value: "sender"},
         {text: "Получатель", value: "receiver"},
         {text: "Банк получателя", value: "bank"},
-        {text: "Тип", value: "operationType"},
+        {text: "Тип операции", value: "operationType"},
         {text: "Валюта", value: "currency"},
         {text: "Сумма", value: "amount"},
         {text: "Сумма комиссии", value: "fee"},
@@ -451,7 +451,6 @@ export default {
   },
   methods: {
     diffDates(date1, date2) {
-      // return Math.abs((date1-date2)/(60*60*24*1000))
       return Math.ceil(Math.abs(date2 - date1) / (1000 * 3600 * 24));
     },
     getChartsData() {
@@ -469,13 +468,11 @@ export default {
       self.$http.post(self.$store.state.prodApiUrl2 + '/report/transaction/excel', self.data)
         .then(response => {
           this.graphicData = response.data.data;
-          console.log(this.graphicData)
+
           const diffDate = this.diffDates(this.date.dateFrom, this.date.dateTo);
           if (diffDate != 1) {
             let date = new Date()
             let dayInMonth = 33 - new Date(date.getFullYear(), date.getMonth(), 33).getDate();
-            // console.log(dayInMonth)
-            // console.log('start')
             let selectedDay;
             let array = [];
             let arrayAmount = [];
@@ -483,32 +480,22 @@ export default {
             let i;
 
             for (i = 1; i <= dayInMonth; i++) {
-              // console.log(i, ' - ', dayInMonth)
               selectedDay = new Date(date.getFullYear(), (new Date(this.date.fromDate).getMonth()), i).getTime();
               let endDay = new Date(date.getFullYear(), (new Date(this.date.fromDate).getMonth()), i, 23, 59, 59).getTime();
               arrayDate.push(new Date(selectedDay).toLocaleDateString())
               array.push(this.graphicData.filter(x => (selectedDay <= x.dateTime) && (endDay >= x.dateTime)).length)
               let filteredArr = this.graphicData.filter(x => (selectedDay <= x.dateTime) && (endDay >= x.dateTime));
-              // console.log(filteredArr)
               var sum = 0;
               filteredArr.forEach(x => {
                 sum = sum + x.amount / 100;
               })
               arrayAmount.push(sum)
-              // console.log('arrayAmount')
-              console.log(arrayAmount)
-              // console.log(this.graphicData.filter(x=>(selectedDay<=x.dateTime)&&(endDay>=x.dateTime)))
-              // console.log('result: ', array)
             }
             this.chartdata.labels = arrayDate;
             this.chartdata.datasets[0].data = array;
             this.chartdata.datasets[1].data = arrayAmount;
 
             this.isShow = true;
-            console.log(array)
-            console.log(arrayDate);
-          } else {
-
           }
 
           this.chartLoader = true;
@@ -522,11 +509,6 @@ export default {
       this.amountData = [];
       this.show = false;
       this.operationAmount = {}
-      // console.log(this.date)
-      // if(this.page===1)
-      //     this.getRequisite(this.page);
-      // else
-      //     this.page = 1;
     },
     toggle() {
       this.$nextTick(() => {
@@ -540,7 +522,6 @@ export default {
     getStatus() {
       this.$http.get(this.$store.state.prodApiUrl2 + `/report/transaction/status`)
         .then(response => {
-          console.log(response.data.data);
           this.statusData = response.data.data;
           response.data.data.forEach(x => {
             this.status.push(x.key);
@@ -598,7 +579,6 @@ export default {
       self.$http.post(self.$store.state.prodApiUrl2 + '/report/transaction/amount', self.data)
         .then(response => {
           self.operationAmount = response.data.data;
-          console.log(response.data.data);
           this.show = true;
         }, self.handleError);
     },
@@ -612,14 +592,12 @@ export default {
         delete this.data.dateFrom
       if (this.date.toDate === "")
         delete this.data.dateTo
-      // this.data.operationType = this.operation.operationType;
       self.loadAmount();
       if (this.page === 1) {
         self.loadReports(1);
       } else {
         this.page = 1
       }
-      // this.getChartsData();
       this.isClick = true;
 
     },
@@ -638,8 +616,6 @@ export default {
       self.$http.post(self.$store.state.prodApiUrl2 + `/report/transaction/excel`, self.data)
         .then(response => {
           self.loader = false;
-          console.log("DATAS: ", response.data.data)
-          console.log("JSON: ", JSON.stringify(response.data.data))
           self.excelData = response.data.data;
           if (this.excelData.length != 0) {
             let elem = document.getElementById('excel');
@@ -653,8 +629,6 @@ export default {
     loadReports(page) {
       let self = this;
       self.loader = true;
-      // self.transactions = [];
-      console.log(this.operation)
       self.$http.post(self.$store.getters.newApiUrl2 + `/report/transaction?page=${page - 1}&size=10`, self.data)
         .then(response => {
           self.loader = false;
@@ -679,7 +653,6 @@ export default {
     },
     sortedAvailableFilter() {
       let self = this;
-      // return self.operationTypes.sort();
       return self.filterGroups;
     },
     likesAllFruit() {
@@ -772,7 +745,6 @@ export default {
   mounted() {
     this.getTypeOperations();
     this.getStatus();
-    // this.loadReports(1);
   }
 }
 </script>
