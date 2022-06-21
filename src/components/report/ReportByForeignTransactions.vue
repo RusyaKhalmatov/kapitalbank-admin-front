@@ -60,19 +60,43 @@
               />
             </div>
 
-            <div class="amount-box">
-              <span v-for="(item,key,index) in operationAmount" :key="index" class="amount-box-child">
-                <p>{{ key }}:</p>
-                <span class="d-flex align-center column">
-                  <p class="amount-text">Общая сумма:</p>
-                  <p class="amount-value">{{ item.amount / 100 | numberFormat }}</p>
-                </span>
-                <span class="d-flex align-center column">
-                  <p class="amount-text">Комиссия:</p>
-                  <p class="amount-value">{{ item.fee / 100 | numberFormat }}</p>
-                </span>
-              </span>
-            </div>
+            <v-card
+              v-if="show"
+              v-for="(item, key, index) in operationsAmount"
+              :key="index"
+              class="amount"
+            >
+              <v-card-title style="font-size: x-large">
+                {{key + ": " + item.senderAmount / 100 | numberFormat}}
+              </v-card-title>
+
+              <v-divider/>
+
+              <v-card-text style="display: flex; flex-direction: column">
+
+                <div  style="font-size: large">{{ "Комиссия: " + item.senderFeeAmount / 100 | numberFormat}}</div>
+
+                <v-container style="display: flex; flex-direction: column">
+                  <v-chip label outline color="black"
+                          style="font-size: medium"
+                  >
+                    UZS: {{item.receiverUSDAmount / 100 | numberFormat}}
+                  </v-chip>
+                  <v-chip label outline color="black"
+                          style="font-size: medium"
+                  >
+                    USD: {{ item.receiverUZSAmount / 100 | numberFormat }}
+                  </v-chip>
+                  <v-chip label outline color="black"
+                          style="font-size: medium"
+                  >
+                    EUR: {{ item.receiverEURAmount / 100 | numberFormat }}
+                  </v-chip>
+                </v-container>
+
+              </v-card-text>
+            </v-card>
+
 
             <v-flex xs12 v-if="show">
 
@@ -88,8 +112,8 @@
                   <tr @click="props.expanded = !props.expanded">
                     <td>{{ props.item.id }}</td>
                     <td>{{ props.item.login }}</td>
-                    <td>{{ props.item.userType }}</td>
                     <td>{{ props.item.dateTime | timestampToDate }}</td>
+                    <td>{{ props.item.status }}</td>
                     <td>{{ props.item.sender }}</td>
                     <td>{{ props.item.receiver }}</td>
                     <td>{{ props.item.bank }}</td>
@@ -100,7 +124,7 @@
                     <td style="min-width:145px">{{ props.item.receiverAmount / 100 | numberFormat }}</td>
                     <td>{{ props.item.feeCurrency }}</td>
                     <td>{{ props.item.feeAmount / 100 | numberFormat }}</td>
-                    <td>{{ props.item.status }}</td>
+                    <td>{{ props.item.userType }}</td>
                     <td>{{ props.item.platform }}</td>
                     <td>{{ props.item.appVersion }}</td>
                   </tr>
@@ -110,7 +134,7 @@
               <v-pagination
                 v-if="transactions.length"
                 :disabled="loader"
-                class="center"
+                class="pagination"
                 v-model="page"
                 :length="totalPages"
                 :total-visible="10"
@@ -134,7 +158,16 @@ export default {
   components: { DateComponent },
   data() {
     return {
-      operationAmount: {},
+      operationsAmount: {
+        RUB: {
+          countId: 0,
+          senderFeeAmount: 0,
+          senderAmount: 0,
+          receiverEURAmount: 0,
+          receiverUZSAmount: 0,
+          receiverUSDAmount: 0
+        }
+      },
       transactions: [],
       operationTypes: [],
       pagination: {
@@ -178,12 +211,15 @@ export default {
     }
   },
   methods: {
-    getDate(val) {
-      this.date = val;
+    resetValues() {
       this.transactions = [];
       this.totalPages = '';
       this.show = false;
-      this.operationAmount = {}
+      this.operationsAmount = {}
+    },
+    getDate(val) {
+      this.date = val;
+      this.resetValues();
     },
     toggle() {
       this.$nextTick(() => {
@@ -230,7 +266,7 @@ export default {
     loadAmount() {
       this.$http.post(this.$store.state.prodApiUrl2 + '/report/foreign-transaction/amount', this.data)
         .then(response => {
-          this.operationAmount = response.data.data;
+          this.operationsAmount = response.data.data;
           this.show = true;
         }, this.handleError);
     },
@@ -323,13 +359,8 @@ export default {
   flex-wrap: wrap;
 }
 
-small {
-  color: #9c9c9c;
-  font-weight: 400;
-  font-size: 14px;
-}
 
-.center {
+.pagination {
   display: flex;
   justify-content: center;
   margin: 15px;
@@ -342,32 +373,14 @@ small {
   color: #FFFF !important;
 }
 
-.amount-text {
-  margin: 0;
-  font-style: italic;
-  font-size: 16px;
+.amount {
+  min-width: 300px;
+  min-height: 300px;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 
-.amount-value {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0 7px;
-}
 
-.amount-box {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  flex-wrap: wrap;
-  margin: 10px 0 25px 0;
-}
-
-.amount-box-child {
-  padding: 10px 20px;
-  border: 1px solid silver;
-  border-radius: 17px;
-  margin: 10px 20px;
-}
 
 @media only screen and (max-width: 820px) {
 
@@ -377,16 +390,7 @@ small {
 
 }
 
-.column {
-  flex-direction: column;
-}
-
-.amount-box-child {
-  width: 310px;
-}
-
 h1 {
   margin-bottom: 5px;
 }
-
 </style>
