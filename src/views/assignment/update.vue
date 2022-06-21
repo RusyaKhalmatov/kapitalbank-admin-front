@@ -17,7 +17,7 @@
       <v-card-text >
 
         <v-text-field :value="assignment.assignmentId" label="ID заявки" readonly />
-        <v-text-field :value="convertDate(assignment.created)" label="Дата создания" readonly />
+        <v-text-field :value="assignment.created | timestampToDate" label="Дата создания" readonly />
         <v-text-field :value="assignment.user.id" label="ID Пользователя" readonly />
         <v-text-field :value="assignment.user.customerId" label="Уникальный код пользователя" readonly />
         <v-text-field :value="assignment.user.fullName" label="Ф.И.О" readonly />
@@ -59,7 +59,7 @@
 
               <v-toolbar color="grey" dark dense flat>
                 <v-toolbar-title class="text-body-2">
-                  {{ convertDate(item.created) }}
+                  {{ item.created | timestampToDate }}
                 </v-toolbar-title>
               </v-toolbar>
               <v-card-text>{{ item.message }}</v-card-text>
@@ -104,7 +104,7 @@
           color="yellow lighten-2"
           text
           @click="updateAssignment()"
-          :disabled="disableButton(this.assignment.assignmentStatus)"
+          :disabled="disableButton()"
         >
           Обновить
         </v-btn>
@@ -115,8 +115,6 @@
 </template>
 
 <script>
-
-import moment from "moment";
 import statuses, {statusesValue} from "@/views/assignment/statuses";
 
 export default {
@@ -156,9 +154,6 @@ export default {
     findAssignmentById(id) {
       return this.$store.getters.getAssignments.find((assignment) => assignment.assignmentId === id);
     },
-    convertDate(timeStamp) {
-      return moment(timeStamp).format('HH:MM - DD.MM.YYYY');
-    },
     getStatuses(status) {
       const {ACCEPTED, FAILED, SUCCESS} = statusesValue
       if (status === ACCEPTED) {
@@ -196,9 +191,9 @@ export default {
         .then(response => this.successMessage(response.data.data.message), this.handleError)
         .then(() => this.redirect('assignment'));
     },
-    disableButton(status) {
-      return ([statusesValue.FAILED, statusesValue.SUCCESS, statusesValue.ACCEPTED].includes(status)
-        && (this.status === statusesValue.ACCEPTED && status === statusesValue.ACCEPTED))
+    disableButton() {
+      return [statusesValue.SUCCESS, statusesValue.FAILED].includes(this.assignment.assignmentStatus)
+        || (this.status === statusesValue.ACCEPTED && this.assignment.assignmentStatus === statusesValue.ACCEPTED)
         || (this.status === statusesValue.FAILED && !this.failedMessage.length);
     },
     disableDetails(status) {

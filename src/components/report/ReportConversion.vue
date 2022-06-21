@@ -27,7 +27,7 @@
                                 <template v-slot:prepend-item>
                                     <v-list-tile ripple @click="toggle">
                                         <v-list-tile-action>
-                                            <v-icon :color="operationType.length > 0 ? 'primary' : ''">{{ icon }}</v-icon> 
+                                            <v-icon :color="operationType.length > 0 ? 'primary' : ''">{{ icon }}</v-icon>
                                         </v-list-tile-action>
                                         <v-list-tile-content>
                                             <v-list-tile-title>Выбрать все</v-list-tile-title>
@@ -35,7 +35,7 @@
                                     </v-list-tile>
                                     <v-divider class="mt-2"></v-divider>
                                 </template>
-                                    
+
                             </v-select>
                         </v-flex>
                         <v-flex xs12>
@@ -55,7 +55,7 @@
                                     <v-btn icon dark color="secondary">
                                         <v-icon>mdi-file-excel</v-icon>
                                     </v-btn>
-                                </download-excel> 
+                                </download-excel>
                         </div>
                         <v-layout row wrap>
                             <!-- <v-flex xs12 sm6 md6 lg6 xl6>
@@ -80,7 +80,7 @@
                                             <span :class="['mx-3', {'brd': index===0}]" v-for="(val, type, index) in item" :key="index">
                                                 <h2>{{type}}:</h2>
                                                 <span class="d-flex column" style="-ms-flex-wrap: wrap;flex-wrap: wrap">
-                                                    <p class="amount-text">Общая сумма:</p>                                                    
+                                                    <p class="amount-text">Общая сумма:</p>
                                                     <p class="amount-value">{{val.sum / 100 | number-format}}</p>
                                                 </span>
                                                 <span class="d-flex column" style="-ms-flex-wrap: wrap;flex-wrap: wrap">
@@ -92,7 +92,7 @@
                                                     <p class="amount-value">{{val.other / 100 | number-format}}</p>
                                                 </span>
                                             </span>
-                                            <v-divider                                            
+                                            <v-divider
                                                 class="mx-4"
                                                 vertical
                                             ></v-divider>
@@ -112,7 +112,7 @@
                                     </v-flex> -->
                                 </v-layout>
                             </v-flex>
-                            <v-flex xs12 v-if="result">                               
+                            <v-flex xs12 v-if="result">
                                 <v-text-field
                                         v-model="search"
                                         prepend-icon="mdi-magnify"
@@ -122,7 +122,7 @@
                                         :headers="conversionHeader"
                                         :items="result.content"
                                         v-if="result.content"
-                                        :loading="loader"                                        
+                                        :loading="loader"
                                         :pagination.sync="pagination"
                                         hide-actions
                                         >
@@ -130,7 +130,8 @@
                                         <tr @click="props.expanded = !props.expanded">
                                             <td>{{props.item.id}}</td>
                                             <td>{{props.item.userId}}</td>
-                                            <td style="font-size:10px">{{props.item.username}}</td>                                            
+                                            <td>{{props.item.customerId}}</td>
+                                            <td style="font-size:10px">{{props.item.username}}</td>
                                             <td>{{props.item.login}}</td>
                                             <td>{{props.item.city}}</td>
                                             <td>{{props.item.sender}}</td>
@@ -163,7 +164,7 @@
                                 v-model="page"
                                 :length="totalPages"
                                 :total-visible="10"
-                                ></v-pagination>                            
+                                ></v-pagination>
                             </v-flex>
                         </v-layout>
                     </v-flex>
@@ -185,6 +186,7 @@
                 conversionHeader: [
                     {text: "ID транзакции", value: "id"},
                     {text: "ID клиента", value: "userId"},
+                    {text: "Customer ID", value: "customerId"},
                     {text: "Имя", value: "username"},
                     {text: "Login", value: "login"},
                     {text: "Город", value: "city"},
@@ -192,11 +194,11 @@
                     {text: "Получатель", value: "receiver"},
                     {text: "Тип операции", value: "operationType"},
                     {text: "Сумма отправителя", value: "senderAmount"},
-                    // {text: "Валюта отправителя", value: "senderCurrency"},                    
+                    // {text: "Валюта отправителя", value: "senderCurrency"},
                     {text: "Сумма получателя", value: "receiverAmount"},
                     // {text: "Валюта получателя", value: "receiverCurrency"},
                     {text: "Вознаграждения", value: "fee"},
-                    // {text: "Валюта комиссии", value: "senderFeeCurrency"},                    
+                    // {text: "Валюта комиссии", value: "senderFeeCurrency"},
                     {text: "Статус", value: "operationStatus"},
                     {text: "Платформа", value: "platform"},
                     {text: "Версия", value: "appVersion"},
@@ -224,7 +226,7 @@
                 totalPages: 0,
                 page: 1,
                 loader: false,
-                isSearch: false,            
+                isSearch: false,
                 excelData: [],
                 date:{},
                 operationType: [],
@@ -276,7 +278,7 @@
             load() {
                 let dateFrom =  this.date.fromDate;
                 let dateTo = this.date.toDate;
-                
+
                 Object.assign(this.postData, {
                     dateFrom :  dateFrom,
                     dateTo : dateTo,
@@ -291,7 +293,7 @@
                 this.getConversionDataAmount();
                 if(this.page===1)
                     this.getConversionData(1);
-                else    
+                else
                     this.page = 1;
             },
             getStatus(){
@@ -300,7 +302,7 @@
                     console.log(response.data.data);
                     this.statusData = response.data.data;
                     response.data.data.forEach(x=>{
-                        this.status.push(x.key);                        
+                        this.status.push(x.key);
                     })
                 }, this.handleError)
 
@@ -317,7 +319,7 @@
                         setTimeout(()=>{
                             elem.click();
                         }, 500)
-                    
+
                     }
                     this.loader = false;
                 },this.handleError)
@@ -329,7 +331,7 @@
                     .then(response => {
                         self.result = response.data.data;
                         self.totalPages = response.data.data.totalPages;
-                    
+
                         self.loader = false;
                     }, self.handleError);
             },
@@ -438,19 +440,19 @@
                     callback: value => {
                         return value;
                     }
-                };    
+                };
                 result['Валюта получателя'] = {
                     field: "receiverCurrency",
                     callback: value => {
                         return value;
                     }
-                };       
+                };
                 result['Валюта комиссии'] = {
                     field: "senderFeeCurrency",
                     callback: value => {
                         return value;
                     }
-                };                                 
+                };
                 return result;
             },
             likesAllFruit(){
@@ -493,7 +495,7 @@
         margin: 15px 0;
         -ms-flex-wrap: wrap;
             flex-wrap: wrap;
-    } 
+    }
     .center{
         display: -webkit-box;
         display: -ms-flexbox;
@@ -504,7 +506,7 @@
         margin: 15px;
         -ms-flex-wrap: wrap;
             flex-wrap: wrap;
-    }    
+    }
     .amount-text{
         margin: 0;
         width: 195px;
@@ -573,7 +575,7 @@
     @media only screen and (max-width: 820px){
         .v-btn{
             margin: 5px 10px 5px 0px !important;
-            
+
         }
         .brd{
             border: 0;
@@ -610,5 +612,5 @@
 
         }
     }
-    
+
 </style>
