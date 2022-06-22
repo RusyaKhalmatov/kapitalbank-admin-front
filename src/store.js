@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import menu from './menu';
+import api from './api';
 
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -18,21 +19,7 @@ export default new Vuex.Store({
     userName: '',
     toolbar: true,
 
-    prodApiUrl: 'https://online.kapitalbank.uz/api',
-    prodApiUrl2: 'http://192.168.132.12:8091/api',
-    apiUrl: 'http://192.168.132.12:8091/api',
-    api5Url: 'http://192.168.132.5:7072/api',
-    avtoApiUrl: 'https://dev.kapitalbank.uz/api',
-    newApiUrl: 'http://192.168.132.12:8091/api',
-    chatApiUrl: 'http://192.168.132.12:8091/api',
-    apiStomp: 'http://192.168.120.23:8082/ws',
-    telegramBotUrl: 'http://192.168.120.9:8077/api',
-    ecommerceUrl: 'https://api.kapitalbank.uz/api',
-    ucellUrl: 'https://ek.kapitalbank.uz/api',
-    ucellApiUrl: 'http://192.168.118.34:8079/api',
-    beelineUrl: 'http://192.168.120.22:8078/api',
-    loyaltyUrl: 'http://192.168.132.12:8091/api',
-    newChatApiUrl: 'http://192.168.120.14:8081/api',
+    ...api,
 
     message: '',
     color: '',

@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "start": "npm-recursive-install && npm run build && node server/app.js dist",
-    "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build ",
+    "dev": "vue-cli-service serve --mode=development",
+    "dev-prod": "vue-cli-service serve --mode=production",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "copy-dist": "shx cp -r dist admin_panel_build",
     "copy-server": "shx cp -r server admin_panel_build/server && rm admin_panel_build/server/package*",

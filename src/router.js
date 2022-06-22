@@ -1,13 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Login from "./views/Login";
 import Settings from "./views/Settings";
 import Profile from "./views/Profile";
 import Deposit from "./views/Deposit";
 import CurrencyRates from "./views/CurrencyRates";
 import Bank from "./views/Bank";
-// import Loan from "./views/Loan";
 import PaynetCategory from "./views/PaynetCategory";
 import PaynetServices from "./views/PaynetServices";
 import Chat from "./views/Chat";
@@ -16,42 +14,29 @@ import CardProduct from "./views/CardProduct";
 import Branch from "./views/Branch";
 import DepositType from "./views/DepositType";
 import Story from "./views/Story";
-import Stories from './views/Stories';
-import eposRevise from "./views/EposRevise.vue";
 import Reverse from './views/Reverse.vue';
 import Antifraud from './views/Antifraud';
 import avtoloan from './views/avtoloan';
-import Publishings from './views/Publishings';
-import terminalAdd from './views/TerminalAdd';
 import ShowBalance from './views/ShowBalance';
 import UsersByAddedCards from './views/UsersByAddedCards';
 import CheckService from './views/CheckService';
-import WhiteList from './views/WhiteList';
-import ExternalHistoryStatistic from './views/ExternalHistoryStatistic';
 import Cache from './views/Cache';
-import EposHistory from './views/EposHistory'
-import Publication from './views/Publication.vue'
-import Faq from './views/Faq'
-import Countries from './views/Countries.vue'
-import SocialMedia from './views/SocialMedia.vue'
-import LocalPaymentCategory from './views/LocalPaymentCategory.vue'
-import MarketProviders from './views/MarketProviders.vue'
-import Weather from './views/Weather.vue'
-import BannedWords from './views/BannedWords.vue'
-import Autonotifications from './views/Autonotifications.vue'
+import Faq from './views/Faq';
+import Countries from './views/Countries.vue';
+import SocialMedia from './views/SocialMedia.vue';
+import LocalPaymentCategory from './views/LocalPaymentCategory.vue';
+import Autonotifications from './views/Autonotifications.vue';
 
 import DepositProductForm from "./components/deposit/DepositProductForm";
 import BankForm from "./components/bank/BankForm";
 import PaynetCategoryForm from "./components/paynet/PaynetCategoryForm";
 import PaynetServicesForm from "./components/paynet/PaynetServicesForm";
 import ServiceCategory from "./components/paynet/ServiceCategory";
-import Logs from "./components/logs/Logs";
-import Clients from "./components/clients/Clients";
 import Chatting from "./components/chat/Chatting";
 import OperationCodes from "./components/operations/OperationCodes";
 import OperationCodesForm from "./components/operations/OperationCodesForm";
 import Report from "./components/report/Report";
-import Chatbot from "./components/chat/Chatbot"
+import Chatbot from "./components/chat/Chatbot";
 import ReportAllBanks from "./components/report/ReportAllBanks";
 import ReportByActiveClients from "./components/report/ReportByActiveClients";
 import ReportByTransactions from "./components/report/ReportByTransactions";
@@ -63,7 +48,7 @@ import ReportRegisteredUsers from "./components/report/ReportRegisteredUsers";
 import ReportConversion from "./components/report/ReportConversion";
 import ReportCrossConversion from "./components/report/ReportCrossConversion";
 import BranchForm from "./components/branch/BranchForm";
-import atm from "./components/atm/atm"
+import atm from "./components/atm/atm";
 import atmForm from "./components/atm/atmForm";
 import ClientForm from "./components/clients/ClientForm";
 import ClientCredential from "./components/clients/ClientCredential";
@@ -73,7 +58,7 @@ import BlockedDevices from "./components/blockedDevices/BlockedDevices";
 import BlockedAccount from "./components/blockedAccount/BlockedAccount";
 import Notification from "./components/notification/Notification";
 import NotificationForm from "./components/notification/NotificationForm";
-import NotificationStatistics from './components/notification/NotificationStatistics'
+import NotificationStatistics from './components/notification/NotificationStatistics';
 import Messages from "./components/messages/Messages";
 import MessagesForm from "./components/messages/MessagesForm";
 import VipClients from "./components/VipClients/VipClients";
@@ -82,18 +67,13 @@ import PartialVipClientsForm from "./components/VipClients/PartialVipClientsForm
 import VipClientsForm from "./components/VipClients/VipClientsForm";
 import Limits from "./components/limits/Limits";
 import LimitsForm from "./components/limits/LimitsForm";
-import ServiceLimits from "./components/limits/ServiceLimits"
-import EPOS from "./components/epos/EPOS";
-import EPOSform from "./components/epos/EPOSform";
+import ServiceLimits from "./components/limits/ServiceLimits";
 import Commission from "./components/commision/Commission";
 import CommissionForm from "./components/commision/CommissionForm";
 import DepositTypeForm from "./components/depositType/DepositTypeForm";
 import StoryForm from "./components/story/StoryForm";
 import ExternalServices from "./components/externalServices/ExternalServices";
 import CardHistory from "./components/cardHistory/CardHistory";
-import TelegramButtons from "./components/telegram/TelegramButtons";
-import telegramMessages from "./components/telegram/TelegramMessages";
-import telegramSendMessages from "./components/telegram/TelegramSendMessages";
 import pivotTable from "./components/report/pivotTable";
 import newPivotTable from "./components/report/newPivotTable";
 import reportOfDeposit from "./components/report/ReportOfDeposit";
@@ -101,39 +81,24 @@ import reportOfCredit from "./components/report/ReportOfCredit";
 import reportVisaDirect from "./components/report/ReportVisaDirect";
 import reportMoneySend from "./components/report/ReportMoneySend";
 import FailedRegistration from "./components/report/ReportFailedRegistration";
-import ReportUcellComponent from "./components/report/ReportUcellComponent";
-import ArchiveChat from './components/chat/ArchiveChat'
-import ChatStaffMonitoring from './components/chat/ChatStaffMonitoring'
-import ChatDataMonitoring from './components/chat/ChatDataMonitoring'
-import LoyaltyRecommended from './components/loyalty/LoyaltyRecommended'
-import RecommendedStatus from './components/loyalty/RecommendedStatus'
-import LoyaltyLevels from './components/loyalty/LoyaltyLevels'
-import ServiceProviders from './components/loyalty/ServiceProviders'
-import MeasurementUnit from './components/loyalty/MeasurementUnit'
-import LoyaltyFilterAccount from './components/loyalty/LoyaltyFilterAccount'
-import LoyaltyFilterTariffs from './components/loyalty/LoyaltyFilterTariffs'
-import LoyaltyFilterTransactions from './components/loyalty/LoyaltyFilterTransactions'
-import specialClients from './components/loyalty/SpecialClients'
-import CategoryList from './components/loyalty/CategoryList'
+import ArchiveChat from './components/chat/ArchiveChat';
+import ChatStaffMonitoring from './components/chat/ChatStaffMonitoring';
+import ChatDataMonitoring from './components/chat/ChatDataMonitoring';
+import LoyaltyFilterAccount from './components/loyalty/LoyaltyFilterAccount';
+import LoyaltyFilterTariffs from './components/loyalty/LoyaltyFilterTariffs';
+import LoyaltyFilterTransactions from './components/loyalty/LoyaltyFilterTransactions';
 import VirtualCards from './components/virtual/VirtualCards';
-import Tariffs from './components/loyalty/Tariffs'
-import LoyaltyRates from './components/loyalty/LoyaltyRates'
-import LoyaltyBankServices from './components/loyalty/LoyaltyBankServices'
-import Bonus from './components/loyalty/Bonus'
-import CardProductOrder from './components/cardProduct/CardProductOrder'
-import ReportBySummery from './components/cardProduct/ReportBySummery'
+import CardProductOrder from './components/cardProduct/CardProductOrder';
+import ReportBySummery from './components/cardProduct/ReportBySummery';
 import employeeList from './components/employeeList/employeeList';
-import employeesList from './components/employeeList/employeesList'
+import employeesList from './components/employeeList/employeesList';
 import detail from './components/avtoloan/detail';
-import virtualCardAccountType from './components/cardHistory/VirtualCardAccountType'
-import AccountWalletHistory from './components/cardHistory/AccountWalletHistory'
-import virtualCardHistory from './components/cardHistory/VirtualCardHistory'
-import ReportRequisite from './components/report/ReportRequisite'
-import ReportBeeline from './components/report/ReportBeeline'
-import ReportUcell from './components/report/ReportUcell'
-import ReportP2pUcell from './components/report/ReportP2pUcell'
-import CreditAsia from './components/report/CreditAsia'
-
+import virtualCardAccountType from './components/cardHistory/VirtualCardAccountType';
+import AccountWalletHistory from './components/cardHistory/AccountWalletHistory';
+import virtualCardHistory from './components/cardHistory/VirtualCardHistory';
+import ReportRequisite from './components/report/ReportRequisite';
+import ReportP2pUcell from './components/report/ReportP2pUcell';
+import CreditAsia from './components/report/CreditAsia';
 
 Vue.use(Router);
 
@@ -455,7 +420,12 @@ export default new Router({
     {
       path: "/reportTransactions",
       name: "reportTransactions",
-      component: ReportByTransactions,
+      component: () => import('@/components/report/ReportByTransactions'),
+    },
+    {
+      path: "/reportForeignTransactions",
+      name: "reportForeignTransactions",
+      component: () => import('@/components/report/ReportByForeignTransactions'),
     },
     {
       path: "/reportDeposit",
