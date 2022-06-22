@@ -4,7 +4,7 @@
       <div class="main">
         <v-card-text>
 
-          <h1 class="headline">По Внешним Транзакциям</h1>
+          <h1 class="headline">Paygine</h1>
 
           <v-layout row wrap>
 
@@ -81,12 +81,12 @@
                     <v-chip label outline color="black"
                             style="font-size: medium"
                     >
-                      UZS: {{item.receiverUSDAmount / 100 | numberFormat}}
+                      UZS: {{ item.receiverUZSAmount / 100 | numberFormat}}
                     </v-chip>
                     <v-chip label outline color="black"
                             style="font-size: medium"
                     >
-                      USD: {{ item.receiverUZSAmount / 100 | numberFormat }}
+                      USD: {{ item.receiverUSDAmount / 100 | numberFormat }}
                     </v-chip>
                     <v-chip label outline color="black"
                             style="font-size: medium"
