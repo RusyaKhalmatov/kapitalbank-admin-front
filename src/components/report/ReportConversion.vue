@@ -58,20 +58,6 @@
                                 </download-excel>
                         </div>
                         <v-layout row wrap>
-                            <!-- <v-flex xs12 sm6 md6 lg6 xl6>
-                                <h1 class="text-xs-left text-sm-left text-md-left text-lg-left text-xl-left mb">
-                                    <small>Общая Сумма UZS: </small><br>
-                                    {{resultAmount.totalAmountUZS / 100 | number-format }}
-                                </h1>
-                                <hr>
-                            </v-flex>
-                            <v-flex xs12 sm6 md6 lg6 xl6>
-                                <h1 class="text-xs-left text-sm-right text-md-right text-lg-right text-xl-right mb">
-                                    <small>Общая Сумма USD: </small><br>
-                                    {{resultAmount.totalAmountUSD / 100 | number-format }}
-                                </h1>
-                                <hr>
-                            </v-flex> -->
                             <v-flex xs12>
                                 <v-layout justify-center wrap>
                                     <div class="box" v-for="(item, value, i) in resultAmount" :key="i">
@@ -81,15 +67,15 @@
                                                 <h2>{{type}}:</h2>
                                                 <span class="d-flex column" style="-ms-flex-wrap: wrap;flex-wrap: wrap">
                                                     <p class="amount-text">Общая сумма:</p>
-                                                    <p class="amount-value">{{val.sum / 100 | number-format}}</p>
+                                                    <p class="amount-value">{{val.sum / 100 | numberFormat}}</p>
                                                 </span>
                                                 <span class="d-flex column" style="-ms-flex-wrap: wrap;flex-wrap: wrap">
                                                     <p class="amount-text">Сумма карты наших банков:</p>
-                                                    <p class="amount-value">{{val.our / 100 | number-format}}</p>
+                                                    <p class="amount-value">{{val.our / 100 | numberFormat}}</p>
                                                 </span>
                                                 <span class="d-flex column" style="-ms-flex-wrap: wrap;flex-wrap: wrap">
                                                     <p class="amount-text">Сумма карты друних банков:</p>
-                                                    <p class="amount-value">{{val.other / 100 | number-format}}</p>
+                                                    <p class="amount-value">{{val.other / 100 | numberFormat}}</p>
                                                 </span>
                                             </span>
                                             <v-divider
@@ -97,27 +83,20 @@
                                                 vertical
                                             ></v-divider>
                                         </span>
-                                        <!-- <h3 class="mb">
-                                            <small>Сумма UZS карты нашего банка: </small><br>
-                                            {{resultAmount.ourBankAmountTo / 100| number-format}}
-                                        </h3>
-                                        <hr> -->
+
                                     </div>
-                                    <!-- <v-flex xs12 xm12 md6 lg6 xl6>
-                                        <h3 class="mb">
-                                            <small>Сумма UZS карты других банков: </small><br>
-                                            {{resultAmount.otherBankAmountTo / 100| number-format}}
-                                        </h3>
-                                        <hr>
-                                    </v-flex> -->
+
                                 </v-layout>
                             </v-flex>
+
                             <v-flex xs12 v-if="result">
+
                                 <v-text-field
                                         v-model="search"
                                         prepend-icon="mdi-magnify"
                                         v-if="result.content"
                                         label="Поиск"/>
+
                                 <v-data-table
                                         :headers="conversionHeader"
                                         :items="result.content"
