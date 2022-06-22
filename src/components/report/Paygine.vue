@@ -4,7 +4,7 @@
       <div class="main">
         <v-card-text>
 
-          <h1 class="headline">По Внешним Транзакциям</h1>
+          <h1 class="headline">Paygine</h1>
 
           <v-layout row wrap>
 
@@ -81,12 +81,12 @@
                     <v-chip label outline color="black"
                             style="font-size: medium"
                     >
-                      UZS: {{item.receiverUSDAmount / 100 | numberFormat}}
+                      UZS: {{ item.receiverUZSAmount / 100 | numberFormat}}
                     </v-chip>
                     <v-chip label outline color="black"
                             style="font-size: medium"
                     >
-                      USD: {{ item.receiverUZSAmount / 100 | numberFormat }}
+                      USD: {{ item.receiverUSDAmount / 100 | numberFormat }}
                     </v-chip>
                     <v-chip label outline color="black"
                             style="font-size: medium"
@@ -113,11 +113,11 @@
                   <tr @click="props.expanded = !props.expanded">
                     <td>{{ props.item.id }}</td>
                     <td>{{ props.item.login }}</td>
+                    <td>{{ props.item.customerId }}</td>
                     <td>{{ props.item.dateTime | timestampToDate }}</td>
                     <td>{{ props.item.status }}</td>
                     <td>{{ props.item.sender }}</td>
                     <td>{{ props.item.receiver }}</td>
-                    <td>{{ props.item.bank }}</td>
                     <td>{{ props.item.operationType }}</td>
                     <td>{{ props.item.senderCurrency }}</td>
                     <td style="min-width:145px">{{ props.item.senderAmount / 100 | numberFormat }}</td>
@@ -182,11 +182,11 @@ export default {
       operationsHeaders: [
         {text: "ID", value: "id"},
         {text: "Login", value: "login"},
+        {text: "Customer ID", value: "customerId"},
         {text: "Дата и время", value: "dateTime"},
         {text: "Статус", value: "status"},
         {text: "Отправитель", value: "sender"},
         {text: "Получатель", value: "receiver"},
-        {text: "Банк получателя", value: "bank"},
         {text: "Тип операции", value: "operationType"},
         {text: "Валюта отправителя", value: "senderCurrency"},
         {text: "Сумма отправителя", value: "senderAmount"},
