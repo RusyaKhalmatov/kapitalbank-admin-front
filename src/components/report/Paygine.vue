@@ -94,7 +94,7 @@
                       EUR: {{ item.receiverEURAmount / 100 | numberFormat }}
                     </v-chip>
                   </v-container>
-
+                  <p class="amount-status">Успешно</p>
                 </v-card-text>
               </v-card>
             </div>
@@ -262,8 +262,11 @@ export default {
       this.loadReports(this.page);
     },
     loadAmount() {
-      this.$http.post(this.$store.state.prodApiUrl2 + '/report/foreign-transaction/amount', this.data)
-        .then(response => {
+      this.$http.post(this.$store.state.prodApiUrl2 + '/report/foreign-transaction/amount',
+        {
+          ...this.data, ...{ status:['SUCCESS'] }
+        }
+      ).then(response => {
           this.operationsAmount = response.data.data;
           this.show = true;
         }, this.handleError);
@@ -376,9 +379,14 @@ export default {
   min-height: 300px;
   margin-left: 20px;
   margin-bottom: 20px;
+  border: 1px solid #4caf50;
 }
 
-
+.amount-status {
+  text-align: center;
+  font-size: large;
+  color: #4caf50;
+}
 
 @media only screen and (max-width: 820px) {
 
