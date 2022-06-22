@@ -39,7 +39,6 @@ import Report from "./components/report/Report";
 import Chatbot from "./components/chat/Chatbot";
 import ReportAllBanks from "./components/report/ReportAllBanks";
 import ReportByActiveClients from "./components/report/ReportByActiveClients";
-import ReportByTransactions from "./components/report/ReportByTransactions";
 import ReportDeposit from "./components/report/ReportDeposit";
 import ReportCredit from "./components/report/ReportCredit";
 import ReportService from "./components/report/ReportService";
@@ -423,9 +422,9 @@ export default new Router({
       component: () => import('@/components/report/ReportByTransactions'),
     },
     {
-      path: "/reportForeignTransactions",
-      name: "reportForeignTransactions",
-      component: () => import('@/components/report/ReportByForeignTransactions'),
+      path: "/paygine",
+      name: "paygine",
+      component: () => import('@/components/report/Paygine'),
     },
     {
       path: "/reportDeposit",
