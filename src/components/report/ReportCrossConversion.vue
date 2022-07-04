@@ -279,7 +279,6 @@ export default {
         },
         load() {
             this.page = 1;
-            this.preparePostData();
             this.getConversionDataAmount();
             this.getConversionData();
         },
@@ -320,7 +319,7 @@ export default {
         },
         getConversionData() {
             this.loader = true;
-            console.log(this.postData);
+            this.preparePostData();
             this.$http.post(
                 this.$store.getters.newApiUrl2
                 + `/report/crossconversion?page=${this.page - 1}&size=${this.pagination.rowsPerPage}`,
@@ -333,6 +332,7 @@ export default {
         },
         getConversionDataAmount() {
             // this.conversionAmount = [];
+            // this.preparePostData();
             // this.$http.post(this.$store.getters.newApiUrl2 + '/report/conversion/amount,
             // {...this.postData, search: this.search})
             //     .then(response => {

@@ -308,13 +308,13 @@
                     }, this.handleError);
             },
             getConversionDataAmount() {
-                this.preparePostData();
-                this.conversionAmount = [];
-                this.$http.post(this.$store.getters.newApiUrl2 + '/report/conversion/amount',
-                {...this.postData, search: this.search})
-                    .then(response => {
-                        this.conversionAmount = response.data.data;
-                    }, this.handleError);
+                // this.preparePostData();
+                // this.conversionAmount = [];
+                // this.$http.post(this.$store.getters.newApiUrl2 + '/report/conversion/amount',
+                // {...this.postData, search: this.search})
+                //     .then(response => {
+                //         this.conversionAmount = response.data.data;
+                //     }, this.handleError);
             },
             getOperationTypes() {
                 this.operationType = [];
