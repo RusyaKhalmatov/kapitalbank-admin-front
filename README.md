@@ -19,7 +19,6 @@ $ npm start
 - open in browser `http://localhost:8882`
 
 ## Develop
-
 ```bash
 # run command
 $ npm run dev

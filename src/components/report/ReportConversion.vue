@@ -45,7 +45,7 @@
                             <v-card class="d-flex flex-wrap">
                                 <v-card-title style="font-size: large">Статус конвертации:</v-card-title>
                                 <v-checkbox
-                                    v-for="(item, index) in statusData"
+                                    v-for="(item, index) in statusesData"
                                     :key="index"
                                     v-model="statuses"
                                     :label="item.value"
@@ -198,12 +198,6 @@
                     {text: "Версия", value: "appVersion"},
                 ],
                 filterGroups: [],
-                conversionData: {
-                    dateStart: null,
-                    dateEnd: (new Date).toLocaleString(),
-                    operationType: [],
-                    status: ['SUCCESS']
-                },
                 pagination: {
                   sortBy: "createdDate",
                   descending: true,
@@ -228,7 +222,7 @@
                 date:{},
                 operationType: [],
                 operationTypes: [],
-                statusData: [],
+                statusesData: [],
                 statuses: [],
             }
         },
@@ -244,7 +238,7 @@
             statuses(statuses) {
                 this.table = [];
                 if (statuses.length === 0) {
-                    this.statuses = this.statusData.map(status => status.key);
+                    this.statuses = this.statusesData.map(status => status.key);
                 }
             },
             operationType() {
@@ -263,7 +257,6 @@
             },
             load() {
                 this.page = 1;
-                this.preparePostData()
                 this.getConversionDataAmount();
                 this.getConversionData();
             },
@@ -273,16 +266,14 @@
                     dateFrom :  this.date.fromDate === '' ? Date.now() : this.date.fromDate,
                     dateTo : this.date.toDate === '' ? Date.now() : this.date.toDate,
                     operationType: this.operationType,
-                    status: this.statuses
+                    statuses: this.statuses
                 };
             },
             getStatuses(){
                 this.$http.get(this.$store.getters.newApiUrl2 + `/report/conversion/status`)
                 .then(response => {
-                    this.statusData = response.data.data;
-                    response.data.data.forEach( x => {
-                        this.statuses.push(x.key);
-                    })
+                    this.statusesData = response.data.data;
+                    this.statuses = this.statusesData.map(status => status.key);
                 }, this.handleError)
             },
             getExcel(){
@@ -305,6 +296,7 @@
             },
             getConversionData() {
                 this.loader = true;
+                this.preparePostData();
                 this.$http.post(
                     this.$store.getters.newApiUrl2
                     + `/report/conversion?page=${this.page - 1}&size=${this.pagination.rowsPerPage}`,
@@ -316,12 +308,13 @@
                     }, this.handleError);
             },
             getConversionDataAmount() {
-                // this.conversionAmount = [];
-                // this.$http.post(this.$store.getters.newApiUrl2 + '/report/conversion/amount?q='+this.search,
-                // {...this.postData, search: this.search})
-                //     .then(response => {
-                //         this.conversionAmount = response.data.data;
-                //     }, this.handleError);
+                this.preparePostData();
+                this.conversionAmount = [];
+                this.$http.post(this.$store.getters.newApiUrl2 + '/report/conversion/amount',
+                {...this.postData, search: this.search})
+                    .then(response => {
+                        this.conversionAmount = response.data.data;
+                    }, this.handleError);
             },
             getOperationTypes() {
                 this.operationType = [];
