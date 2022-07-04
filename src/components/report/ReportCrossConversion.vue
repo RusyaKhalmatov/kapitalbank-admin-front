@@ -46,7 +46,7 @@
                             <v-card class="d-flex flex-wrap">
                                 <v-card-title style="font-size: large">Статус конвертации:</v-card-title>
                                 <v-checkbox
-                                    v-for="(item, index) in statusData"
+                                    v-for="(item, index) in statusesData"
                                     :key="index"
                                     v-model="statuses"
                                     :label="item.value"
@@ -211,12 +211,6 @@ export default {
                 {text: "Версия", value: "appVersion"},
             ],
             filterGroups: [],
-            conversionData: {
-                dateStart: null,
-                dateEnd: (new Date).toLocaleString(),
-                operationType: [],
-                status: ['SUCCESS']
-            },
             pagination: {
                 sortBy: "createdDate",
                 descending: true,
@@ -242,7 +236,7 @@ export default {
             date:{},
             operationType: [],
             operationTypes: [],
-            statusData: [],
+            statusesData: [],
             statuses: [],
             refCurrencies: [],
             targetCurrencies: [],
@@ -260,7 +254,7 @@ export default {
         statuses(statuses) {
             this.table = [];
             if (statuses.length === 0) {
-                this.statuses = this.statusData.map(status => status.key);
+                this.statuses = this.statusesData.map(status => status.key);
             }
         },
         operationType() {
@@ -285,7 +279,6 @@ export default {
         },
         load() {
             this.page = 1;
-            this.preparePostData();
             this.getConversionDataAmount();
             this.getConversionData();
         },
@@ -302,8 +295,8 @@ export default {
         getStatuses(){
             this.$http.get(this.$store.getters.newApiUrl2 + `/report/crossconversion/status`)
                 .then(response => {
-                    this.statusData = response.data.data;
-                    this.statuses = this.statusData.map(status => status.key);
+                    this.statusesData = response.data.data;
+                    this.statuses = this.statusesData.map(status => status.key);
                 }, this.handleError)
         },
         getExcel(){
@@ -326,6 +319,7 @@ export default {
         },
         getConversionData() {
             this.loader = true;
+            this.preparePostData();
             this.$http.post(
                 this.$store.getters.newApiUrl2
                 + `/report/crossconversion?page=${this.page - 1}&size=${this.pagination.rowsPerPage}`,
@@ -338,6 +332,7 @@ export default {
         },
         getConversionDataAmount() {
             // this.conversionAmount = [];
+            // this.preparePostData();
             // this.$http.post(this.$store.getters.newApiUrl2 + '/report/conversion/amount,
             // {...this.postData, search: this.search})
             //     .then(response => {
