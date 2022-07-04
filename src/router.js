@@ -453,14 +453,19 @@ export default new Router({
       component: ReportRegisteredUsers,
     },
     {
-      path: "/reportCrossConversion",
-      name: "reportCrossConversion",
-      component: ReportCrossConversion,
+      path: "/reportCrossConversionOld",
+      name: "reportCrossConversionOld",
+      component: () => import('@/components/report/ReportCrossConversionOld'),
     },
     {
-      path: "/reportConversion",
-      name: "reportConversion",
-      component: ReportConversion,
+      path: "/reportCrossConversion",
+      name: "reportCrossConversion",
+      component: () => import('@/components/report/ReportCrossConversion'),
+    },
+    {
+        path: "/reportConversion",
+        name: "reportConversion",
+        component: () => import('@/components/report/ReportConversion'),
     },
     {
       path: "/branch",
