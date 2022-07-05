@@ -24,22 +24,8 @@
                                 attach
                                 chips
                                 multiple
-                            >
-                                <template v-slot:prepend-item>
-                                    <v-list-tile ripple @click="toggle">
-                                        <v-list-tile-action>
-                                            <v-icon :color="operationType.length > 0 ? 'primary' : ''">
-                                                {{ icon }}
-                                            </v-icon>
-                                        </v-list-tile-action>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title>Выбрать все</v-list-tile-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                    <v-divider class="mt-2"></v-divider>
-                                </template>
-
-                            </v-select>
+                                disabled
+                            />
                         </v-flex>
 
                         <v-flex xs12>
@@ -268,11 +254,6 @@ export default {
         }
     },
     methods: {
-        toggle() {
-            this.$nextTick(() => {
-                this.operationType = this.operationType.length === this.operationTypes.length ? [] : this.operationTypes;
-            });
-        },
         getDate(val){
             this.date = val;
             this.table = [];
