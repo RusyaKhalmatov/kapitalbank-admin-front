@@ -250,7 +250,7 @@ export default {
         self.$http
           .post(
             self.$store.getters.apiUrl +
-              `/notification/push/direct/${self.data.phone}`,
+              `/notification/push/direct?phone=${self.data.phone}`,
             self.data
           )
           .then(() => {
