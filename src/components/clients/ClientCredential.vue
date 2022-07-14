@@ -33,11 +33,11 @@
             <v-text-field disabled v-model="userInfo.userState" label="Статус"/>
           </v-flex>
           <v-flex xs6>
-            <v-text-field disabled :value="userInfo.lastActiveTime | timestamp-to-date"
+            <v-text-field disabled :value="userInfo.lastActiveTime | timestampToDate"
                           @input="value => userInfo.lastActiveTime = value" label="Последный вход"/>
           </v-flex>
           <v-flex xs6>
-            <v-text-field disabled :value="userInfo.registeredDate | timestamp-to-date"
+            <v-text-field disabled :value="userInfo.registeredDate | timestampToDate"
                           @input="value => userInfo.registeredDate = value" label="Дата регистрация"/>
           </v-flex>
           <v-flex xs6>
@@ -63,7 +63,7 @@
                   <td style="display:flex; align-items: center">
                     <p class="card-pan-text">{{ props.item.pan }}</p>
                     <v-btn
-                      v-if="props.item.virtual&&($store.getters.roles==='ADMIN'||$store.getters.roles=='HEAD_CALL_CENTER'||$store.getters.roles=='CALL_CENTER')"
+                      v-if="props.item.virtual && (['ADMIN', 'HEAD_CALL_CENTER', 'CALL_CENTER'].includes($store.getters.roles))"
                       @click="sendQueue(props.item.id)" style="border-radius: 16px;" depressed small color="primary">
                       смс-инфо
                     </v-btn>
@@ -72,7 +72,7 @@
                   <td>{{ props.item.cardStatus }}</td>
                   <td>{{ props.item.phone }}</td>
                   <td>{{ props.item.smsInfo }}</td>
-                  <td>{{ props.item.registeredDate | timestamp-to-date }}</td>
+                  <td>{{ props.item.registeredDate | timestampToDate }}</td>
                 </tr>
               </template>
             </v-data-table>
@@ -94,16 +94,23 @@
             </v-data-table>
           </v-flex>
           <v-flex xs12>
-            <v-btn dark color="danger" @click.stop="dialog = true">Удалить аккаунт</v-btn>
-            <v-btn dark color="primary" :to="{name: 'vipClientsForm',params: {userLimit: userInfo}}">
+            <v-btn color="danger" @click.stop="dialog = true">Удалить аккаунт</v-btn>
+            <v-btn color="primary" :to="{name: 'vipClientsForm',params: {userLimit: userInfo}}">
               добавить в VIP-пользователя
             </v-btn>
-            <v-btn dark color="primary" :to="{name: 'partialVipClientsForm',params: {userLimit: userInfo}}">
+            <v-btn color="primary" :to="{name: 'partialVipClientsForm',params: {userLimit: userInfo}}">
               добавить в частичные VIP-пользователи
             </v-btn>
-            <v-btn v-if="userInfo.id" @click="preAdd" color="primary">Добавить в список сотрудников</v-btn>
+            <v-btn v-if="userInfo.id" @click="addEmployeeDialog = true" color="primary">Добавить в список сотрудников</v-btn>
             <v-btn v-if="userInfo.id" @click="openWhiteListBox" color="primary">Добавить в белый список</v-btn>
-            <v-btn dark color="danger" @click="openPasswordResetDialog">Разрешить устройство</v-btn>
+            <v-btn
+              v-if="userInfo.id && userInfo.phone.split(':').length < 2"
+              @click="changePhoneNumberDialog = true"
+              color="primary"
+            >
+              Сменить номер телефона
+            </v-btn>
+            <v-btn color="danger" @click="openPasswordResetDialog">Разрешить устройство</v-btn>
             <!-- <v-btn v-if="userInfo.id&&isAdmin" @click="externalHistoryDialog = true" color="primary">Количество запросов по скорингу</v-btn> -->
             <div class="sms-box" v-if="userInfo.id">
               <v-btn @click="sendSMS" color="primary">Отправить СМС</v-btn>
@@ -220,6 +227,25 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
+            <v-dialog
+              v-model="changePhoneNumberDialog"
+              persistent
+              max-width="600px"
+            >
+              <v-card>
+                <v-card-title>
+                  <h3>Сменить номер телефона</h3>
+                </v-card-title>
+                <v-card-text>
+                    <v-text-field label="Введите номер телефона" v-model="newPhoneNumber" v-bind:value="newPhoneNumber"/>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer/>
+                  <v-btn @click="changePhoneNumberDialog = false" color="primary">Отмена</v-btn>
+                  <v-btn @click="updatePhoneNumber" color="primary" :disabled="!newPhoneNumber.length">Сохранить</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-flex>
         </v-layout>
       </v-card-text>
@@ -291,6 +317,8 @@ export default {
       externalHistoryDialog: false,
       whiteListData: [],
       isAdmin: false,
+      newPhoneNumber: '',
+      changePhoneNumberDialog: false,
     }
   },
   filters: {
@@ -309,7 +337,7 @@ export default {
         "allowed": this.whiteListAllowed
       }
       this.$http.post(this.$store.getters.newApiUrl + `/admin/external-history/white-list`, postData)
-        .then(response => {
+        .then(() => {
           this.$router.push('whiteList');
         }, this.handleError)
     },
@@ -327,26 +355,20 @@ export default {
         }, self.handleError);
     },
     getBranches() {
-      //alert("Hello");
       let self = this;
       self.$http.get(self.$store.getters.prodApiUrl + `/branch/list`)
         .then(response => {
           self.barches = response.data.data;
-          //console.log(response.data.data);
         }, self.handleError);
     },
-    preAdd() {
-      //alert(this.userInfo.id);
-      this.addEmployeeDialog = true;
-    },
     addSome(val) {
-      if (val == 0) {
+      if (val === 0) {
         this.employeeBrach = '';
         this.employeeMail = '';
         this.employeePhone = '';
         this.addEmployeeDialog = false;
       }
-      if (val == 1) {
+      if (val === 1) {
         this.addEmployeeDialog = false;
         const postData = {
           userId: this.userInfo.id,
@@ -358,14 +380,13 @@ export default {
         self.$http
           .post(self.$store.getters.newApiUrl + "/card-employee/v2/add", postData)
           .then(() => {
-            //console.log(response.data.data);
           }, self.handleError);
       }
     },
     sendQueue(cardId) {
       this.loader = true;
       this.$http.post(this.$store.getters.apiUrl + `/cards/virtual/send-queue?cardId=${cardId}`)
-        .then(response => {
+        .then(() => {
           this.loader = false;
           this.successMessage('Успешно')
         }, this.handleError);
@@ -376,7 +397,6 @@ export default {
       self.$http.get(self.$store.getters.prodApiUrl + `/general/cards/getByPhone?phone=${self.userInfo.phone}`)
         .then(response => {
           self.cardsByPhone = response.data.data;
-          //this.loader = false;
         }, self.handleError);
     },
     getUserCards() {
@@ -410,39 +430,33 @@ export default {
         }
       }
     },
-    getCardHistory(id) {
-      let self = this;
-      self.$http.get(self.$store.getters.apiUrl + '/general/admin/card-history', {
-        // params:{
-        //     'id' : id,
-
-        // }
-      })
-        .then(() => {
-
-        }, self.handleError);
-    },
-    closeOperations(id) {
+    closeOperations() {
       this.isMonitoring = this.id;
-      //console.log(id)
     },
     getWhiteList() {
       this.whiteListData = [];
       this.isAdmin = false;
       this.$http.get(this.$store.getters.newApiUrl + `/admin/external-history/white-list`)
         .then(response => {
-          console.log(response.data.data);
           this.whiteListData = response.data.data;
           this.isAdmin = this.whiteListData.find(x => x.adminId === this.$store.getters.userId);
-          // console.log(this.isAdmin, ' - ', this.$store.getters.userId)
         }, this.handleError)
+    },
+    updatePhoneNumber() {
+      this.$http.post(
+          this.$store.getters.prodApiUrl2 + `/user/updatePhoneNumber`,
+          { userId: this.userInfo.id, phoneNumber: this.newPhoneNumber }
+        ).then(() => {
+            this.successMessage("Номер успешно обновлен!");
+            this.userInfo.phone = this.newPhoneNumber;
+            this.changePhoneNumberDialog = false;
+            this.newPhoneNumber = '';
+        }, this.handleError);
     }
-
   },
   mounted() {
     if (this.$route.params.user) {
       this.userInfo = this.$route.params.user;
-      //console.log(this.userInfo)
       this.getUserCards();
       this.getUserCardWithPhone()
     }
@@ -454,6 +468,12 @@ export default {
       if (!val) {
         this.whiteListAllowed = false;
       }
+    },
+    newPhoneNumber(val) {
+      this.newPhoneNumber = val.replace(/[^0-9]+/g, '').trim();
+    },
+    changePhoneNumberDialog(val) {
+        console.log("changePhoneNumberDialog" + val);
     }
   }
 }
@@ -469,12 +489,6 @@ export default {
 
 .card-pan-text {
   margin: 0;
-}
-
-.apelsin-logo {
-  width: 23px;
-  height: 23px;
-  margin: 5px;
 }
 
 .sms-box {
