@@ -237,12 +237,18 @@
                   <h3>Сменить номер телефона</h3>
                 </v-card-title>
                 <v-card-text>
-                    <v-text-field label="Введите номер телефона" v-model="newPhoneNumber" v-bind:value="newPhoneNumber"/>
+                    <v-text-field label="Введите номер телефона (11-12 цифр)" v-model="newPhoneNumber" v-bind:value="newPhoneNumber"/>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer/>
                   <v-btn @click="changePhoneNumberDialog = false" color="primary">Отмена</v-btn>
-                  <v-btn @click="updatePhoneNumber" color="primary" :disabled="!newPhoneNumber.length">Сохранить</v-btn>
+                  <v-btn
+                    @click="updatePhoneNumber"
+                    color="primary"
+                    :disabled="newPhoneNumber.length < 11 || newPhoneNumber.length > 12"
+                  >
+                    Сохранить
+                  </v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
