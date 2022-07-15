@@ -452,8 +452,8 @@ export default {
       this.$http.post(
           this.$store.getters.prodApiUrl2 + `/user/updatePhoneNumber`,
           { userId: this.userInfo.id, phoneNumber: this.newPhoneNumber }
-        ).then(() => {
-            this.successMessage("Номер успешно обновлен!");
+        ).then(response => {
+            this.successMessage(response.data.data.message);
             this.userInfo.phone = this.newPhoneNumber;
             this.changePhoneNumberDialog = false;
             this.newPhoneNumber = '';
@@ -477,9 +477,6 @@ export default {
     },
     newPhoneNumber(val) {
       this.newPhoneNumber = val.replace(/[^0-9]+/g, '').trim();
-    },
-    changePhoneNumberDialog(val) {
-        console.log("changePhoneNumberDialog" + val);
     }
   }
 }
