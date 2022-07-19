@@ -99,7 +99,7 @@
           if (this.hasItem(params, 'word')) {
             word = params.word;
           }
-          this.$http.post(`${this.apiUrl}/user/search?page=${page}&size=${size}&search=${word}`, {
+          this.$http.post(`${this.apiUrl}/user/search?page=${page}&size=${size}&query=${word}`, {
             clientId: "",
             firstName: "",
             lastName: "",
