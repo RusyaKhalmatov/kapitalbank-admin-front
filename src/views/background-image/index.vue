@@ -5,6 +5,7 @@
       tableData: data,
       tableTitle: 'Баннеры',
       getList: getList,
+      autoUploadList: true,
       deleteContent: deleteContent,
       updateRouteName: 'backgroundImageUpdate',
       actions: {

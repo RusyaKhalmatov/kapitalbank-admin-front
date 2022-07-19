@@ -13,10 +13,11 @@
         },
       ],
       getList: getList,
+      autoUploadList: false,
       listSearch: true,
       actions: {
         create: { to: {name: 'clientForm'}, title: 'Добавить новый', icon: 'plus'}
-      },
+      }
     }"
   />
 </template>
@@ -93,26 +94,25 @@
         return new Promise((resolve, reject) => {
           let page = 0, size = 10, word = '';
           if (this.hasItem(params, 'pagination')) {
-            page = (params.pagination.current - 1)
+            page = (params.pagination.current - 1);
           }
           if (this.hasItem(params, 'word')) {
-            word = params.word
+            word = params.word;
           }
-          this.$http.post(`${this.apiUrl}/user-search/v2?page=${page}&size=${size}&word=${word}`, {
-            id: "",
+          this.$http.post(`${this.apiUrl}/user/search?page=${page}&size=${size}&search=${word}`, {
+            clientId: "",
             firstName: "",
             lastName: "",
             phone: "",
-            clientId: "",
-            status: "",
             userType: "",
+            status: "",
             ...params.sort
           })
             .then(response => {
               if (response.ok) {
                 const data = response.body.data
                 resolve({
-                  list: data.dtoList,
+                  list: data.users,
                   pagination: {
                     total: data.totalElements,
                     pageSize: data.size

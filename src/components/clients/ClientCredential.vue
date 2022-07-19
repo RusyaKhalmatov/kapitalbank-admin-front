@@ -237,7 +237,19 @@
                   <h3>Сменить номер телефона</h3>
                 </v-card-title>
                 <v-card-text>
-                    <v-text-field label="Введите номер телефона (11-12 цифр)" v-model="newPhoneNumber" v-bind:value="newPhoneNumber"/>
+                    <v-select
+                        :items="phoneTemplate.countries"
+                        v-model="countryPhone"
+                        label="Страна"
+                    />
+                    <v-text-field
+                        v-model="newPhoneNumber"
+                        v-bind:value="newPhoneNumber"
+                        autofocus
+                        label="Введите номер телефона"
+                        :placeholder="phoneTemplate[countryPhone].placeholder"
+                        :mask="phoneTemplate[countryPhone].mask"
+                    />
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer/>
@@ -271,6 +283,7 @@
 import ClientOperations from './ClientOperations.vue'
 import ClientRating from './ClientRating'
 import ExternalHistoryStatistic from '@/views/ExternalHistoryStatistic.vue'
+import phoneTemplate from '@/helpers/phoneTemplate'
 
 export default {
   name: "UserCredential",
@@ -325,6 +338,8 @@ export default {
       isAdmin: false,
       newPhoneNumber: '',
       changePhoneNumberDialog: false,
+      phoneTemplate,
+      countryPhone: phoneTemplate.countries[0],
     }
   },
   filters: {
@@ -474,9 +489,6 @@ export default {
       if (!val) {
         this.whiteListAllowed = false;
       }
-    },
-    newPhoneNumber(val) {
-      this.newPhoneNumber = val.replace(/[^0-9]+/g, '').trim();
     }
   }
 }

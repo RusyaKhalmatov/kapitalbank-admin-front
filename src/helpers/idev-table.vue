@@ -108,10 +108,11 @@
       tableActions: Array,
       tableTitle: String,
       getList: Function,
+      autoUploadList: Boolean,
       listSearch: Boolean,
       deleteContent: Function,
       updateRouteName: String,
-      actions: Object
+      actions: Object,
     },
     components: {
       [Table.name]: Table,
@@ -188,7 +189,7 @@
       },
     },
     mounted() {
-      this.updateContent()
+        this.autoUploadList && this.updateContent()
     }
   }
 </script>
