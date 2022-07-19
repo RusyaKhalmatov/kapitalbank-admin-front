@@ -5,6 +5,7 @@
       tableData: data,
       tableTitle: 'Типы кредитов',
       getList: getList,
+      autoUploadList: true,
       deleteContent: deleteContent,
       updateRouteName: 'loanTypeUpdate',
       actions: {

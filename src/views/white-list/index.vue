@@ -5,6 +5,7 @@
       tableData: data,
       tableTitle: 'Белый список',
       getList: getList,
+      autoUploadList: true,
       deleteContent: deleteContent,
       updateRouteName: 'userWhiteListUpdate',
       actions: {

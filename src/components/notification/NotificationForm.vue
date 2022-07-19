@@ -38,13 +38,18 @@
                   <template v-if="selected === 'recipient_phone'">
                     <v-layout row wrap>
                       <v-flex xs10>
+                        <v-select
+                            :items="phoneTemplate.countries"
+                            v-model="countryPhone"
+                            label="Страна"
+                        />
                         <v-text-field
                           v-model="data.phone"
                           autofocus
                           :disabled="all"
                           label="Получатель(телефон)"
-                          placeholder="998(90) 999-99-99"
-                          mask="###(##) ###-##-##"
+                          :placeholder="phoneTemplate[countryPhone].placeholder"
+                          :mask="phoneTemplate[countryPhone].mask"
                         >
                         </v-text-field>
                       </v-flex>
@@ -99,7 +104,10 @@
               </v-radio-group>
             </v-flex>
             <v-flex xs12 class="quill-container pb-3">
-              <quill-editor v-model="data.body" />
+              <v-textarea
+                  label="Введите текст пуш уведомления"
+                  v-model="data.body"
+              />
             </v-flex>
             <v-flex xs12>
               <v-btn color="primary" dark @click="save">Сохранить</v-btn>
@@ -129,6 +137,7 @@
 
 <script>
 import XLSX from 'xlsx';
+import phoneTemplate from "@/helpers/phoneTemplate";
 
 export default {
   name: 'NotificationForm',
@@ -143,7 +152,9 @@ export default {
       id: '',
       file: '',
       selected: 'recipient_phone',
-      fileContentRowsLength: null
+      fileContentRowsLength: null,
+      phoneTemplate,
+      countryPhone: phoneTemplate.countries[0],
     };
   },
   methods: {
@@ -249,9 +260,8 @@ export default {
       } else {
         self.$http
           .post(
-            self.$store.getters.apiUrl +
-              `/notification/push/direct?phone=${self.data.phone}`,
-            self.data
+              `${self.$store.getters.apiUrl}/notification/push/direct?phone=${self.data.phone}`,
+              self.data
           )
           .then(() => {
             self.redirect('notification');
