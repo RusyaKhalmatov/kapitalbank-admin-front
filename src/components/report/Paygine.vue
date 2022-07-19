@@ -17,7 +17,7 @@
                 v-model="selectedOperationType"
                 placeholder="Выберите опериции"
                 attach
-                chips outline
+                chips
                 multiple
               >
                 <template v-slot:prepend-item>
@@ -35,24 +35,38 @@
             </v-flex>
 
             <v-flex xs12>
-              <div class="d-flex flex-wrap checkbox">
-                <v-checkbox
-                  v-for="(item,index) in statusData"
-                  :key="index"
-                  v-model="status"
-                  :label="item.value"
-                  :value="item.key"
-                />
-              </div>
+                <v-card class="d-flex flex-wrap">
+                    <v-card-title style="font-size: large">Статус конвертации:</v-card-title>
+                    <v-checkbox
+                        v-for="(item, index) in statusData"
+                        :key="index"
+                        v-model="statuses"
+                        :label="item.value"
+                        :value="item.key"
+                    />
+                </v-card>
             </v-flex>
 
             <div class="button-box">
-              <v-btn dark color="primary" class="get-btn" @click="load" :loading="loader">Получить</v-btn>
-              <v-btn class="excel-btn" :loading="loader" @click="getExcel">Скачать Excel</v-btn>
+              <v-btn
+                color="primary"
+                outlined
+                @click="load"
+                :loading="loader"
+              >
+                Получить
+              </v-btn>
+              <v-btn
+                color="success"
+                :loading="loader"
+                @click="getExcel"
+              >
+                Скачать Excel
+              </v-btn>
               <download-excel
                 v-show="false"
                 id="excel"
-                name="p2pForeign.xls"
+                :name="reportFileName"
                 :stringify-long-num="true"
                 :stringifyLongNum="true"
                 :fields="operationExcelFields"
@@ -119,12 +133,12 @@
                     <td>{{ props.item.sender }}</td>
                     <td>{{ props.item.receiver }}</td>
                     <td>{{ props.item.operationType }}</td>
-                    <td>{{ props.item.senderCurrency }}</td>
                     <td style="min-width:145px">{{ props.item.senderAmount / 100 | numberFormat }}</td>
-                    <td>{{ props.item.receiverCurrency }}</td>
+                    <td>{{ props.item.senderCurrency }}</td>
                     <td style="min-width:145px">{{ props.item.receiverAmount / 100 | numberFormat }}</td>
-                    <td>{{ props.item.feeCurrency }}</td>
+                    <td>{{ props.item.receiverCurrency }}</td>
                     <td>{{ props.item.feeAmount / 100 | numberFormat }}</td>
+                    <td>{{ props.item.feeCurrency }}</td>
                     <td>{{ props.item.userType }}</td>
                     <td>{{ props.item.platform }}</td>
                     <td>{{ props.item.appVersion }}</td>
@@ -177,7 +191,6 @@ export default {
         descending: true,
         rowsPerPage: 10
       },
-      status: [],
       show: false,
       operationsHeaders: [
         {text: "ID", value: "id"},
@@ -188,17 +201,18 @@ export default {
         {text: "Отправитель", value: "sender"},
         {text: "Получатель", value: "receiver"},
         {text: "Тип операции", value: "operationType"},
-        {text: "Валюта отправителя", value: "senderCurrency"},
         {text: "Сумма отправителя", value: "senderAmount"},
-        {text: "Валюта получателя", value: "receiverCurrency"},
+        {text: "Валюта отправителя", value: "senderCurrency"},
         {text: "Сумма получателя", value: "receiverAmount"},
-        {text: "Валюта комиссии", value: "feeCurrency"},
+        {text: "Валюта получателя", value: "receiverCurrency"},
         {text: "Сумма комиссии", value: "feeAmount"},
+        {text: "Валюта комиссии", value: "feeCurrency"},
         {text: "Тип клиента", value: "userType"},
         {text: "Платформа", value: "platform"},
         {text: "Версия", value: "appVersion"},
       ],
       statusData: [],
+      statuses: [],
       selectedOperationType: [],
       data: {
         status: [],
@@ -211,6 +225,17 @@ export default {
       excelData: [],
       date: {}
     }
+  },
+  watch: {
+      statuses(statuses) {
+          this.transactions = [];
+          if (statuses.length === 0) {
+              this.statuses = this.statusData.map(status => status.key);
+          }
+      },
+      operationType() {
+          this.transactions = [];
+      },
   },
   methods: {
     resetValues() {
@@ -236,9 +261,7 @@ export default {
       this.$http.get(this.$store.state.prodApiUrl2 + `/report/foreign-transaction/status`)
         .then(response => {
           this.statusData = response.data.data;
-          response.data.data.forEach(x => {
-            this.status.push(x.key);
-          })
+          this.statuses = this.statusData.map(status => status.key);
         }, this.handleError)
 
     },
@@ -250,16 +273,17 @@ export default {
         }, this.handleError);
     },
     load() {
-      this.data.dateFrom = this.date.fromDate;
-      this.data.dateTo = this.date.toDate;
-      this.data.status = this.status;
-      this.data.operationType = this.selectedOperationType;
-      if (this.date.fromDate === "")
-        delete this.data.dateFrom
-      if (this.date.toDate === "")
-        delete this.data.dateTo;
+      this.preparePostData();
       this.loadAmount();
       this.loadReports(this.page);
+    },
+    preparePostData() {
+        this.data = {
+            dateFrom :  this.date.fromDate === '' ? Date.now() : this.date.fromDate,
+            dateTo : this.date.toDate === '' ? Date.now() : this.date.toDate,
+            status: this.statuses,
+            operationType: this.selectedOperationType,
+        };
     },
     loadAmount() {
       this.$http.post(this.$store.state.prodApiUrl2 + '/report/foreign-transaction/amount',
@@ -286,14 +310,7 @@ export default {
     getExcel() {
       this.loader = true;
       this.excelData = [];
-      this.data.dateFrom = this.date.fromDate;
-      this.data.dateTo = this.date.toDate;
-      this.data.status = this.status;
-      this.data.operationType = this.selectedOperationType;
-      if (this.date.fromDate === "")
-        delete this.data.dateFrom
-      if (this.date.toDate === "")
-        delete this.data.dateTo
+      this.preparePostData();
       this.$http.post(this.$store.state.prodApiUrl2 + `/report/foreign-transaction/excel`, this.data)
         .then(response => {
           this.loader = false;
@@ -309,6 +326,9 @@ export default {
     },
   },
   computed: {
+    reportFileName() {
+      return "p2pPaygine_" + (new Date()).toLocaleDateString() + ".xls"
+    },
     likesAllFruit() {
       return this.selectedOperationType.length === this.operationTypes.length
     },
@@ -344,12 +364,12 @@ export default {
   width: 100%;
 }
 
-.headline {
-  text-align: center;
+h1 {
+  margin-bottom: 5px;
 }
 
-.get-btn {
-  border-radius: 20px;
+.headline {
+  text-align: center;
 }
 
 .checkbox {
@@ -360,18 +380,11 @@ export default {
   flex-wrap: wrap;
 }
 
-
 .pagination {
   display: flex;
   justify-content: center;
   margin: 15px;
   flex-wrap: wrap;
-}
-
-.excel-btn {
-  border-radius: 20px;
-  background: #3d9c3d !important;
-  color: #FFFF !important;
 }
 
 .amount {
@@ -394,9 +407,5 @@ export default {
 
 @media only screen and (max-width: 600px) {
 
-}
-
-h1 {
-  margin-bottom: 5px;
 }
 </style>

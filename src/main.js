@@ -72,10 +72,10 @@ Vue.use(Vuetify, {
         accent: colors[1],
         error: colors[2],
         cancel: colors[2],
-        warning: colors[3],
-        info: colors[4],
-        success: colors[5],
-        danger: colors[6]
+        warning: colors[4],
+        info: colors[5],
+        success: colors[6],
+        danger: colors[3]
     }
 });
 Vue.config.productionTip = false;
